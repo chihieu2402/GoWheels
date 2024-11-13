@@ -19,18 +19,25 @@
 		<div th:if="${errorMessage}" class="alert alert-danger">
 			<span th:text="${errorMessage}"></span>
 		</div>
-
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Tên Xe</th>
 					<th>Hiệu Xe</th>
+					<th>Loại Xe</th>
 					<th>Màu Sắc</th>
-					<th>Địa chỉ</th>
+					<th>Số Xe</th>
+					<th>Loại Nhiên Liệu</th>
+					<th>Năm Sản Xuất</th>
+					<th>Mức Tiêu Thụ</th>
+					<th>Giới Hạn</th>
+					<th>Phí Vượt Giới Hạn</th>
+					<th>Địa Chỉ</th>
+					<th>Mô Tả</th>
 					<th>Hình Ảnh</th>
+					<th>Giấy Tờ Sở Hữu</th>
 					<th>Giá Theo Giờ</th>
-					
 					<th>Hành Động</th>
 				</tr>
 			</thead>
@@ -38,34 +45,105 @@
 				<tr th:each="post : ${posts}">
 					<td th:text="${post.postID}"></td>
 					<td th:text="${post.carName}"></td>
-					 <td th:text="${post.carBrand.brandName}"></td> 
-					<!-- <td th:text="${car.carBrand != null ? car.carBrand.brandName : 'N/A'}"></td> -->
+					<td
+						th:text="${post.carBrand != null ? post.carBrand.brandName : 'N/A'}"></td>
+					<td th:text="${post.carType}"></td>
 					<td th:text="${post.color}"></td>
+					<td th:text="${post.car_number}"></td>
+					<td th:text="${post.type_fuel}"></td>
+					<td th:text="${post.year_of_manufacture}"></td>
+					<td th:text="${post.muctieuthu}"></td>
+					<td th:text="${post.limit}"></td>
+					<td th:text="${post.fee_limit}"></td>
 					<td th:text="${post.address}"></td>
-					<td><img th:src="@{${post.image}}" alt="Car Image"
-						style="width: 100px; height: auto;"></td>
-					<!--  <td>
-                        <img th:src="@{${post.ownershipDocument}}" alt="Car Image" style="width: 100px; height: auto;">
-                    </td> -->
+					<td th:text="${post.describe}"></td>
+
+					<td>
+						<div>
+							<img th:src="${post.imagePending.image1}" alt="Car Image 1"
+								style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image1 != null}">
+							<img th:src="${post.imagePending.image2}" alt="Car Image 2"
+								style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image2 != null}">
+							<img th:src="${post.imagePending.image3}" alt="Car Image 3"
+								style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image3 != null}">
+							<img th:src="${post.imagePending.image4}" alt="Car Image 4"
+								style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image4 != null}">
+						</div>
+					</td>
+
+					<td>
+						<div>
+							<img th:src="${post.imagePending.imgOwnershipCertificate1}"
+								alt="Ownership Document 1" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate1 != null}">
+							<img th:src="${post.imagePending.imgOwnershipCertificate2}"
+								alt="Ownership Document 2" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
+						</div>
+					</td>
+					<td>
+						<div>
+							<img
+								th:src="@{/images/{post.imagePending.image1}(post.imagePending.image1)}"
+								alt="Car Image 1" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image1 != null}">
+
+							<img
+								th:src="@{/images/{post.imagePending.image2}(post.imagePending.image2)}"
+								alt="Car Image 2" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image2 != null}">
+
+							<img
+								th:src="@{/images/{post.imagePending.image3}(post.imagePending.image3)}"
+								alt="Car Image 3" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image3 != null}">
+
+							<img
+								th:src="@{/images/{post.imagePending.image4}(post.imagePending.image4)}"
+								alt="Car Image 4" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.image4 != null}">
+						</div>
+					</td>
+
+					<td>
+						<div>
+							<img
+								th:src="@{/images/{post.imagePending.imgOwnershipCertificate1}(post.imagePending.imgOwnershipCertificate1)}"
+								alt="Ownership Document 1" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate1 != null}">
+
+							<img
+								th:src="@{/images/{post.imagePending.imgOwnershipCertificate2}(post.imagePending.imgOwnershipCertificate2)}"
+								alt="Ownership Document 2" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
+						</div>
+					</td>
+
 					<td th:text="${post.priceHoursCar}"></td>
-					<td><div class="btn-group">
-							<!-- Duyệt bài đăng -->
+
+					<td>
+						<div class="btn-group">
 							<form action="/index/approvePost" method="post"
 								style="display: inline;">
 								<input type="hidden" name="postID" th:value="${post.postID}">
 								<button type="submit" class="btn btn-success">Duyệt</button>
 							</form>
 
-							<!-- Từ chối bài đăng -->
 							<form action="/index/rejectPost" method="post"
 								style="display: inline;">
 								<input type="hidden" name="postID" th:value="${post.postID}">
 								<button type="submit" class="btn btn-danger">Từ Chối</button>
 							</form>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+
 	</div>
 </body>
 

@@ -1,9 +1,9 @@
 package com.poly.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,106 +25,79 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CarID")
+    private int carID;
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "CarID")
-//	private int carID;
-//
-//	@Column(name = "CarName", columnDefinition = "NVARCHAR(255)")
-//	private String carName;
-//
-//	@Column(name = "CarBrand")
-//	private String carBrand;
-//
-//	@Column(name = "Color")
-//	private String color;
-//
-//	@Column(name = "address", columnDefinition = "NVARCHAR(255)")
-//	private String address;
-//
-//	@Column(name = "Image")
-//	private String image;
-//
-//	@Column(name = "PriceHoursCar")
-//	private double priceHoursCar;
-//
-//	@Column(name = "Status")
-//	private boolean status;
-//
-//	@Column(name = "DiscountID")
-//	private int discountID;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "ReviewID")
-//	private Review review;
-//
-//	@OneToMany(mappedBy = "car")
-//	private List<BillDetail> billDetail;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "OwnerID")
-//	private CarOwner carOwner;
-//
-//	@OneToOne
-//	@JoinColumn(name = "DiscountID", insertable = false, updatable = false)
-//	private Discount discount;
-//
-//	public Car get(int i) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+    @Column(name = "CarName", columnDefinition = "NVARCHAR(255)")
+    private String carName;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CarID")
-	private int carID;
+    @Column(name = "CarType")
+    private String carType;
 
-	@Column(name = "CarName", columnDefinition = "NVARCHAR(255)")
-	private String carName;
+    @Column(name = "Color")
+    private String color;
 
+    @Column(name = "TypeGear")
+    private String type_gear;
 
-	@Column(name = "Color")
-	private String color;
+    @Column(name = "CarNumber")
+    private String car_number;
 
-	@Column(name = "address", columnDefinition = "NVARCHAR(255)")
-	private String address;
+    @Column(name = "TypeFuel")
+    private String type_fuel;
 
-	@Column(name = "Image")
-	private String image;
+    @Column(name = "YearOfManufacture")
+    private int year_of_manufacture;
 
-	@Column(name = "PriceHoursCar")
-	private double priceHoursCar;
+    @Column(name = "muctieuthu")
+    private String muctieuthu;
 
-	@Column(name = "Status")
-	private boolean status;
+    @Column(name = "limit")
+    private String limit;
 
-	@ManyToOne
-	@JoinColumn(name = "ReviewID")
-	private Review review;
+    @Column(name = "fee_limit")
+    private String fee_limit;
 
-	@OneToMany(mappedBy = "car")
-	private List<BillDetail> billDetail;
+    @Column(name = "location", columnDefinition = "NVARCHAR(255)")
+    private String address;
 
-	@ManyToOne
-	@JoinColumn(name = "OwnerID")
-	private CarOwner carOwner;
+    @Column(name = "describe", columnDefinition = "NVARCHAR(255)")
+    private String describe;
 
+    @Column(name = "PriceHoursCar")
+    private double priceHoursCar;
 
-	@ManyToOne
-	@JoinColumn(name = "CarBrandID")
-	private CarBrand carBrand;
+    @Column(name = "Status")
+    private boolean status;
 
-//	@Column(name = "OwnershipDocument")
-//	private String ownershipDocument;
+    @Column(name = "Image", columnDefinition = "VARCHAR(MAX)")
+    private List<String> images = new ArrayList<>();
 
-	public Car get(int i) {
-		return null;
-	}
-	
-	
-	@OneToMany(mappedBy = "car")
-	@ToString.Exclude
-	private List<Booking> bookings;
+    @Column(name = "OwnershipDocument", columnDefinition = "VARCHAR(MAX)")
+    private List<String> ownershipDocuments = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "ReviewID")
+    private Review review;
+
+    @OneToMany(mappedBy = "car")
+    private List<BillDetail> billDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "OwnerID")
+    private CarOwner carOwner;
+
+    @ManyToOne
+    @JoinColumn(name = "CarBrandID")
+    private CarBrand carBrand;
+
+    @OneToMany(mappedBy = "car")
+    @ToString.Exclude
+    
+    private List<Booking> bookings;
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    private ImageCar imageCar;
 
 }

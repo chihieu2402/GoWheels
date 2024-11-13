@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,7 +40,7 @@ public class CarContronller {
 	private FileManagerService fileManagerService;
 
 	@Autowired
-	CarBrandSerivce carBrandSerivce;
+	private CarBrandSerivce carBrandSerivce;
 
 	@Autowired
 	ServletContext app;
@@ -72,8 +73,8 @@ public class CarContronller {
 	@PostMapping("/car/create")
 	public String createCar(@ModelAttribute Car car, @RequestParam("carBrandID") int carBrandID,
 			@RequestParam("imageFile") MultipartFile imageFile) {
-		CarBrand carBrand = carBrandSerivce.findById(carBrandID).orElse(null);
-		car.setCarBrand(carBrand);
+		//CarBrand carBrand = carBrandSerivce.findById(carBrandID).orElse(null);
+		//car.setCarBrand(carBrand);
 		handleImageUpload(car, imageFile);
 		carDao.save(car);
 		return "redirect:/admin/car";
@@ -91,7 +92,7 @@ public class CarContronller {
 
 			Car existingCar = carDao.findById(car.getCarID()).orElse(null);
 			if (existingCar != null) {
-				car.setImage(existingCar.getImage());
+//				car.setImage(existingCar.getImage());
 			}
 		}
 		carDao.save(car);
@@ -128,7 +129,10 @@ public class CarContronller {
 				String fileName = imageFile.getOriginalFilename();
 				Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
 				Files.copy(imageFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-				car.setImage("/images/" + fileName);
+				List<String> imageList = new ArrayList<>();
+				imageList.add("/images/" + fileName);
+//				car.setImage(imageList);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

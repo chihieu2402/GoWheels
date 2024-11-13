@@ -5,25 +5,40 @@
 <meta charset="UTF-8">
 <title>Car Detail</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="../../../webapp/views/css/DinhDangSao.css">
 </head>
 <body>
 
-   <!-- phần carDetail -->
-    <section class="py-5 bg-light" th:object="${carDetail}">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="*{image}" alt="..." ></div>
-                <div class="col-md-6">
-                    <div class="small mb-1">
-                      <span class="badge bg-success"> [[${ratingTB}]]</span>
-                   
-                   <i th:classappend="${ratingTB >= 1} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'" style="color: #01d28e;"></i>
-					<i th:classappend="${ratingTB >= 2} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'" style="color: #01d28e;"></i>
-					<i th:classappend="${ratingTB >= 3} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'" style="color: #01d28e;"></i>
-					<i th:classappend="${ratingTB >= 4} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'" style="color: #01d28e;"></i>
-					<i th:classappend="${ratingTB >= 5} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'" style="color: #01d28e;"></i>
+	<!-- phần carDetail -->
+	<section class="py-5 bg-light" th:object="${carDetail}">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="row gx-4 gx-lg-5 align-items-center">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<img class="card-img-top mb-5 mb-md-0"
+							th:if="${carDetail.imageCar != null}"
+							th:src="@{/images/{carDetail.imageCar.image1}(carDetail.imageCar.image1=${carDetail.imageCar.image1})}"
+							alt="Car Image 1">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="small mb-1">
+						<span class="badge bg-success"> [[${ratingTB}]]</span> <i
+							th:classappend="${ratingTB >= 1} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'"
+							style="color: #01d28e;"></i> <i
+							th:classappend="${ratingTB >= 2} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'"
+							style="color: #01d28e;"></i> <i
+							th:classappend="${ratingTB >= 3} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'"
+							style="color: #01d28e;"></i> <i
+							th:classappend="${ratingTB >= 4} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'"
+							style="color: #01d28e;"></i> <i
+							th:classappend="${ratingTB >= 5} ? 'fa-solid' + ' fa-star fa-2xl': 'fa-regular' + ' fa-star fa-2xl'"
+							style="color: #01d28e;"></i>
 
 
 					</div>
@@ -37,128 +52,137 @@
 					<div class="lead">Color: [[*{color}]]</div>
 					<div class="d-flex">
 
-						<a th:href="@{/booking/views/Booking(carID=${carDetail.carID})}" class="btn btn-outline-dark flex-shrink-0">
-   						<i class="bi-cart-fill me-1"></i> Book now
+						<a th:href="@{/booking/views/Booking(carID=${carDetail.carID})}"
+							class="btn btn-outline-dark flex-shrink-0"> <i
+							class="bi-cart-fill me-1"></i> Book now
 						</a>
-
-
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-   <!-- phần carDetail -->
+	<!-- phần carDetail -->
 
 
-<!-- phần comment cũ -->
-<section class="py-3 ">
-    <div class="container  mt-2"> 
-        <h2 class="fw-bolder mb-3">Review Car</h2>
-     
-          
-                <div class="container  py-3 text-body">
-                  <div class="row d-flex ">
-                 
-                      <div class="card" >
-                        <div class="card-body p-4">
-                          <div class="d-flex flex-start w-100">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                              height="65" />
-                              
-                            <form th:action="@{/index/cars/{id}(id=${carDetail.carID})}" method="post" class="w-100">
-                              <h5 class="m-0">Add a comment</h5>
-                        
-                              
-                              <div class="rating">
-                                <input value="5" name="rateCarDetail" id="star5" type="radio">
-                                <label title="text" for="star5"></label>
-                                <input value="4" name="rateCarDetail" id="star4" type="radio">
-                                <label title="text" for="star4"></label>
-                                <input value="3" name="rateCarDetail" id="star3" type="radio" checked="">
-                                <label title="text" for="star3"></label>
-                                <input value="2" name="rateCarDetail" id="star2" type="radio">
-                                <label title="text" for="star2"></label>
-                                <input value="1" name="rateCarDetail" id="star1" type="radio">
-                                <label title="text" for="star1"></label>
-                              </div>
-                             
-                              
-                              <div data-mdb-input-init class="form-outline">
-                                <textarea class="form-control" id="textAreaExample" name="reviewText" rows="4" placeholder="What is your view?"></textarea>
-                                <label class="form-label" for="textAreaExample"></label>
-                              </div>
-                              <div class="d-flex justify-content-between ">
-                
-                                <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success">
-                                  Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                   
-                  </div>
-                </div>
-            
-        
-    </div>
-</section>
-
-    <!--phần comment  -->
+	<!-- phần comment cũ -->
+	<section class="py-3 ">
+		<div class="container  mt-2">
+			<h2 class="fw-bolder mb-3">Review Car</h2>
 
 
+			<div class="container  py-3 text-body">
+				<div class="row d-flex ">
 
-    <!-- phần hiện thị comment -->
-    <section class="bg-light">
-      <div class="container">
-        <h2 class="fw-bolder mb-2 pt-3">Recent comments</h2>
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-12 col-lg-12">
-            <div class="card text-body border-0 mb-5 bg-light">
-              <div class="card-body px-4 pt-3 pb-0" th:each="review:${reviewByCarID}">
-            
-                <div class="d-flex flex-start " >
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
-                    height="60" />
-                  <div>
-                    <h6 class="fw-bold mb-1">[[${review.customer.customerName}]]</h6>
-                    <div>
-                       
-                    <i th:classappend="${review.rating >= 1} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'" style="color: #01d28e;"></i>
-					<i th:classappend="${review.rating >= 2} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'" style="color: #01d28e;"></i>
-					<i th:classappend="${review.rating >= 3} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'" style="color: #01d28e;"></i>
-					<i th:classappend="${review.rating >= 4} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'" style="color: #01d28e;"></i>
-					<i th:classappend="${review.rating >= 5} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'" style="color: #01d28e;"></i>
-                        
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <p class="mb-0">
-                       
-                        <span class="badge bg-primary">[[${review.reviewDate}]]</span>
-                      </p>
-                    
-                    </div>
-                    <p class="mb-2">
-                     [[${review.reviewText}]]
-                    </p>
-                  </div>
-                  
-                </div>
-                <hr class="m-0 bg-success" style="height: 1px;">
-              </div>       
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--phần hiển thị comment -->
+					<div class="card">
+						<div class="card-body p-4">
+							<div class="d-flex flex-start w-100">
+								<img class="rounded-circle shadow-1-strong me-3"
+									src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+									alt="avatar" width="65" height="65" />
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
- 
+								<form th:action="@{/index/cars/{id}(id=${carDetail.carID})}"
+									method="post" class="w-100">
+									<h5 class="m-0">Add a comment</h5>
+
+
+									<div class="rating">
+										<input value="5" name="rateCarDetail" id="star5" type="radio">
+										<label title="text" for="star5"></label> <input value="4"
+											name="rateCarDetail" id="star4" type="radio"> <label
+											title="text" for="star4"></label> <input value="3"
+											name="rateCarDetail" id="star3" type="radio" checked="">
+										<label title="text" for="star3"></label> <input value="2"
+											name="rateCarDetail" id="star2" type="radio"> <label
+											title="text" for="star2"></label> <input value="1"
+											name="rateCarDetail" id="star1" type="radio"> <label
+											title="text" for="star1"></label>
+									</div>
+
+
+									<div data-mdb-input-init class="form-outline">
+										<textarea class="form-control" id="textAreaExample"
+											name="reviewText" rows="4" placeholder="What is your view?"></textarea>
+										<label class="form-label" for="textAreaExample"></label>
+									</div>
+									<div class="d-flex justify-content-between ">
+
+										<button type="submit" data-mdb-button-init
+											data-mdb-ripple-init class="btn btn-success">
+											Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+
+	<!--phần comment  -->
+
+
+
+	<!-- phần hiện thị comment -->
+	<section class="bg-light">
+		<div class="container">
+			<h2 class="fw-bolder mb-2 pt-3">Recent comments</h2>
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-12 col-lg-12">
+					<div class="card text-body border-0 mb-5 bg-light">
+						<div class="card-body px-4 pt-3 pb-0"
+							th:each="review:${reviewByCarID}">
+
+							<div class="d-flex flex-start ">
+								<img class="rounded-circle shadow-1-strong me-3"
+									src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
+									alt="avatar" width="60" height="60" />
+								<div>
+									<h6 class="fw-bold mb-1">[[${review.customer.customerName}]]</h6>
+									<div>
+
+										<i
+											th:classappend="${review.rating >= 1} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'"
+											style="color: #01d28e;"></i> <i
+											th:classappend="${review.rating >= 2} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'"
+											style="color: #01d28e;"></i> <i
+											th:classappend="${review.rating >= 3} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'"
+											style="color: #01d28e;"></i> <i
+											th:classappend="${review.rating >= 4} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'"
+											style="color: #01d28e;"></i> <i
+											th:classappend="${review.rating >= 5} ? 'fa-solid' + ' fa-star': 'fa-regular' + ' fa-star'"
+											style="color: #01d28e;"></i>
+
+									</div>
+									<div class="d-flex align-items-center">
+										<p class="mb-0">
+
+											<span class="badge bg-primary">[[${review.reviewDate}]]</span>
+										</p>
+
+									</div>
+									<p class="mb-2">[[${review.reviewText}]]</p>
+								</div>
+
+							</div>
+							<hr class="m-0 bg-success" style="height: 1px;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--phần hiển thị comment -->
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
 
 </body>
 </html>

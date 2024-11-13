@@ -17,4 +17,6 @@ public interface CarDao extends JpaRepository<Car, Integer> {
     List<Car> findCars(@Param("carName") String carName, @Param("address") String address, @Param("minPrice") Double minPrice, @Param("maxPrice") Double maxPrice);
 
 	Optional<Car> findBycarID(Car car);
+	
+	List<Car> findByStatus(boolean status);
 }

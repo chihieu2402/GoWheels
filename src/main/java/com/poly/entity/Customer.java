@@ -58,6 +58,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Bill> bill;
 
-
-
+    @OneToMany(mappedBy = "customer")
+    private List<PendingCarPost> pendingCarPosts;
 }

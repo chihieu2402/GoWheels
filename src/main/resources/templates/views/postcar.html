@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 <meta charset="UTF-8">
 <title>Đăng Bài Cho Thuê</title>
@@ -38,53 +37,117 @@
 		<div class="row">
 			<h1>POST RENTALS CAR</h1>
 			<div class="col-sm-7">
-				<form action="/index/addPost" method="post"
-					enctype="multipart/form-data">
+				<form action="/index/addPost" method="POST"
+					enctype="multipart/form-data" th:object="${pendingCarPost}">
 					<div class="form-group">
-						<label for="carName">Car Name</label> <input type="text"
+						<label for="carName">Tên Xe</label> <input type="text"
 							class="form-control" id="carName" name="carName" required>
 					</div>
 					<div class="form-group">
-						<!-- <label for="carBrand">Car Brand</label> <select
-							class="form-control" id="carBrand" name="carBrand" required>
-							<option value="">Select Car Brand</option>
-							<th:block th:each="brand : ${carBrands}">
-								<option th:value="${brand.brandName}"
-									th:text="${brand.brandName}"></option>
-							</th:block>
-						</select> -->
-						<select class="form-control" id="carBrand" name="carBrand.carBrandID" required>
-                        <option value="">Select Car Brand</option>
-                        <th:block th:each="brand : ${carBrands}">
-                            <option th:value="${brand.carBrandID}" th:text="${brand.brandName}"
-                                    th:selected="${selectedCarBrand == brand.carBrandID}"></option>
-                        </th:block>
-                    </select>
+						<label for="carType">Loại Xe</label> <input type="text"
+							class="form-control" id="carType" name="carType" required>
 					</div>
 					<div class="form-group">
-						<label for="color">Color</label> <input type="text"
+						<label for="color">Màu Sắc</label> <input type="text"
 							class="form-control" id="color" name="color" required>
 					</div>
 					<div class="form-group">
-						<label for="address">Address</label> <input type="text"
+						<label for="typeGear">Loại Hộp Số</label> <input type="text"
+							class="form-control" id="typeGear" name="type_gear" required>
+					</div>
+					<div class="form-group">
+						<label for="carNumber">Biển Số Xe</label> <input type="text"
+							class="form-control" id="carNumber" name="car_number" required>
+					</div>
+					<div class="form-group">
+						<label for="typeFuel">Loại Nhiên Liệu</label> <input type="text"
+							class="form-control" id="typeFuel" name="type_fuel" required>
+					</div>
+					<div class="form-group">
+						<label for="yearOfManufacture">Năm Sản Xuất</label> <input
+							type="number" class="form-control" id="yearOfManufacture"
+							name="year_of_manufacture" required>
+					</div>
+					<div class="form-group">
+						<label for="muctieuthu">Mức Tiêu Thụ</label> <input type="text"
+							class="form-control" id="muctieuthu" name="muctieuthu" required>
+					</div>
+					<div class="form-group">
+						<label for="limit">Giới Hạn</label> <input type="text"
+							class="form-control" id="limit" name="limit" required>
+					</div>
+					<div class="form-group">
+						<label for="feeLimit">Phí Giới Hạn</label> <input type="text"
+							class="form-control" id="feeLimit" name="fee_limit" required>
+					</div>
+					<div class="form-group">
+						<label for="address">Địa Chỉ</label> <input type="text"
 							class="form-control" id="address" name="address" required>
 					</div>
 					<div class="form-group">
-						<label for="imageName">Image</label> <input type="file"
-							class="form-control-file" id="imageName" name="imageName"
-							required>
+						<label for="describe">Mô Tả</label> <input type="text"
+							class="form-control" id="describe" name="describe" required>
 					</div>
-					<!-- <div class="form-group">
-						<label for="ownershipDocument">Ownership Document</label> <input
-							type="file" class="form-control-file" id="ownershipDocument"
-							name="ownershipDocument" required>
-					</div> -->
 					<div class="form-group">
-						<label for="priceHoursCar">Hourly Rate</label> <input
-							type="number" class="form-control" id="priceHoursCar"
-							name="priceHoursCar" step="0.01" required>
+						<label for="priceHoursCar">Giá Thuê Theo Giờ</label> <input
+							type="number" step="0.01" class="form-control" id="priceHoursCar"
+							name="priceHoursCar" required>
 					</div>
-					<button type="submit" class="btn btn-primary mt-3">Submit</button>
+					<div class="form-group">
+						<label for="images">Hình Ảnh Xe (6 Ảnh)</label>
+						<div class="row">
+							<div class="col-md-4">
+								<label for="image1">Ảnh 1</label> <input type="file"
+									class="form-control-file" id="image1" name="image1" required>
+							</div>
+							<div class="col-md-4">
+								<label for="image2">Ảnh 2</label> <input type="file"
+									class="form-control-file" id="image2" name="image2" required>
+							</div>
+							<div class="col-md-4">
+								<label for="image3">Ảnh 3</label> <input type="file"
+									class="form-control-file" id="image3" name="image3" required>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-md-4">
+								<label for="image4">Ảnh 4</label> <input type="file"
+									class="form-control-file" id="image4" name="image4" required>
+							</div>
+							<div class="col-md-4">
+								<label for="image5">Giấy Tờ Sở Hữu 1</label> <input type="file"
+									class="form-control-file" id="image5" name="ownershipDocument1"
+									required>
+							</div>
+							<div class="col-md-4">
+								<label for="image6">Giấy Tờ Sở Hữu 2</label> <input type="file"
+									class="form-control-file" id="image6" name="ownershipDocument2"
+									required>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="customerID">Mã Khách Hàng</label> <input type="text"
+							class="form-control" id="customerID" name="customerID"
+							value="${customerID}" readonly>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						Authenticated as <span sec:authentication="name"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="carBrandID">Thương Hiệu Xe</label><select
+							class="form-control" id="carBrand" name="carBrand.carBrandID"
+							required>
+							<option value="">Select Car Brand</option>
+							<th:block th:each="brand : ${carBrands}">
+								<option th:value="${brand.carBrandID}"
+									th:text="${brand.brandName}"
+									th:selected="${selectedCarBrand == brand.carBrandID}"></option>
+							</th:block>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Đăng Bài</button>
 				</form>
 
 			</div>
@@ -240,8 +303,6 @@
 
 	<script src="https://kit.fontawesome.com/03099bb746.js"
 		crossorigin="anonymous"></script>
-
-
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-var app = angular.module('app', []);
+/*var app = angular.module('app', []);
 app.controller("ctrl", function($scope, $http){
     $scope.import = function(files){	
         var reader = new FileReader();
@@ -28,4 +28,4 @@ app.controller("ctrl", function($scope, $http){
         };
         reader.readAsArrayBuffer(files[0]);
     }
-})
+})*/
