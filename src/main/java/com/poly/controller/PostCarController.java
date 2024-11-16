@@ -35,138 +35,90 @@ import com.poly.entity.PendingCarPost;
 @Controller
 public class PostCarController {
 
-	private final String UPLOAD_DIR = "src/main/resources/static/images/";
+    private final String UPLOAD_DIR = "src/main/resources/static/images/";
 
-	@Autowired
-	private CarPostService carPostService;
+    @Autowired
+    private CarPostService carPostService;
 
-	@Autowired
-	private CarBrandSerivce brandService;
+    @Autowired
+    private CarBrandSerivce brandService;
 
-	@Autowired
-	private PendingCarPostDao pendingCarPostDao;
+    @Autowired
+    private PendingCarPostDao pendingCarPostDao;
 
-	@Autowired
-	private CustomUserDetailsService customerService;
+    @GetMapping("/index/postcar")
+    @PreAuthorize("hasAuthority('OWNER')")
+    public String showPostCarForm(Model model) {
+        model.addAttribute("pendingCarPost", new PendingCarPost());
+        model.addAttribute("carBrands", brandService.findAll());
+        return "views/postcar";
+    }
 
-	@GetMapping("/index/postcar")
-	@PreAuthorize("hasAuthority('OWNER')")
-	public String showPostCarForm(Model model, Principal principal) {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-//		Account account = userDetails.getAccount();
-//		int customerID = account.getCustomer().getCustomerID();
-		
-//		model.addAttribute("customerID", customerID);
-		model.addAttribute("pendingCarPost", new PendingCarPost());
-		model.addAttribute("carBrands", brandService.findAll());
+    @PostMapping("/index/addPost")
+    public String addPost(@Validated @ModelAttribute PendingCarPost pendingCarPost,
+                          @RequestParam("image1") MultipartFile image1,
+                          @RequestParam("image2") MultipartFile image2,
+                          @RequestParam("image3") MultipartFile image3,
+                          @RequestParam("image4") MultipartFile image4,
+                          @RequestParam("ownershipDocument1") MultipartFile ownershipDocument1,
+                          @RequestParam("ownershipDocument2") MultipartFile ownershipDocument2,
+                          BindingResult result, RedirectAttributes redirectAttributes) {
 
-		return "views/postcar";
-	}
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
+            return "views/postcar";
+        }
 
-	@PostMapping("/index/addPost")
-	public String addPost(@Validated @ModelAttribute PendingCarPost pendingCarPost,
-			@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2,
-			@RequestParam("image3") MultipartFile image3, @RequestParam("image4") MultipartFile image4,
-			@RequestParam("ownershipDocument1") MultipartFile ownershipDocument1,
-			@RequestParam("ownershipDocument2") MultipartFile ownershipDocument2, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+        try {
+            ImagePending imagePending = new ImagePending();
+            imagePending.setImage1(saveFile(image1));
+            imagePending.setImage2(saveFile(image2));
+            imagePending.setImage3(saveFile(image3));
+            imagePending.setImage4(saveFile(image4));
+            imagePending.setImgOwnershipCertificate1(saveFile(ownershipDocument1));
+            imagePending.setImgOwnershipCertificate2(saveFile(ownershipDocument2));
 
-		if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("errorMessage", "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
-			return "views/postcar";
-		}
+            pendingCarPost.setImagePending(imagePending);
 
-		try {
-			// Xử lý hình ảnh
-			handleUploadImage(pendingCarPost, image1);
-			handleUploadImage(pendingCarPost, image2);
-			handleUploadImage(pendingCarPost, image3);
-			handleUploadImage(pendingCarPost, image4);
+            carPostService.addPost(pendingCarPost);
+            redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được thêm thành công!");
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi thêm bài đăng.");
+        }
 
-			// Xử lý giấy tờ sở hữu
-			handleUploadOwnershipDocument(pendingCarPost, ownershipDocument1, ownershipDocument2);
+        return "views/postcar";
+    }
 
-			// Thêm bài đăng vào cơ sở dữ liệu
-			carPostService.addPost(pendingCarPost);
+    private String saveFile(MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
+            Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+            return fileName;
+        }
+        return null;
+    }
 
-			redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được thêm thành công!");
-		} catch (IOException e) {
-			e.printStackTrace();
-			redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi thêm bài đăng.");
-		}
+    @GetMapping("/index/managePosts")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String managePosts(Model model) {
+        model.addAttribute("pendingPosts", carPostService.getAllPendingPosts());
+        return "views/managePosts";
+    }
 
-		return "views/postcar";
-	}
+    @PostMapping("/index/approvePost")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String approvePost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
+        carPostService.approvePost(postID);
+        redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được duyệt thành công!");
+        return "redirect:/index/managePosts";
+    }
 
-	private void handleUploadImage(PendingCarPost pendingCarPost, MultipartFile imageFile) throws IOException {
-		if (!imageFile.isEmpty()) {
-			String fileName = imageFile.getOriginalFilename();
-			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
-			Files.copy(imageFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-
-			// Lưu tên hình ảnh vào đối tượng ImagePending
-			if (pendingCarPost.getImagePending() == null) {
-				pendingCarPost.setImagePending(new ImagePending()); // Khởi tạo nếu chưa có
-			}
-
-			// Gán tên file vào các trường image1, image2, image3, image4
-			switch (imageFile.getName()) {
-			case "image1":
-				pendingCarPost.getImagePending().setImage1(fileName);
-				break;
-			case "image2":
-				pendingCarPost.getImagePending().setImage2(fileName);
-				break;
-			case "image3":
-				pendingCarPost.getImagePending().setImage3(fileName);
-				break;
-			case "image4":
-				pendingCarPost.getImagePending().setImage4(fileName);
-				break;
-			}
-		}
-	}
-
-	private void handleUploadOwnershipDocument(PendingCarPost pendingCarPost, MultipartFile doc1, MultipartFile doc2)
-			throws IOException {
-		if (!doc1.isEmpty()) {
-			String fileName = doc1.getOriginalFilename();
-			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
-			Files.copy(doc1.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-			if (pendingCarPost.getImagePending() == null) {
-				pendingCarPost.setImagePending(new ImagePending());
-			}
-			pendingCarPost.getImagePending().setImgOwnershipCertificate1(fileName);
-		}
-
-		if (!doc2.isEmpty()) {
-			String fileName = doc2.getOriginalFilename();
-			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
-			Files.copy(doc2.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-			if (pendingCarPost.getImagePending() == null) {
-				pendingCarPost.setImagePending(new ImagePending());
-			}
-			pendingCarPost.getImagePending().setImgOwnershipCertificate2(fileName);
-		}
-	}
-
-	@GetMapping("/views/admin/managePosts")
-	public String managePosts(Model model) {
-		List<PendingCarPost> posts = pendingCarPostDao.findAll();
-		model.addAttribute("posts", posts);
-		return "views/admin/managePosts";
-	}
-
-	@PostMapping("/index/approvePost")
-	public String approvePost(@RequestParam int postID) {
-		carPostService.approvePost(postID);
-		return "redirect:/index/managePosts";
-	}
-
-	@PostMapping("/index/rejectPost")
-	public String rejectPost(@RequestParam int postID) {
-		carPostService.rejectPost(postID);
-		return "redirect:/index/managePosts";
-	}
+    @PostMapping("/index/rejectPost")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String rejectPost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
+        carPostService.rejectPost(postID);
+        redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã bị từ chối.");
+        return "redirect:/index/managePosts";
+    }
 }
