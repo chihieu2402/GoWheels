@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.poly.dao.AccountDao;
+import com.poly.dao.ReviewDao;
 import com.poly.entity.Account;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.poly.entity.Review;
+
 
 
 @Controller
@@ -24,7 +26,9 @@ public class AdminController {
     
     @Autowired
     private AccountDao accountDao;
-
+    @Autowired
+    private ReviewDao reviewDao;
+    
     
     @GetMapping("/account")
     public String users(Model model) {
@@ -74,8 +78,12 @@ public class AdminController {
         return "redirect:/admin/account";
     }
     @GetMapping("/Review")
-    public String rv() {
-        return "/views/admin/Review";
+    public String rv(Model model) {
+        // Giả sử bạn có repository để lấy dữ liệu Review
+        List<Review> reviews = reviewDao.findAll(); // Lấy tất cả reviews từ database
+        model.addAttribute("reviews", reviews); // Thêm danh sách vào model
+        return "/views/admin/Review"; // Trả về trang giao diện
     }
+
     
 }
