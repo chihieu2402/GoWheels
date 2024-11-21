@@ -479,9 +479,9 @@ VALUES
 INSERT INTO [dbo].[image_car]
            ([image1], [image2], [image3], [image4], [img_ownership_certificate1], [img_ownership_certificate2], [car_id])
 VALUES
-           ('img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'doc1.jpg', 'doc2.jpg', 1),
-           ('img5.jpg', 'img6.jpg', 'img7.jpg', 'img8.jpg', 'doc3.jpg', 'doc4.jpg', 4),
-           ('img9.jpg', 'img10.jpg', 'img11.jpg', 'img12.jpg', 'doc5.jpg', 'doc6.jpg', 7);
+           ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 1),
+           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 4),
+           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 7);
 go
 
 INSERT INTO [dbo].[booking]
