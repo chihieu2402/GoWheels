@@ -57,9 +57,7 @@
 						<div class="img rounded d-flex align-items-end"
 							style="position: relative; width: 348px; height: 200px; overflow: hidden;">
 							<!-- Hiển thị ảnh nếu có -->
-							<img
-								th:src="@{/images/${car.imageCar.image1}}"
-								alt="Car Image 1"
+							<img th:src="@{${car.imageCar.image1}}" alt="Car Image 1"
 								style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-size: cover">
 						</div>
 						<div class="text">
@@ -82,12 +80,18 @@
 									class="bi-cart-fill me-1"></i> Book now
 								</a> <a th:href="@{/index/cars/{id}(id=${car.carID})}"
 									class="btn btn-secondary py-2 ml-1">Details</a>
+								<button class="btn btn-primary ml-1"
+									onclick="showDirections('[[${car.address}]]');">Get
+									Directions</button>
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div id="map"
+			style="height: 500px; width: 100%; margin-top: 20px; display: none;"></div>
+
 		<!-- <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -104,12 +108,6 @@
 		</div>
 		</div>
 	</section>
-
-
-
-
-
-
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
@@ -119,7 +117,58 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
+	<script>
+let map;
+let directionsService;
+let directionsRenderer;
 
+function initMap() {
+    // Khởi tạo bản đồ và các dịch vụ
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 }, // Điểm mặc định
+        zoom: 8,
+    });
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+}
+
+function showDirections(destinationAddress) {
+    // Hiển thị bản đồ
+    document.getElementById("map").style.display = "block";
+
+    // Lấy vị trí hiện tại của người dùng
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+
+            // Tính toán đường đi
+            const request = {
+                origin: userLocation, // Vị trí hiện tại của người dùng
+                destination: destinationAddress, // Địa chỉ của xe
+                travelMode: google.maps.TravelMode.DRIVING, // Phương thức di chuyển
+            };
+
+            directionsService.route(request, (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    alert("Không thể tìm thấy đường đi: " + status);
+                }
+            });
+        }, (error) => {
+            alert("Không thể lấy vị trí của bạn. Hãy bật định vị trên thiết bị.");
+        });
+    } else {
+        alert("Trình duyệt của bạn không hỗ trợ định vị.");
+    }
+}
+</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6ZInLFqOezQwiwSFtcb5axfkG-0Awjaw&callback=initMap"></script>
 	<script src="/views/js/jquery.min.js"></script>
 	<script src="/views/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/views/js/popper.min.js"></script>
@@ -135,7 +184,7 @@
 	<script src="/views/js/jquery.timepicker.min.js"></script>
 	<script src="/views/js/scrollax.min.js"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6ZInLFqOezQwiwSFtcb5axfkG-0Awjaw&sensor=false"></script>
 	<script src="/views/js/google-map.js"></script>
 	<script src="/views/js/main.js"></script>
 </body>

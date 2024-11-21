@@ -85,44 +85,6 @@
 								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
 						</div>
 					</td>
-					<td>
-						<div>
-							<img
-								th:src="@{/images/{post.imagePending.image1}(post.imagePending.image1)}"
-								alt="Car Image 1" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image1 != null}">
-
-							<img
-								th:src="@{/images/{post.imagePending.image2}(post.imagePending.image2)}"
-								alt="Car Image 2" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image2 != null}">
-
-							<img
-								th:src="@{/images/{post.imagePending.image3}(post.imagePending.image3)}"
-								alt="Car Image 3" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image3 != null}">
-
-							<img
-								th:src="@{/images/{post.imagePending.image4}(post.imagePending.image4)}"
-								alt="Car Image 4" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image4 != null}">
-						</div>
-					</td>
-
-					<td>
-						<div>
-							<img
-								th:src="@{/images/{post.imagePending.imgOwnershipCertificate1}(post.imagePending.imgOwnershipCertificate1)}"
-								alt="Ownership Document 1" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate1 != null}">
-
-							<img
-								th:src="@{/images/{post.imagePending.imgOwnershipCertificate2}(post.imagePending.imgOwnershipCertificate2)}"
-								alt="Ownership Document 2" style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
-						</div>
-					</td>
-
 					<td th:text="${post.priceHoursCar}"></td>
 
 					<td>
