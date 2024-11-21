@@ -18,5 +18,10 @@ public interface CarDao extends JpaRepository<Car, Integer> {
 
 	Optional<Car> findBycarID(Car car);
 	
+//	    @Query("SELECT c FROM Car c LEFT JOIN FETCH c.imageCar")
+//	    List<Car> findAllWithImages();
+	
+
+	
 	List<Car> findByStatus(boolean status);
 }

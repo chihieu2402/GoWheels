@@ -20,7 +20,9 @@ public class CarService {
         return carDao.findCars(carName, address, minPrice, maxPrice);
     }
     
- 
+//    public List<Car> getAllCars() {
+//        return carDao.findAllWithImages();
+//    }
     
     
 }

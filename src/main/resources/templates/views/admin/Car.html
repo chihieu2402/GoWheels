@@ -1,129 +1,125 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"
-	th:replace="~{/views/admin :: dynamic(~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="~{/views/admin :: dynamic(~{::body})}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Car Management</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container mt-4">
+    <div class="container mt-4">
 
-		<div class="custom-heading mb-4">
-			<h1 class="mb-1">Car Management</h1>
-		</div>
+        <div class="custom-heading mb-4">
+            <h1 class="mb-1">Car Management</h1>
+        </div>
 
+        <!-- Form for adding/updating cars -->
+        <form th:action="@{/admin/car/create}" th:object="${car}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:value="${car.carID}" name="carID">
 
-		<form th:action="@{/admin/car/create}" th:object="${car}"
-			method="post" enctype="multipart/form-data">
-			<input type="hidden" th:value="${car.carID}" name="carID">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="carName">Car Name:</label> <input
-							th:value="${car.carName}" name="carName" type="text"
-							class="form-control" id="carName" placeholder="Enter car name"
-							required>
-					</div>
-					<div class="form-group">
-						<label for="carBrand">Car Brand:</label> 
-						<select class="form-control" id="carBrand" name="carBrandID" required>
-                        <option value="">Select Car Brand</option>
-                        <th:block th:each="brand : ${listCarbrand}">
-                            <option th:value="${brand.carBrandID}" th:text="${brand.brandName}"
-                                    th:selected="${selectedCarBrand == brand.carBrandID}"></option>
-                        </th:block>
-                    </select>
-					</div>
-					<div class="form-group">
-						<label for="color">Color:</label> <input th:value="${car.color}"
-							name="color" type="text" class="form-control" id="color"
-							placeholder="Enter color" required>
-					</div>
-					<div class="form-group">
-						<label for="priceHoursCar">Price/Day:</label> <input
-							th:value="${car.priceHoursCar}" name="priceHoursCar"
-							type="number" step="0.01" class="form-control" id="priceHoursCar"
-							placeholder="Enter price per hour" required>
-					</div>
-					
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="address">Address:</label> <input
-							th:value="${car.address}" name="address" type="text"
-							class="form-control" id="address" placeholder="Enter address"
-							required>
-					</div>
-					<div class="form-group">
-						<label for="status">Status:</label> <select th:field="*{status}"
-							name="status" class="form-control" id="status" required>
-							<option th:value="true" th:text="'Active'">Active</option>
-							<option th:value="false" th:text="'Inactive'">Inactive</option>
-						</select>
-					</div>
-					<div class="form-group mb-3">
-						<label for="ownerID">Owner ID:</label> <input th:value="${car.carOwner != null ? car.carOwner.ownerID : ''}"
-							name="ownerID" type="text" class="form-control" id="ownerID"
-							placeholder="Enter owner ID">
-					</div>
-					
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="carName">Car Name:</label>
+                        <input th:value="${car.carName}" name="carName" type="text" class="form-control" id="carName" placeholder="Enter car name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carBrand">Car Brand:</label>
+                        <select class="form-control" id="carBrand" name="carBrandID" required>
+                            <option value="">Select Car Brand</option>
+                            <th:block th:each="brand : ${listCarbrand}">
+                                <option th:value="${brand.carBrandID}" th:text="${brand.brandName}" th:selected="${selectedCarBrand == brand.carBrandID}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <input th:value="${car.color}" name="color" type="text" class="form-control" id="color" placeholder="Enter color" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priceHoursCar">Price/Hour:</label>
+                        <input th:value="${car.priceHoursCar}" name="priceHoursCar" type="number" step="0.01" class="form-control" id="priceHoursCar" placeholder="Enter price per hour" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input th:value="${car.address}" name="address" type="text" class="form-control" id="address" placeholder="Enter address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select th:field="*{status}" name="status" class="form-control" id="status" required>
+                            <option th:value="true" th:text="'Active'">Active</option>
+                            <option th:value="false" th:text="'Inactive'">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ownerID">Owner ID:</label>
+                        <input th:value="${car.carOwner != null ? car.carOwner.ownerID : ''}" name="ownerID" type="text" class="form-control" id="ownerID" placeholder="Enter owner ID">
+                    </div>
+
                     <div class="form-group">
                         <label for="imageFile">Car Image:</label>
                         <input name="imageFile" type="file" class="form-control-file" id="imageFile" accept="image/*">
                     </div>
+                </div>
+            </div>
 
+            <div class="btn-group mt-3">
+                <button type="submit" class="btn btn-info">Add</button>
+                <button type="submit" th:formaction="@{/admin/car/update}" class="btn btn-warning">Update</button>
+                <button type="submit" th:formaction="@{/admin/car/delete}" class="btn btn-danger">Delete</button>
+                <button type="reset" class="btn btn-success">Reset</button>
+            </div>
+        </form>
 
-				</div>
-			</div>
-			<div class="btn-group mt-3">
-				<button type="submit" class="btn btn-info">Add</button>
-				<button type="submit" th:formaction="@{/admin/car/update}"
-					class="btn btn-warning">Update</button>
-				<button type="submit" th:formaction="@{/admin/car/delete}"
-					class="btn btn-danger">Delete</button>
-				<button type="reset" class="btn btn-success">Reset</button>
-			</div>
-		</form>
-		<!-- Table -->
-		<table class="table table-striped table-bordered mt-5">
-			<thead class="thead-dark">
-				<tr>
-					<th>Car ID</th>
-					<th>Car Name</th>
-					<th>Car Brand</th>
-					<th>Color</th>
-					<th>Address</th>
-					<th>Price/Hour</th>
-					<th>Status</th>
-					<th>Owner ID</th>
-					<th>Image</th>
-					<th>Edit</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="car : ${cars}">
-					<td th:text="${car.carID}"></td>
-					<td th:text="${car.carName}"></td>
-					<td th:text="${car.carBrand != null ? car.carBrand.brandName : 'N/A'}"></td>
-					<td th:text="${car.color}"></td>
-					<td th:text="${car.address}"></td>
-					<td th:text="${car.priceHoursCar}"></td>
-					<td th:text="${car.status ? 'Active' : 'Inactive'}"></td>	
-					<td th:text="${car.carOwner != null ? car.carOwner.ownerID : ''}"></td>
+        <!-- Table displaying cars -->
+        <table class="table table-striped table-bordered mt-5">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Car ID</th>
+                    <th>Car Name</th>
+                    <th>Car Brand</th>
+                    <th>Color</th>
+                    <th>Address</th>
+                    <th>Price/Hour</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th>Images</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="car : ${cars}">
+                    <td th:text="${car.carID}"></td>
+                    <td th:text="${car.carName}"></td>
+                    <td th:text="${car.carBrand != null ? car.carBrand.brandName : 'N/A'}"></td>
+                    <td th:text="${car.color}"></td>
+                    <td th:text="${car.address}"></td>
+                    <td th:text="${car.priceHoursCar}"></td>
+                    <td th:text="${car.status ? 'Active' : 'Inactive'}"></td>
+                    <td th:text="${car.carOwner != null ? car.carOwner.customerName : 'N/A'}"></td>
 
-					<td><img th:src="@{${car.image}}" alt="Car Image" style="width: 100px; height: auto;"></td>	
+                    <!-- Display images -->
+                    <td>
+                        <span th:if="${car.imageCar != null and car.imageCar.image1 != null}">
+                            <img th:src="@{/images/{image}(image=${car.imageCar.image1})}" alt="Car Image 1" style="width: 100px; height: auto;">
+                        </span>
+                        <span th:if="${car.imageCar == null or car.imageCar.image1 == null}">No Image</span>
+                    </td>
 
-					
-
-
-					<td><a th:href="@{/admin/car/edit/{id}(id=${car.carID})}"
-						class="btn btn-primary">Edit</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+                    <td>
+                        <a th:href="@{/admin/car/edit/{id}(id=${car.carID})}" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
