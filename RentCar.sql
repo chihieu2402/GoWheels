@@ -1,10 +1,5 @@
 ﻿Create database RentCar;
-Use RentCar;
-
-
-GO
--- bảng account
-Create database RentCar;
+go
 Use RentCar;
 
 
@@ -23,8 +18,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[account]  WITH CHECK ADD CHECK  (([auth_type]>=(0) AND [auth_type]<=(2)))
-GO
 
 --bang bill
 CREATE TABLE [dbo].[bill](
@@ -42,12 +35,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[bill]  WITH CHECK ADD  CONSTRAINT [FKduvsbt91e079yql89g7io0rt4] FOREIGN KEY([customerid])
-REFERENCES [dbo].[customer] ([customerid])
-GO
-
-ALTER TABLE [dbo].[bill] CHECK CONSTRAINT [FKduvsbt91e079yql89g7io0rt4]
-GO
 --bang bill_detal
 CREATE TABLE [dbo].[bill_detail](
 	[bill_detailid] [int] IDENTITY(1,1) NOT NULL,
@@ -64,19 +51,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[bill_detail]  WITH CHECK ADD  CONSTRAINT [FK480s0ds7f3aqu51t96wmcuxhw] FOREIGN KEY([carid])
-REFERENCES [dbo].[car] ([carid])
-GO
-
-ALTER TABLE [dbo].[bill_detail] CHECK CONSTRAINT [FK480s0ds7f3aqu51t96wmcuxhw]
-GO
-
-ALTER TABLE [dbo].[bill_detail]  WITH CHECK ADD  CONSTRAINT [FK8k2t2g0ijaseny4aj71bupp4n] FOREIGN KEY([billid])
-REFERENCES [dbo].[bill] ([billid])
-GO
-
-ALTER TABLE [dbo].[bill_detail] CHECK CONSTRAINT [FK8k2t2g0ijaseny4aj71bupp4n]
-GO
 -- baag booking
 CREATE TABLE [dbo].[booking](
 	[bookingid] [int] IDENTITY(1,1) NOT NULL,
@@ -95,12 +69,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[booking]  WITH CHECK ADD  CONSTRAINT [FK1j4gjgtm2n9gvhmcwsmj00mm7] FOREIGN KEY([carid])
-REFERENCES [dbo].[car] ([carid])
-GO
-
-ALTER TABLE [dbo].[booking] CHECK CONSTRAINT [FK1j4gjgtm2n9gvhmcwsmj00mm7]
-GO
 --- bang car
 CREATE TABLE [dbo].[car](
 	[carid] [int] IDENTITY(1,1) NOT NULL,
@@ -130,26 +98,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKcx4d66i0tlqrdi2938u1y3l01] FOREIGN KEY([ownerid])
-REFERENCES [dbo].[car_owner] ([ownerid])
-GO
-
-ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKcx4d66i0tlqrdi2938u1y3l01]
-GO
-
-ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKf9p93wnsbdy4g44cx4iqhyhes] FOREIGN KEY([reviewid])
-REFERENCES [dbo].[review] ([reviewid])
-GO
-
-ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKf9p93wnsbdy4g44cx4iqhyhes]
-GO
-
-ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKkevqd6mlo9mjfmo129co282cs] FOREIGN KEY([car_brandid])
-REFERENCES [dbo].[car_brand] ([car_brandid])
-GO
-
-ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKkevqd6mlo9mjfmo129co282cs]
-GO
 -- car_band
 CREATE TABLE [dbo].[car_brand](
 	[car_brandid] [int] IDENTITY(1,1) NOT NULL,
@@ -172,12 +120,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[car_owner]  WITH CHECK ADD  CONSTRAINT [FK8dr7ig14t1euldtqevqn0f670] FOREIGN KEY([customerid])
-REFERENCES [dbo].[customer] ([customerid])
-GO
-
-ALTER TABLE [dbo].[car_owner] CHECK CONSTRAINT [FK8dr7ig14t1euldtqevqn0f670]
-GO
 -- customer
 CREATE TABLE [dbo].[customer](
 	[customerid] [int] IDENTITY(1,1) NOT NULL,
@@ -194,12 +136,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[customer]  WITH CHECK ADD  CONSTRAINT [FKass5qvmiyb6jsxaqjmk0mj4bw] FOREIGN KEY([accountid])
-REFERENCES [dbo].[account] ([accountid])
-GO
-
-ALTER TABLE [dbo].[customer] CHECK CONSTRAINT [FKass5qvmiyb6jsxaqjmk0mj4bw]
-GO
 -- image_car
 CREATE TABLE [dbo].[image_car](
 	[vehicle_id] [int] IDENTITY(1,1) NOT NULL,
@@ -217,12 +153,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[image_car]  WITH CHECK ADD  CONSTRAINT [FK5ppiyn9bw9l086xylipo8p3d1] FOREIGN KEY([car_id])
-REFERENCES [dbo].[car] ([carid])
-GO
-
-ALTER TABLE [dbo].[image_car] CHECK CONSTRAINT [FK5ppiyn9bw9l086xylipo8p3d1]
-GO
 -- image-pending
 CREATE TABLE [dbo].[image_pending](
 	[vehicle_id] [int] IDENTITY(1,1) NOT NULL,
@@ -251,12 +181,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[payment]  WITH CHECK ADD  CONSTRAINT [FK11qy73js2eheuoa5wlgm9jblw] FOREIGN KEY([billid])
-REFERENCES [dbo].[bill] ([billid])
-GO
-
-ALTER TABLE [dbo].[payment] CHECK CONSTRAINT [FK11qy73js2eheuoa5wlgm9jblw]
-GO
 -- pending_car_post
 CREATE TABLE [dbo].[pending_car_post](
 	[postid] [int] IDENTITY(1,1) NOT NULL,
@@ -283,19 +207,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[pending_car_post]  WITH CHECK ADD  CONSTRAINT [FKm3ye1voktw4rqp62tqp1m0f3d] FOREIGN KEY([customerid])
-REFERENCES [dbo].[customer] ([customerid])
-GO
-
-ALTER TABLE [dbo].[pending_car_post] CHECK CONSTRAINT [FKm3ye1voktw4rqp62tqp1m0f3d]
-GO
-
-ALTER TABLE [dbo].[pending_car_post]  WITH CHECK ADD  CONSTRAINT [FKmp0ud2hk07d5fgg7j67rfofs] FOREIGN KEY([car_brandid])
-REFERENCES [dbo].[car_brand] ([car_brandid])
-GO
-
-ALTER TABLE [dbo].[pending_car_post] CHECK CONSTRAINT [FKmp0ud2hk07d5fgg7j67rfofs]
-GO
 -- review
 CREATE TABLE [dbo].[review](
 	[reviewid] [int] IDENTITY(1,1) NOT NULL,
@@ -311,12 +222,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[review]  WITH CHECK ADD  CONSTRAINT [FKry6hyp71d3k629ky7rgl2lnxk] FOREIGN KEY([customerid])
-REFERENCES [dbo].[customer] ([customerid])
-GO
-
-ALTER TABLE [dbo].[review] CHECK CONSTRAINT [FKry6hyp71d3k629ky7rgl2lnxk]
-GO
 --role 
 CREATE TABLE [dbo].[role](
 	[id] [int] NOT NULL,
@@ -338,6 +243,116 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+--after cái gì đó
+ALTER TABLE [dbo].[account]  WITH CHECK ADD CHECK  (([auth_type]>=(0) AND [auth_type]<=(2)))
+GO
+
+
+ALTER TABLE [dbo].[bill]  WITH CHECK ADD  CONSTRAINT [FKduvsbt91e079yql89g7io0rt4] FOREIGN KEY([customerid])
+REFERENCES [dbo].[customer] ([customerid])
+GO
+
+ALTER TABLE [dbo].[bill] CHECK CONSTRAINT [FKduvsbt91e079yql89g7io0rt4]
+GO
+
+
+ALTER TABLE [dbo].[bill_detail]  WITH CHECK ADD  CONSTRAINT [FK480s0ds7f3aqu51t96wmcuxhw] FOREIGN KEY([carid])
+REFERENCES [dbo].[car] ([carid])
+GO
+
+ALTER TABLE [dbo].[bill_detail] CHECK CONSTRAINT [FK480s0ds7f3aqu51t96wmcuxhw]
+GO
+
+ALTER TABLE [dbo].[bill_detail]  WITH CHECK ADD  CONSTRAINT [FK8k2t2g0ijaseny4aj71bupp4n] FOREIGN KEY([billid])
+REFERENCES [dbo].[bill] ([billid])
+GO
+
+ALTER TABLE [dbo].[bill_detail] CHECK CONSTRAINT [FK8k2t2g0ijaseny4aj71bupp4n]
+GO
+
+
+ALTER TABLE [dbo].[booking]  WITH CHECK ADD  CONSTRAINT [FK1j4gjgtm2n9gvhmcwsmj00mm7] FOREIGN KEY([carid])
+REFERENCES [dbo].[car] ([carid])
+GO
+
+ALTER TABLE [dbo].[booking] CHECK CONSTRAINT [FK1j4gjgtm2n9gvhmcwsmj00mm7]
+GO
+
+ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKcx4d66i0tlqrdi2938u1y3l01] FOREIGN KEY([ownerid])
+REFERENCES [dbo].[car_owner] ([ownerid])
+GO
+
+ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKcx4d66i0tlqrdi2938u1y3l01]
+GO
+
+ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKf9p93wnsbdy4g44cx4iqhyhes] FOREIGN KEY([reviewid])
+REFERENCES [dbo].[review] ([reviewid])
+GO
+
+ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKf9p93wnsbdy4g44cx4iqhyhes]
+GO
+
+ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FKkevqd6mlo9mjfmo129co282cs] FOREIGN KEY([car_brandid])
+REFERENCES [dbo].[car_brand] ([car_brandid])
+GO
+
+ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FKkevqd6mlo9mjfmo129co282cs]
+GO
+
+
+ALTER TABLE [dbo].[car_owner]  WITH CHECK ADD  CONSTRAINT [FK8dr7ig14t1euldtqevqn0f670] FOREIGN KEY([customerid])
+REFERENCES [dbo].[customer] ([customerid])
+GO
+
+ALTER TABLE [dbo].[car_owner] CHECK CONSTRAINT [FK8dr7ig14t1euldtqevqn0f670]
+GO
+
+
+ALTER TABLE [dbo].[customer]  WITH CHECK ADD  CONSTRAINT [FKass5qvmiyb6jsxaqjmk0mj4bw] FOREIGN KEY([accountid])
+REFERENCES [dbo].[account] ([accountid])
+GO
+
+ALTER TABLE [dbo].[customer] CHECK CONSTRAINT [FKass5qvmiyb6jsxaqjmk0mj4bw]
+GO
+
+
+ALTER TABLE [dbo].[image_car]  WITH CHECK ADD  CONSTRAINT [FK5ppiyn9bw9l086xylipo8p3d1] FOREIGN KEY([car_id])
+REFERENCES [dbo].[car] ([carid])
+GO
+
+ALTER TABLE [dbo].[image_car] CHECK CONSTRAINT [FK5ppiyn9bw9l086xylipo8p3d1]
+GO
+
+
+ALTER TABLE [dbo].[payment]  WITH CHECK ADD  CONSTRAINT [FK11qy73js2eheuoa5wlgm9jblw] FOREIGN KEY([billid])
+REFERENCES [dbo].[bill] ([billid])
+GO
+
+ALTER TABLE [dbo].[payment] CHECK CONSTRAINT [FK11qy73js2eheuoa5wlgm9jblw]
+GO
+
+ALTER TABLE [dbo].[pending_car_post]  WITH CHECK ADD  CONSTRAINT [FKm3ye1voktw4rqp62tqp1m0f3d] FOREIGN KEY([customerid])
+REFERENCES [dbo].[customer] ([customerid])
+GO
+
+ALTER TABLE [dbo].[pending_car_post] CHECK CONSTRAINT [FKm3ye1voktw4rqp62tqp1m0f3d]
+GO
+
+ALTER TABLE [dbo].[pending_car_post]  WITH CHECK ADD  CONSTRAINT [FKmp0ud2hk07d5fgg7j67rfofs] FOREIGN KEY([car_brandid])
+REFERENCES [dbo].[car_brand] ([car_brandid])
+GO
+
+ALTER TABLE [dbo].[pending_car_post] CHECK CONSTRAINT [FKmp0ud2hk07d5fgg7j67rfofs]
+GO
+
+
+ALTER TABLE [dbo].[review]  WITH CHECK ADD  CONSTRAINT [FKry6hyp71d3k629ky7rgl2lnxk] FOREIGN KEY([customerid])
+REFERENCES [dbo].[customer] ([customerid])
+GO
+
+ALTER TABLE [dbo].[review] CHECK CONSTRAINT [FKry6hyp71d3k629ky7rgl2lnxk]
+GO
+
 
 ALTER TABLE [dbo].[user_role]  WITH CHECK ADD  CONSTRAINT [FKa68196081fvovjhkek5m97n3y] FOREIGN KEY([role_id])
 REFERENCES [dbo].[role] ([id])
@@ -353,6 +368,8 @@ GO
 ALTER TABLE [dbo].[user_role] CHECK CONSTRAINT [FKlkhooy5w45r7bji6wv27a0wuq]
 GO
 
+
+---------
 
 -- insert Dữ liệu
 INSERT INTO [dbo].[account]
