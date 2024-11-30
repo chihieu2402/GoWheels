@@ -1,79 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"
-	th:replace="~{/views/admin :: dynamic(~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="~{/views/admin :: dynamic(~{::body})}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quản Lý Bài Đăng</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Bài Đăng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-
 <body>
-	<div class="container mt-5">
-		<h1 class="text-center mb-4">Quản Lý Bài Đăng</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Quản Lý Bài Đăng</h1>
 
-		<div th:if="${successMessage}" class="alert alert-success">
-			<span th:text="${successMessage}"></span>
-		</div>
-		<div th:if="${errorMessage}" class="alert alert-danger">
-			<span th:text="${errorMessage}"></span>
-		</div>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Tên Xe</th>
-					<th>Hiệu Xe</th>
-					<th>Loại Xe</th>
-					<th>Màu Sắc</th>
-					<th>Số Xe</th>
-					<th>Loại Nhiên Liệu</th>
-					<th>Năm Sản Xuất</th>
-					<th>Mức Tiêu Thụ</th>
-					<th>Giới Hạn</th>
-					<th>Phí Vượt Giới Hạn</th>
-					<th>Địa Chỉ</th>
-					<th>Mô Tả</th>
-					<th>Hình Ảnh</th>
-					<th>Giấy Tờ Sở Hữu</th>
-					<th>Giá Theo Giờ</th>
-					<th>Hành Động</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="post : ${posts}">
-					<td th:text="${post.postID}"></td>
-					<td th:text="${post.carName}"></td>
-					<td
-						th:text="${post.carBrand != null ? post.carBrand.brandName : 'N/A'}"></td>
-					<td th:text="${post.carType}"></td>
-					<td th:text="${post.color}"></td>
-					<td th:text="${post.car_number}"></td>
-					<td th:text="${post.type_fuel}"></td>
-					<td th:text="${post.year_of_manufacture}"></td>
-					<td th:text="${post.muctieuthu}"></td>
-					<td th:text="${post.limit}"></td>
-					<td th:text="${post.fee_limit}"></td>
-					<td th:text="${post.address}"></td>
-					<td th:text="${post.describe}"></td>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Xe</th>
+                    <th>Hiệu Xe</th>
+                    <th>Loại Xe</th>
+                    <th>Màu Sắc</th>
+                    <th>Số Xe</th>
+                    <th>Loại Nhiên Liệu</th>
+                    <th>Năm Sản Xuất</th>
+                    <th>Mức Tiêu Thụ</th>
+                    <th>Giới Hạn</th>
+                    <th>Phí Vượt Giới Hạn</th>
+                    <th>Địa Chỉ</th>
+                    <th>Mô Tả</th>
+                    <th>Hình Ảnh</th>
+                    <th>Giấy Tờ Sở Hữu</th>
+                    <th>Giá Theo Giờ</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.postID}"></td>
+                    <td th:text="${post.carName}"></td>
+                    <td th:text="${post.carBrand != null ? post.carBrand.brandName : 'N/A'}"></td>
+                    <td th:text="${post.carType}"></td>
+                    <td th:text="${post.color}"></td>
+                    <td th:text="${post.car_number}"></td>
+                    <td th:text="${post.type_fuel}"></td>
+                    <td th:text="${post.year_of_manufacture}"></td>
+                    <td th:text="${post.muctieuthu}"></td>
+                    <td th:text="${post.limit}"></td>
+                    <td th:text="${post.fee_limit}"></td>
+                    <td th:text="${post.address}"></td>
+                    <td th:text="${post.describe}"></td>
 
-					<td>
-						<div>
-							<img th:src="${post.imagePending.image1}" alt="Car Image 1"
-								style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image1 != null}">
-							<img th:src="${post.imagePending.image2}" alt="Car Image 2"
-								style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image2 != null}">
-							<img th:src="${post.imagePending.image3}" alt="Car Image 3"
-								style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image3 != null}">
-							<img th:src="${post.imagePending.image4}" alt="Car Image 4"
-								style="width: 100px; height: auto;"
-								th:if="${post.imagePending != null and post.imagePending.image4 != null}">
-						</div>
-					</td>
+                    <!-- Display images -->
+                   <td>
+    <div>
+        <!-- Display image1 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.image1})}" alt="Car Image 1"
+            style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.image1 != null}">
 
 					<td>
 						<div>
@@ -86,27 +67,59 @@
 						</div>
 					</td>
 					<td th:text="${post.priceHoursCar}"></td>
+        <!-- Display image2 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.image2})}" alt="Car Image 2"
+            style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.image2 != null}">
 
-					<td>
-						<div class="btn-group">
-							<form action="/index/approvePost" method="post"
-								style="display: inline;">
-								<input type="hidden" name="postID" th:value="${post.postID}">
-								<button type="submit" class="btn btn-success">Duyệt</button>
-							</form>
+        <!-- Display image3 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.image3})}" alt="Car Image 3"
+            style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.image3 != null}">
 
-							<form action="/index/rejectPost" method="post"
-								style="display: inline;">
-								<input type="hidden" name="postID" th:value="${post.postID}">
-								<button type="submit" class="btn btn-danger">Từ Chối</button>
-							</form>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+        <!-- Display image4 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.image4})}" alt="Car Image 4"
+            style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.image4 != null}">
+    </div>
+</td>
 
-	</div>
+<td>
+    <div>
+        <!-- Display ownership certificate image1 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.imgOwnershipCertificate1})}"
+            alt="Ownership Document 1" style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate1 != null}">
+
+        <!-- Display ownership certificate image2 from imagePending -->
+        <img th:src="@{/images/{filename}(filename=${post.imagePending.imgOwnershipCertificate2})}"
+            alt="Ownership Document 2" style="width: 100px; height: auto;"
+            th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
+    </div>
+</td>
+
+
+                    <td th:text="${post.priceHoursCar}"></td>
+>>>>>>> 67096f3f548d1f390946d143a7ba9fd25b952d61
+
+                    <!-- Action Buttons -->
+                    <td>
+                        <div class="btn-group">
+                            <form action="/index/approvePost" method="post" style="display: inline;">
+                                <input type="hidden" name="postID" th:value="${post.postID}">
+                                <button type="submit" class="btn btn-success">Duyệt</button>
+                            </form>
+
+                            <form action="/index/rejectPost" method="post" style="display: inline;">
+                                <input type="hidden" name="postID" th:value="${post.postID}">
+                                <button type="submit" class="btn btn-danger">Từ Chối</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 </body>
-
 </html>

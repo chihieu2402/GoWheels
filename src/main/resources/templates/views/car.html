@@ -53,7 +53,15 @@
 							<img th:src="@{'/images/'+${car.imageCar.image1}}"
 								alt="Car Image 1"
 								style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-size: cover">
+
+							<!-- Hiển thị ảnh nếu có -->
+							
+						<span th:if="${car.imageCar != null and car.imageCar.image1 != null}">
+                            <img th:src="@{/images/{image}(image=${car.imageCar.image1})}" alt="Car Image 1" style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-size: cover">
+                        </span>
+
 						</div>
+						
 						<div class="text">
 							<h2 class="mb-0">
 								<a href="#">[[${car.carName}]]</a>
@@ -107,7 +115,7 @@
 		goongjs.accessToken = "68SRPQ62BQWhy944tPzQhrM9i0O7gAP7rbiSjWel"; // Khóa API
 
 		// Khởi tạo bản đồ với khóa tiles
-		const map = ne=w goongjs.Map(
+/* 		const map = ne=w goongjs.Map(
 				{
 					container : "map",
 					style : "https://tiles.goong.io/assets/goong_map_web.json?accessToken=it192E23DCpOUmf7zu5rpeArJzfCDRG8xp1OsYLh", // Khóa bản đồ tiles
@@ -182,7 +190,7 @@
 			} else {
 				alert('Geolocation is not supported by your browser.');
 			}
-		}
+		} */
 	</script>
 </body>
 </html>

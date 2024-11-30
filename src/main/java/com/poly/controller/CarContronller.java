@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.Service.CarBrandSerivce;
+import com.poly.Service.CarService;
 import com.poly.Service.FileManagerService;
 import com.poly.dao.CarDao;
 import com.poly.entity.Car;
@@ -35,6 +36,7 @@ import jakarta.servlet.ServletContext;
 public class CarContronller {
 
 	private final String UPLOAD_DIR = "src/main/resources/static/images/";
+	
 
 	@Autowired
 	private CarDao carDao;
@@ -44,6 +46,8 @@ public class CarContronller {
 
 	@Autowired
 	private CarBrandSerivce carBrandSerivce;
+	@Autowired
+	private CarService carservice;
 
 	@Autowired
 	ServletContext app;
@@ -55,6 +59,7 @@ public class CarContronller {
 		model.addAttribute("cars", cars);
 		model.addAttribute("car", new Car());
 		model.addAttribute("listCarbrand", carBrandSerivce.findAll());
+	//	 model.addAttribute("cars", carservice.getAllCars());
 		return "views/admin/Car";
 	}
 
