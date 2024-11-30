@@ -35,11 +35,6 @@ public class IndexController {
     
     @Autowired
     HttpSession ses; 
-    
- 
-    
-   
-   
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model,Authentication auth) {

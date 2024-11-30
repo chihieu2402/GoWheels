@@ -30,12 +30,12 @@ public class ManegerPostcarController {
     @PostMapping("/approvePost")
     public String approvePost(@RequestParam int postID) {
         carPostService.approvePost(postID);
-        return "redirect:/admin/PendingCar"; // Redirect to the manage posts page
+        return "redirect:/admin/PendingCar"; 
     }
 
     @PostMapping("/rejectPost")
     public String rejectPost(@RequestParam int postID) {
         carPostService.rejectPost(postID);
-        return "redirect:/admin/PendingCar"; // Redirect to the manage posts page
+        return "redirect:/admin/PendingCar"; 
     }
 }
