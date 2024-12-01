@@ -58,10 +58,11 @@
 						<td th:text="${car.address}"></td>
 						<td th:text="${car.priceHoursCar}"></td>
 						<td>
-							<div th:each="image : ${car.images}">
-								<img th:src="@{${image}}" alt="Car Image"
-									style="width: 100px; height: auto;">
-							</div>
+							
+							<img class="card-img-top mb-5 mb-md-0"
+							th:if="${car.imageCar != null}"
+							th:src="@{/images/{car.imageCar.image1}(car.imageCar.image1=${car.imageCar.image1})}"
+							alt="Car Image 1" style="width: 100px; height: auto;">
 						</td>
 
 					</tr>
@@ -104,6 +105,24 @@
 						type="text" class="form-control" id="address"
 						th:field="*{address}" required>
 				</div>
+				<div class="form-group">
+						<label for="images">Hình Ảnh Xe (6 Ảnh)</label>
+						<div class="row">
+							<div class="col-md-4">
+								<label for="image1">Giấy Tờ Sở Hữu 1(CCCD1)</label> <input type="file"
+									class="form-control-file" id="image1" name="image1" required>
+							</div>
+							<div class="col-md-4">
+								<label for="image2">Giấy Tờ Sở Hữu 2(CCCD2)</label> <input type="file"
+									class="form-control-file" id="image2" name="image2" required>
+							</div>
+							<div class="col-md-4">
+								<label for="image3">Giấy Tờ Sở Hữu 3(GPLX)</label> <input type="file"
+									class="form-control-file" id="image3" name="image3" required>
+							</div>
+						</div>
+						
+					</div>
 				<div class="mb-3">
 					<label for="totalPrice" class="form-label">Total Price</label> <input
 						type="number" class="form-control" id="totalPrice"
