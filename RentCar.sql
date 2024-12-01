@@ -513,3 +513,4 @@ select * from car
 select * from pending_car_post
 select * from image_pending
 select * from image_car
+select * from review
