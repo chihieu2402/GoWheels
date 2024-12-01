@@ -3,29 +3,24 @@
 	th:replace="~{/views/layout::dynamic(~{::body})}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-	rel="stylesheet">
-
+<title>Choose Your Car</title>
 <link rel="stylesheet" href="/views/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/views/css/animate.css">
-
 <link rel="stylesheet" href="/views/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/views/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="/views/css/magnific-popup.css">
-
 <link rel="stylesheet" href="/views/css/aos.css">
-
 <link rel="stylesheet" href="/views/css/ionicons.min.css">
-
 <link rel="stylesheet" href="/views/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/views/css/jquery.timepicker.css">
-
-
 <link rel="stylesheet" href="/views/css/flaticon.css">
 <link rel="stylesheet" href="/views/css/icomoon.css">
 <link rel="stylesheet" href="/views/css/style.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css"
+	rel="stylesheet" />
 </head>
 <body>
 
@@ -48,7 +43,6 @@
 		</div>
 	</section>
 
-
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row">
@@ -56,11 +50,16 @@
 					<div class="car-wrap rounded ftco-animate">
 						<div class="img rounded d-flex align-items-end"
 							style="position: relative; width: 348px; height: 200px; overflow: hidden;">
+							<img th:src="@{'/images/'+${car.imageCar.image1}}"
+								alt="Car Image 1"
+								style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-size: cover">
+
 							<!-- Hiển thị ảnh nếu có -->
 							
 						<span th:if="${car.imageCar != null and car.imageCar.image1 != null}">
                             <img th:src="@{/images/{image}(image=${car.imageCar.image1})}" alt="Car Image 1" style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-size: cover">
                         </span>
+
 						</div>
 						
 						<div class="text">
@@ -83,61 +82,115 @@
 									class="bi-cart-fill me-1"></i> Book now
 								</a> <a th:href="@{/index/cars/{id}(id=${car.carID})}"
 									class="btn btn-secondary py-2 ml-1">Details</a>
+								<button class="btn btn-primary ml-1"
+									onclick="getDirections('[[${car.address}]]')">Get
+									Directions</button>
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div> 
-          </div> -->
-		</div>
+			<!-- Thêm thẻ div để chứa bản đồ -->
+			<div id="map" style="width: 100%; height: 400px;"></div>
 		</div>
 	</section>
 
-
-
-
-
-
-	<!-- loader -->
+	<!-- Loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+            <circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
 	</div>
 
-
 	<script src="/views/js/jquery.min.js"></script>
-	<script src="/views/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/views/js/popper.min.js"></script>
 	<script src="/views/js/bootstrap.min.js"></script>
-	<script src="/views/js/jquery.easing.1.3.js"></script>
-	<script src="/views/js/jquery.waypoints.min.js"></script>
-	<script src="/views/js/jquery.stellar.min.js"></script>
-	<script src="/views/js/owl.carousel.min.js"></script>
-	<script src="/views/js/jquery.magnific-popup.min.js"></script>
-	<script src="/views/js/aos.js"></script>
-	<script src="/views/js/jquery.animateNumber.min.js"></script>
-	<script src="/views/js/bootstrap-datepicker.js"></script>
-	<script src="/views/js/jquery.timepicker.min.js"></script>
-	<script src="/views/js/scrollax.min.js"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="/views/js/google-map.js"></script>
-	<script src="/views/js/main.js"></script>
+		src="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js"></script>
+
+	<script>
+		//Khóa API cho các dịch vụ
+		goongjs.accessToken = "68SRPQ62BQWhy944tPzQhrM9i0O7gAP7rbiSjWel"; // Khóa API
+
+		// Khởi tạo bản đồ với khóa tiles
+/* 		const map = ne=w goongjs.Map(
+				{
+					container : "map",
+					style : "https://tiles.goong.io/assets/goong_map_web.json?accessToken=it192E23DCpOUmf7zu5rpeArJzfCDRG8xp1OsYLh", // Khóa bản đồ tiles
+					center : {
+						lat : 20.99245,
+						lng : 105.80278
+					}, // Ví dụ tọa độ
+					zoom : 11.5,
+				});
+
+		// Hàm lấy chỉ đường
+		function getDirections(address) {
+			// Lấy vị trí hiện tại của người dùng
+			if (navigator.geolocation) {
+				navigator.geolocation
+						.getCurrentPosition(
+								function(position) {
+									const currentLat = position.coords.latitude;
+									const currentLng = position.coords.longitude;
+
+									const geocoder = new goongjs.Geocoder();
+									geocoder
+											.geocode(
+													{
+														address : address
+													},
+													function(results, status) {
+														if (status === 'OK') {
+															const destinationLat = results[0].geometry.location
+																	.lat();
+															const destinationLng = results[0].geometry.location
+																	.lng();
+
+															const directionsService = new goongjs.DirectionsService();
+															const directionsRenderer = new goongjs.DirectionsRenderer();
+															directionsRenderer
+																	.setMap(map);
+
+															const request = {
+																origin : new goongjs.LatLng(
+																		currentLat,
+																		currentLng),
+																destination : new goongjs.LatLng(
+																		destinationLat,
+																		destinationLng),
+																travelMode : goongjs.TravelMode.DRIVING
+															};
+
+															directionsService
+																	.route(
+																			request,
+																			function(
+																					result,
+																					status) {
+																				if (status === 'OK') {
+																					directionsRenderer
+																							.setDirections(result);
+																				} else {
+																					alert('Error getting directions: '
+																							+ status);
+																				}
+																			});
+														} else {
+															alert('Unable to geocode the address: '
+																	+ status);
+														}
+													});
+								},
+								function() {
+									alert('Geolocation failed or is not supported by your browser.');
+								});
+			} else {
+				alert('Geolocation is not supported by your browser.');
+			}
+		} */
+	</script>
 </body>
 </html>

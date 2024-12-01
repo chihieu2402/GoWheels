@@ -12,7 +12,193 @@
         <div class="custom-heading mb-4">
             <h1 class="mb-1">Car Management</h1>
         </div>
+		<form th:action="@{/admin/car/update}" th:object="${car}"
+			method="post" enctype="multipart/form-data">
+			<input type="hidden" th:value="${car.carID}" name="carID">
+			<div class="row">
+				<!-- Left column -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="carName">Car Name:</label> <input
+							th:value="${car.carName}" name="carName" type="text"
+							class="form-control" id="carName" required>
+					</div>
+					<div class="form-group">
+						<label for="carBrand">Car Brand:</label> <select name="carBrandID"
+							class="form-control" id="carBrand">
+							<option th:value="${car.carBrand.carBrandID}"
+								th:text="${car.carBrand.brandName}" selected>Current
+								Brand</option>
+							<option th:each="brand : ${listCarbrand}"
+								th:value="${brand.carBrandID}" th:text="${brand.brandName}"></option>
+						</select>
+					</div>
 
+					<div class="form-group">
+						<label for="carType">Car Type:</label> <input
+							th:value="${car.carType}" name="carType" type="text"
+							class="form-control" id="carType">
+					</div>
+
+					<div class="form-group">
+						<label for="color">Color:</label> <input th:value="${car.color}"
+							name="color" type="text" class="form-control" id="color">
+					</div>
+					<div class="form-group">
+						<label for="typeGear">Type Gear:</label> <input
+							th:value="${car.type_gear}" name="typeGear" type="text"
+							class="form-control" id="typeGear">
+					</div>
+					<div class="form-group">
+						<label for="carNumber">Car Number:</label> <input
+							th:value="${car.car_number}" name="carNumber" type="text"
+							class="form-control" id="carNumber">
+					</div>
+					<div class="form-group">
+						<label for="typeFuel">Type Fuel:</label> <input
+							th:value="${car.type_fuel}" name="typeFuel" type="text"
+							class="form-control" id="typeFuel">
+					</div>
+					<div class="form-group">
+						<label for="yearOfManufacture">Year of Manufacture:</label> <input
+							th:value="${car.year_of_manufacture}" name="yearOfManufacture"
+							type="number" class="form-control" id="yearOfManufacture">
+					</div>
+					<div class="form-group">
+						<label for="muctieuthu">Fuel Consumption:</label> <input
+							th:value="${car.muctieuthu}" name="muctieuthu" type="text"
+							class="form-control" id="muctieuthu">
+					</div>
+				</div>
+
+				<!-- Right column -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="limit">Limit:</label> <input th:value="${car.limit}"
+							name="limit" type="text" class="form-control" id="limit">
+					</div>
+					<div class="form-group">
+						<label for="feeLimit">Fee Limit:</label> <input
+							th:value="${car.fee_limit}" name="feeLimit" type="text"
+							class="form-control" id="feeLimit">
+					</div>
+					<div class="form-group">
+						<label for="address">Address:</label> <input
+							th:value="${car.address}" name="address" type="text"
+							class="form-control" id="address">
+					</div>
+					<div class="form-group">
+						<label for="describe">Description:</label>
+						<textarea th:value="${car.describe}" name="describe"
+							class="form-control" id="describe"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="priceHoursCar">Price/Hour:</label> <input
+							th:value="${car.priceHoursCar}" name="priceHoursCar"
+							type="number" step="0.01" class="form-control" id="priceHoursCar">
+					</div>
+					<div class="form-group">
+						<label for="status">Status:</label> <select th:field="*{status}"
+							name="status" class="form-control" id="status">
+							<option th:value="true">Active</option>
+							<option th:value="false">Inactive</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="ownerID">Owner ID:</label> <input
+							th:value="${car.carOwner != null ? car.carOwner.ownerID : ''}"
+							name="ownerID" type="text" class="form-control" id="ownerID">
+					</div>
+				</div>
+			</div>
+
+			<!-- Images -->
+			<h3>Car Images</h3>
+			<div class="form-group">
+				<label for="image1">Image 1:</label> <input name="image1"
+					type="file" class="form-control-file" id="image1">
+			</div>
+			<div class="form-group">
+				<label for="image2">Image 2:</label> <input name="image2"
+					type="file" class="form-control-file" id="image2">
+			</div>
+			<div class="form-group">
+				<label for="ownershipDocument1">Ownership Document 1:</label> <input
+					name="ownershipDocument1" type="file" class="form-control-file"
+					id="ownershipDocument1">
+			</div>
+			<div class="form-group">
+				<label for="ownershipDocument2">Ownership Document 2:</label> <input
+					name="ownershipDocument2" type="file" class="form-control-file"
+					id="ownershipDocument2">
+			</div>
+
+			<!-- Buttons -->
+			<div class="btn-group mt-3">
+				<button type="submit" class="btn btn-info">Save</button>
+				<button type="reset" class="btn btn-success">Reset</button>
+			</div>
+		</form>
+		<!-- Table -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Car Name</th>
+					<th>Car Type</th>
+					<th>Color</th>
+					<th>Type Gear</th>
+					<th>Car Number</th>
+					<th>Type Fuel</th>
+					<th>Year of Manufacture</th>
+					<th>Mức tiêu thụ</th>
+					<th>Limit</th>
+					<th>Fee Limit</th>
+					<th>Location</th>
+					<th>Description</th>
+					<th>Price/Hour</th>
+					<th>Status</th>
+					<th>Images</th>
+					<th>Ownership Documents</th>
+					<th>Car Brand</th>
+					<th>Car Owner</th>
+					<th>Review</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="car : ${cars}">
+					<td th:text="${car.carID}">1</td>
+					<td th:text="${car.carName}">Car Name</td>
+					<td th:text="${car.carType}">Car Type</td>
+					<td th:text="${car.color}">Color</td>
+					<td th:text="${car.type_gear}">Type Gear</td>
+					<td th:text="${car.car_number}">Car Number</td>
+					<td th:text="${car.type_fuel}">Type Fuel</td>
+					<td th:text="${car.year_of_manufacture}">Year of Manufacture</td>
+					<td th:text="${car.muctieuthu}">Mức tiêu thụ</td>
+					<td th:text="${car.limit}">Limit</td>
+					<td th:text="${car.fee_limit}">Fee Limit</td>
+					<td th:text="${car.address}">Location</td>
+					<td th:text="${car.describe}">Description</td>
+					<td th:text="${car.priceHoursCar}">Price/Hour</td>
+					<td th:text="${car.status ? 'Active' : 'Inactive'}">Status</td>
+					<td><img th:src="@{'/images/'+${car.imageCar.image1}}"
+						alt="Car Image" width="100"></td>
+					<td><img
+						th:src="@{'/images/'+${car.imageCar.imgOwnershipCertificate1}}"
+						alt="Ownership Document" width="100"> </span></td>
+					<td th:text="${car.carBrand != null ? car.carBrand.brandName : ''}">Car
+						Brand</td>
+					<td th:text="${car.carOwner != null ? car.carOwner.ownerName : ''}">Car
+						Owner</td>
+					<td th:text="${car.review != null ? car.review.reviewContent : ''}">Review</td>
+					<td><a th:href="@{/admin/car/edit/{id}(id=${car.carID})}"
+						class="btn btn-primary">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
         <!-- Form for adding/updating cars -->
         <form th:action="@{/admin/car/create}" th:object="${car}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:value="${car.carID}" name="carID">

@@ -69,7 +69,7 @@ public class PendingCarPost {
 	private double priceHoursCar;
 	
 	@ManyToOne
-	@JoinColumn(name = "CustomerID")  // Đảm bảo ánh xạ đúng với CustomerID
+	@JoinColumn(name = "CustomerID")  
 	private Customer customer;
 
 	@ManyToOne

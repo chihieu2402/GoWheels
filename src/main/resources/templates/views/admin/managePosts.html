@@ -56,6 +56,17 @@
             style="width: 100px; height: auto;"
             th:if="${post.imagePending != null and post.imagePending.image1 != null}">
 
+					<td>
+						<div>
+							<img th:src="${post.imagePending.imgOwnershipCertificate1}"
+								alt="Ownership Document 1" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate1 != null}">
+							<img th:src="${post.imagePending.imgOwnershipCertificate2}"
+								alt="Ownership Document 2" style="width: 100px; height: auto;"
+								th:if="${post.imagePending != null and post.imagePending.imgOwnershipCertificate2 != null}">
+						</div>
+					</td>
+					<td th:text="${post.priceHoursCar}"></td>
         <!-- Display image2 from imagePending -->
         <img th:src="@{/images/{filename}(filename=${post.imagePending.image2})}" alt="Car Image 2"
             style="width: 100px; height: auto;"
@@ -89,6 +100,7 @@
 
 
                     <td th:text="${post.priceHoursCar}"></td>
+>>>>>>> 67096f3f548d1f390946d143a7ba9fd25b952d61
 
                     <!-- Action Buttons -->
                     <td>
