@@ -45,6 +45,14 @@ public class Booking {
 
     @Column(name = "Status")
     private Boolean status;
+    @Column(name = "image1")
+    private String image1;
+    @Column(name = "image2")
+    private String image2;
+    @Column(name = "image3")
+    private String image3;
+    @Column(name = "image4")
+    private String image4;
 
     @ManyToOne
     @JoinColumn(name = "CarID", insertable = false, updatable = false)
