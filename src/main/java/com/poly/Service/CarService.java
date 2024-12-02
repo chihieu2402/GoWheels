@@ -22,14 +22,8 @@ public class CarService {
 
 
 
-	public Car getCarById(int carId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
-//    public List<Car> getAllCars() {
-//        return carDao.findAllWithImages();
-//    }
+	
+ 
     
     
 }
