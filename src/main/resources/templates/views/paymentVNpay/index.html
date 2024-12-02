@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/views/layout::dynamic(~{::body})}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,12 +12,14 @@
 <body>
 <div class="container">
     <div class="row justify-content-center mt-5">
-        <div class="col-md-6">
+        <div class="col-md-6" >
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" >
+                
                     <img th:src="@{/vnpay-logo.png}" style="width: 200px">
                     <h2 class="card-title">Thanh Toán Đơn Hàng</h2>
                     <form th:action="@{/submitOrder}" method="post">
+                    
                         <div class="form-group">
                             <label for="amount">Số tiền:</label>
                             <input type="number" class="form-control" id="amount" name="amount" required value="299999">

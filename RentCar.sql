@@ -496,9 +496,17 @@ VALUES
 INSERT INTO [dbo].[image_car]
            ([image1], [image2], [image3], [image4], [img_ownership_certificate1], [img_ownership_certificate2], [car_id])
 VALUES
-           ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 1),
+            ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 1),
            ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 4),
-           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 7);
+           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 7),
+		     ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 2),
+           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 3),
+           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 5),
+		     ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 6),
+           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 8),
+           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 9);
+
+
 go
 
 INSERT INTO [dbo].[booking]

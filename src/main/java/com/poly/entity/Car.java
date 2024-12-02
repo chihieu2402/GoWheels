@@ -100,5 +100,9 @@ public class Car {
     private List<Booking> bookings;
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private ImageCar imageCar;
+	public double getPricePerDay() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

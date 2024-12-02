@@ -19,6 +19,13 @@ public class CarService {
     public List<Car> findCars(String carName, String address, Double minPrice, Double maxPrice) {
         return carDao.findCars(carName, address, minPrice, maxPrice);
     }
+
+
+
+	public Car getCarById(int carId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 //    public List<Car> getAllCars() {
 //        return carDao.findAllWithImages();

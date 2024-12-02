@@ -130,9 +130,20 @@
 				</div>
 				<div class="h3" th:text="${mes}"></div>
 				<br>
+				<div class="d-flex">
+
+					<a th:href="@{/payment(car=${car.carID})}"
+							class="btn btn-outline-dark flex-shrink-0"> <i
+							class="bi-cart-fill me-1"></i> Payment
+						</a>
+				
 
 				<button type="submit" class="btn btn-primary">Confirm
-					Booking</button>
+					Booking
+				</button>
+				
+				</div>	
+						
 			</form>
 		</div>
 		<footer class="ftco-footer ftco-bg-dark ftco-section mt-3"

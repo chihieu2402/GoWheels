@@ -64,7 +64,8 @@ public class BookingController {
         model.addAttribute("mes", "Đã gửi yêu cầu!");
 
         // Redirect to the booking post page after submission
-        return "forward:/booking/views/Booking";
+       // return "forward:/booking/views/Booking";
+        return "redirect:payment";
     }
 
     @GetMapping("/admin/BookingCar")
@@ -95,4 +96,11 @@ public class BookingController {
 
         return "redirect:/admin/BookingCar";
     }
+    
+    
+    @GetMapping("/confim")
+    private String pulblic() {
+		return "views/ConfimBooking";
+
+	}
 }
