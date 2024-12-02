@@ -44,6 +44,9 @@ public class Customer {
     
     @Column(name="AccountID")
     private int accountID;
+    
+    @Column(name="license")
+    private String license;
 
     @OneToMany(mappedBy = "customer")
     private List<Review> review;

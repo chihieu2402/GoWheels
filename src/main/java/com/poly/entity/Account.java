@@ -48,6 +48,7 @@ public class Account {
     
     @OneToOne(mappedBy = "account")
     private Customer customer;
+    
     @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
