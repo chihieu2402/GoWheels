@@ -30,6 +30,7 @@ public class BookingController {
     @Autowired
     private CarDao carRepository;
     
+    private Booking Tbooking; 
 	@Autowired
 	ServletContext app;
 
@@ -49,24 +50,25 @@ public class BookingController {
     }
 
     @PostMapping("/booking/submit")
-    public String submitBooking(@ModelAttribute Booking booking, RedirectAttributes redirectAttributes, @RequestParam int carID, Model model) {
-        booking.setStatus(false); // Set to false initially until approved by admin
+    public String submitBooking(
+            @ModelAttribute Booking booking,
+            @RequestParam int carID,
+            Model model) {
+
+        booking.setStatus(false); // Set initial status
         Car car = carRepository.findById(carID).orElse(null);
-        // Calculate total price based on rental days (e.g., price per day is 100)
+
+        // Calculate total price based on rental days
         long daysBetween = ChronoUnit.DAYS.between(booking.getRentalDay(), booking.getReturnDay());
-        double pricePerDay = car.getPriceHoursCar(); // Assume a price per day
+        double pricePerDay = car.getPriceHoursCar(); // Giá thuê mỗi ngày của xe
         booking.setTotalPrice(daysBetween * pricePerDay);
 
-        bookingRepository.save(booking);
+        // Save data in the temporary Tbooking variable
+        this.Tbooking = booking;
 
-        // Add the booking object to the redirect attributes
-        redirectAttributes.addFlashAttribute("booking", booking);
-        model.addAttribute("mes", "Đã gửi yêu cầu!");
-
-        // Redirect to the booking post page after submission
-        return "forward:/booking/views/Booking";
+        model.addAttribute("mes", "Data saved temporarily!");
+        return "redirect:/booking/confirm"; // Redirect to the confirmation page
     }
-
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showBookingPost(Model model) {
@@ -95,4 +97,39 @@ public class BookingController {
 
         return "redirect:/admin/BookingCar";
     }
-}
+    @GetMapping("/booking/confirm")
+    public String showConfirmBooking(Model model) {
+        model.addAttribute("Tbooking", Tbooking); // Add Tbooking to model
+        return "views/ConfirmBooking"; // Ensure this matches the name of your Thymeleaf template
+    }
+    @PostMapping("/booking/submit2")
+    public String submitFinalBooking(RedirectAttributes redirectAttributes, Model model) {
+        if (Tbooking == null) {
+            model.addAttribute("error", "No booking data available!");
+            return "redirect:/booking/form"; // Redirect to form if no data available
+        }
+
+        // Save the temporary Tbooking data into the database
+        Car car = carRepository.findById(Tbooking.getCarID()).orElse(null);
+        if (car != null) {
+            Tbooking.setStatus(true); // Set booking status to true (approved)
+            // Calculate total price based on rental days
+            long daysBetween = ChronoUnit.DAYS.between(Tbooking.getRentalDay(), Tbooking.getReturnDay());
+            double pricePerDay = car.getPriceHoursCar(); // Assume a price per day
+            Tbooking.setTotalPrice(daysBetween * pricePerDay);
+
+            // Save booking to the database
+            bookingRepository.save(Tbooking);
+
+            // Add the booking object to the redirect attributes
+            redirectAttributes.addFlashAttribute("booking", Tbooking);
+            model.addAttribute("mes", "Booking successfully submitted!");
+
+            // Redirect to the booking post page after submission
+            return "redirect:/booking/confirm";
+        } else {
+            model.addAttribute("error", "Car not found!");
+            return "redirect:/booking/form"; // Redirect to form if car not found
+        }
+
+}}
