@@ -30,25 +30,27 @@
 						href="/index/login" class="nav-link">Login</a></li>
 
 					<li class="nav-item" th:unless="${session.userSes==null}">
-	<div class="dropdown">
-		<button class="btn btn-secondary dropdown-toggle"
-			type="button" data-bs-toggle="dropdown" aria-expanded="false"
-			style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0;">
-			<i class="fa-regular fa-user"></i> <span class="badge"
-				th:text="${newNotificationCount}">0</span>
-			<!-- Hiển thị số lượng thông báo mới -->
-		</button>
-		<ul class="dropdown-menu">
-			<li><a class="dropdown-item" href="#">Change Password</a></li>
-			<li><a class="dropdown-item" href="/index/postcar">Post Rentals</a></li>
-			<li><a class="dropdown-item" href="#">MailBox <span><i class="fa-regular fa-envelope"></i></span></a></li>
-			<li><a class="dropdown-item" href="/admin/thongke">Manage</a></li>
-			<li><a class="dropdown-item" href="/logout">Logout</a></li>
-		</ul>
-	</div>
-</li>
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button"
+								data-bs-toggle="dropdown" aria-expanded="false"
+								style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0;">
+								<i class="fa-regular fa-user"></i> <span class="badge"
+									th:text="${newNotificationCount}">0</span>
+								<!-- Hiển thị số lượng thông báo mới -->
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/index/changePass">Change
+										Password</a></li>
+								<li><a class="dropdown-item" href="/index/postcar">Post
+										Rentals</a></li>
+								<li><a class="dropdown-item" href="#">MailBox <span><i
+											class="fa-regular fa-envelope"></i></span></a></li>
+								<li><a class="dropdown-item" href="/admin/thongke">Manage</a></li>
+								<li><a class="dropdown-item" href="/logout">Logout</a></li>
+							</ul>
 
-
+						</div>
+					</li>
 			</div>
 		</div>
 	</nav>

@@ -72,12 +72,22 @@ public class IndexController {
         return "/views/blog";
     }
 
+    
+    @RequestMapping(value = "/index/changePass", method = RequestMethod.GET)
+    public String changPassword(Model model) {
+        return "/views/changePassword";
+    }
+
+    
     @RequestMapping(value = "/index/cars", method = RequestMethod.GET)
     public String cars(Model model) {
         List<Car> list_car = carDao.findAll();
         model.addAttribute("cars", list_car);
         return "/views/car";
     }
+    
+
+    
 	@PostMapping("/find-cars")
 	public String getCarsByName(
 	        @RequestParam String carName,
