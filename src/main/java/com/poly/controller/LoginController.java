@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.poly.auth.UserRoot;
 import com.poly.dao.AccountDao;
 import com.poly.entity.Account;
+import com.poly.entity.Customer;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -90,8 +91,18 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/account/login/success", method = RequestMethod.GET)
-	public String success(@ModelAttribute Account user,Authentication auth) {
+	public String success(@ModelAttribute Account user,Authentication auth, Model model) {
 		UserRoot userRoot = (UserRoot) auth.getPrincipal();
+		
+		//start: lấy email để kiểm tra
+				Customer customer = userRoot.getUser().getCustomer();
+			String username = customer.getEmail();
+			
+				  if (username == null || username.isEmpty()) {
+				        model.addAttribute("customer",customer);
+				        return "/views/updateCustomer";
+				    }
+	//end: lấy email để kiểm tra		  
 		System.out.println("::::::::::::::"
 				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
 		ses.setAttribute("userSes", userRoot);
