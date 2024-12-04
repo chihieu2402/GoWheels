@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -142,5 +143,8 @@ public class LoginController {
 	    return "redirect:/index";
 	}
 
-	
+	  @GetMapping("/quenMatKhau")
+	    public String quenMatKhau() {
+	        return "views/quenMatKhau";
+	    }
 }
