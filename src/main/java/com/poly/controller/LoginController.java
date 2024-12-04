@@ -30,10 +30,7 @@ public class LoginController {
 	@Autowired
 	HttpSession ses;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	
 	@RequestMapping(value = "/index/login")
 	public String login(@ModelAttribute Account user, Model model) {
 
