@@ -30,17 +30,20 @@ public class LoginController {
 	@Autowired
 	HttpSession ses;
 
-	
+	@Bean
+	public PasswordEncoder passwordEncoderLogin() {
+		return new BCryptPasswordEncoder();
+	}
 	@RequestMapping(value = "/index/login")
 	public String login(@ModelAttribute Account user, Model model) {
 
-//		List<Account> accs = accDao.findAll();
-//		for (Account acc : accs) {
-//			// Mã hóa mật khẩu hiện tại và lưu lại
-//			String encodedPassword = passwordEncoder().encode(acc.getPassWord());
-//			acc.setPassWord(encodedPassword);
-//			accDao.save(acc);
-//		}
+		List<Account> accs = accDao.findAll();
+		for (Account acc : accs) {
+			// Mã hóa mật khẩu hiện tại và lưu lại
+			String encodedPassword = passwordEncoderLogin().encode(acc.getPassWord());
+			acc.setPassWord(encodedPassword);
+			accDao.save(acc);
+		}
 
 		model.addAttribute("user", user);
 		return "/views/login";
@@ -99,7 +102,7 @@ public class LoginController {
 				        model.addAttribute("customer",customer);
 				        return "/views/updateCustomer";
 				    }
-	//end: lấy email để kiểm tra		  
+					//end: lấy email để kiểm tra		  
 		System.out.println("::::::::::::::"
 				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
 		ses.setAttribute("userSes", userRoot);
