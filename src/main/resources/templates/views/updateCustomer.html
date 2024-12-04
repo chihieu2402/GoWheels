@@ -162,6 +162,7 @@
             <div class="form-container">
                 <form th:action="@{/customer/update}" th:object="${customer}" method="post">
                     <h2>Personal</h2>
+                    <input id="customerID" th:field="*{customerID}" type="hidden">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
                         <input id="fullName" th:field="*{customerName}" type="text" />

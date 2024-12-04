@@ -117,19 +117,30 @@ public class LoginController {
 	
 	
 	// user tự update khi mới vào
-	  @PostMapping("/customer/update")
-	    public String updateCustomer(@ModelAttribute("customer") Customer customer,Authentication auth) {
-	    	try {
-	   		 Customer u = customerDao.findByCustomerID(customer.getCustomerID());
-	      		  customerDao.save(customer);
-			} catch (Exception e) {
-				System.out.println("Đ có làm sao m update");
-			}
-	    	UserRoot userRoot = (UserRoot) auth.getPrincipal();
-	    	System.out.println("::::::::::::::"
-					+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
-			ses.setAttribute("userSes", userRoot);
-	       return "redirect:/index";
+	@PostMapping("/customer/update")
+	public String updateCustomer(@ModelAttribute("customer") Customer customer, Authentication auth) {
+	    try {
+	        Customer existingCustomer = customerDao.findByCustomerID(customer.getCustomerID());
+	        if (existingCustomer != null) {
+	            existingCustomer.setCustomerName(customer.getCustomerName());
+	            existingCustomer.setEmail(customer.getEmail());
+	            existingCustomer.setPhoneNumber(customer.getPhoneNumber());
+	            existingCustomer.setAddress(customer.getAddress());
+	            existingCustomer.setGender(customer.getGender());
+	            existingCustomer.setIdCard(customer.getIdCard());
+	            
+	            customerDao.save(existingCustomer);  // Lưu lại đối tượng đã cập nhật
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // Xử lý lỗi nếu có
 	    }
+		UserRoot userRoot = (UserRoot) auth.getPrincipal();
+	    System.out.println("::::::::::::::"
+				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
+		ses.setAttribute("userSes", userRoot);
+	    return "redirect:/index";
+	}
+
 	
 }
