@@ -1,6 +1,5 @@
 package com.poly.auth;
 
-
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,72 +17,68 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class UserRoot implements UserDetails, OAuth2User {
-  private Account user;
-  private Collection<? extends GrantedAuthority> authorities;
-  private Map<String, Object> attributes;
+	private Account user;
+	private Collection<? extends GrantedAuthority> authorities;
+	private Map<String, Object> attributes;
 
-  public static UserRoot create(Account user) {
-    List<GrantedAuthority> authorities = user.getRoles()
-        .stream().map(role -> new SimpleGrantedAuthority(role.getName()))
-        .collect(Collectors.toList());
-    return UserRoot.builder()
-        .user(user)
-        .authorities(authorities)
-        .build();
-  }
-  public static UserRoot create(Account user, Map<String, Object> attributes) {
-    UserRoot userRoot = UserRoot.create(user);
-    userRoot.setAttributes(attributes);
-    return userRoot;
-  }
+	public static UserRoot create(Account user) {
+		List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		return UserRoot.builder().user(user).authorities(authorities).build();
+	}
 
-  @Override
-  public <A> A getAttribute(String name) {
-    return OAuth2User.super.getAttribute(name);
-  }
+	public static UserRoot create(Account user, Map<String, Object> attributes) {
+		UserRoot userRoot = UserRoot.create(user);
+		userRoot.setAttributes(attributes);
+		return userRoot;
+	}
 
-  @Override
-  public Map<String, Object> getAttributes() {
-    return attributes;
-  }
+	@Override
+	public <A> A getAttribute(String name) {
+		return OAuth2User.super.getAttribute(name);
+	}
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.authorities;
-  }
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
 
-  @Override
-  public String getPassword() {
-    return this.user.getPassWord();
-  }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.authorities;
+	}
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+	@Override
+	public String getPassword() {
+		return this.user.getPassWord();
+	}
 
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-  @Override
-  public String getName() {
-    return this.user.getUserName();
-  }
-@Override
-public String getUsername() {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	@Override
+	public String getName() {
+		return this.user.getUserName();
+	}
+	@Override
+	public String getUsername() {
+		return this.user.getUserName();
+	}
 }

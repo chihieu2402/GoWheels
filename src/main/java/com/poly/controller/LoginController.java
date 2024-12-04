@@ -10,7 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.poly.auth.UserRoot;
 import com.poly.dao.AccountDao;
+import com.poly.dao.CustomerDao;
 import com.poly.entity.Account;
+import com.poly.entity.Customer;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,19 +32,19 @@ public class LoginController {
 	AccountDao accDao;
 	@Autowired
 	HttpSession ses;
-
+    @Autowired
+    private CustomerDao customerDao;
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoderLogin() {
 		return new BCryptPasswordEncoder();
 	}
-
 	@RequestMapping(value = "/index/login")
 	public String login(@ModelAttribute Account user, Model model) {
 
 		List<Account> accs = accDao.findAll();
 //		for (Account acc : accs) {
 //			// Mã hóa mật khẩu hiện tại và lưu lại
-//			String encodedPassword = passwordEncoder().encode(acc.getPassWord());
+//			String encodedPassword = passwordEncoderLogin().encode(acc.getPassWord());
 //			acc.setPassWord(encodedPassword);
 //			accDao.save(acc);
 //		}
@@ -91,8 +95,17 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/account/login/success", method = RequestMethod.GET)
-	public String success(@ModelAttribute Account user,Authentication auth) {
+	public String success(@ModelAttribute Account user,Authentication auth, Model model) {
 		UserRoot userRoot = (UserRoot) auth.getPrincipal();
+		
+		//start: lấy email để kiểm tra
+		Customer customer = userRoot.getUser().getCustomer();
+	
+		  if (customer == null || customer.getEmail() == null || customer.getEmail().isEmpty()) {
+		        model.addAttribute("customer",customer);
+		        return "/views/updateCustomer";
+		    }
+			//end: lấy email để kiểm tra	
 		System.out.println("::::::::::::::"
 				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
 		ses.setAttribute("userSes", userRoot);
@@ -102,4 +115,36 @@ public class LoginController {
 	public String accessDenied() {
 		return "/views/denied";
 	}
+	
+	
+	// user tự update khi mới vào
+	@PostMapping("/customer/update")
+	public String updateCustomer(@ModelAttribute("customer") Customer customer, Authentication auth) {
+	    try {
+	        Customer existingCustomer = customerDao.findByCustomerID(customer.getCustomerID());
+	        if (existingCustomer != null) {
+	            existingCustomer.setCustomerName(customer.getCustomerName());
+	            existingCustomer.setEmail(customer.getEmail());
+	            existingCustomer.setPhoneNumber(customer.getPhoneNumber());
+	            existingCustomer.setAddress(customer.getAddress());
+	            existingCustomer.setGender(customer.getGender());
+	            existingCustomer.setIdCard(customer.getIdCard());
+	            
+	            customerDao.save(existingCustomer);  // Lưu lại đối tượng đã cập nhật
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // Xử lý lỗi nếu có
+	    }
+		UserRoot userRoot = (UserRoot) auth.getPrincipal();
+	    System.out.println("::::::::::::::"
+				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
+		ses.setAttribute("userSes", userRoot);
+	    return "redirect:/index";
+	}
+
+	  @GetMapping("/quenMatKhau")
+	    public String quenMatKhau() {
+	        return "views/quenMatKhau";
+	    }
 }

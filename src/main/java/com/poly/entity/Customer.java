@@ -26,6 +26,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="CustomerID")
     private int customerID;
+    
+    @Column(name = "Email", columnDefinition = "VARCHAR(255)", nullable = true)
+    private String Email;
 
     @Column(name="CustomerName", columnDefinition = "NVARCHAR(255)")
     private String customerName;
@@ -44,6 +47,9 @@ public class Customer {
     
     @Column(name="AccountID")
     private int accountID;
+    
+    @Column(name="license")
+    private String license;
 
     @OneToMany(mappedBy = "customer")
     private List<Review> review;

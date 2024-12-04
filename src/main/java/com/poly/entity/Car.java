@@ -95,9 +95,13 @@ public class Car {
     private CarBrand carBrand;
 
     @OneToMany(mappedBy = "car")
-    @ToString.Exclude
-    
+    @ToString.Exclude    
     private List<Booking> bookings;
+    
+    @OneToOne
+    @JoinColumn(name="license_id")
+    private Document doc;
+    
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private ImageCar imageCar;
 	

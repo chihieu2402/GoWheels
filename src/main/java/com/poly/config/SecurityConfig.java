@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.poly.auth.UserRootService;
@@ -39,6 +40,11 @@ public class SecurityConfig {
     authProvider.setPasswordEncoder(getPasswordEncoder());
     return authProvider;
   }
+  
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+  }
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -47,6 +53,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(
             req -> req
                 .requestMatchers("/admin/*","/booking/views/*").authenticated()
+                .requestMatchers("/account/change-password").permitAll()
                 .anyRequest().permitAll())
         .formLogin(form -> form
             .loginPage("/index/login")
@@ -62,4 +69,5 @@ public class SecurityConfig {
         .exceptionHandling(e -> e.accessDeniedPage("/accessDenied"))
         .build();
   }
+ 
 }
