@@ -104,9 +104,17 @@
 </table>
 
 
-    
-        <input type="hidden" name="carID" th:value="${Tbooking.carID}" />
-        <button type="submit">Xác nhận</button>
+    	<div class="d-flex justify-content-between mt-3">
+    <button type="submit" class="btn btn-success">Xác nhận</button>
+    <a th:href="@{/payment(carID=${Tbooking.carID}, totalPrice=${Tbooking.totalPrice})}" class="btn btn-primary">
+    <i class="bi-cart-fill me-1"></i> Payment
+</a>
+
+
+</a>
+
+</div>
+
     </form>
     <div class="h3" th:text="${mes}"></div>
 </div>

@@ -16,7 +16,9 @@ public class ControllerVNpay {
 
 
     @GetMapping("/payment")
-    public String home(){
+    public String redirectToPayment(@RequestParam("totalPrice") double totalPrice, Model model) {
+        int totalPriceInt = (int) Math.round(totalPrice); // Convert double to int
+        model.addAttribute("totalPrice", totalPriceInt);
         return "views/paymentVNpay/index";
     }
 

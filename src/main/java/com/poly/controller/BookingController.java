@@ -147,5 +147,6 @@ public class BookingController {
             return "redirect:/booking/form"; // Redirect to form if car not found
         }
 
+
 }}
 
