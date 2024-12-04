@@ -75,7 +75,7 @@
 				<p th:text="${successMessage}"></p>
 			</div>
 
-			<form th:action="@{/booking/submit}" method="post"
+			<form th:action="@{/booking/submit}" method="post" 
 				th:object="${booking}">
 
 				<input type="hidden" th:field="*{carID}" readonly />
@@ -123,11 +123,7 @@
 						</div>
 						
 					</div>
-				<div class="mb-3">
-					<label for="totalPrice" class="form-label">Total Price</label> <input
-						type="number" class="form-control" id="totalPrice"
-						th:field="*{totalPrice}" step="0.01" readonly="readonly">
-				</div>
+				
 				<div class="h3" th:text="${mes}"></div>
 				<br>
 
