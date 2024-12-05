@@ -104,5 +104,6 @@ public class Car {
     
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private ImageCar imageCar;
+	
 
 }

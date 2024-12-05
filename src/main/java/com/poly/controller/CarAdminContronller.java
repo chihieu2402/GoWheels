@@ -33,7 +33,7 @@ import jakarta.servlet.ServletContext;
 @RequestMapping(value = "/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
 @Controller
-public class CarContronller {
+public class CarAdminContronller {
 
 	private final String UPLOAD_DIR = "src/main/resources/static/images/";
 	

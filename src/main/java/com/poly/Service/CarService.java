@@ -19,12 +19,7 @@ public class CarService {
     public List<Car> findCars(String carName, String address, Double minPrice, Double maxPrice) {
         return carDao.findCars(carName, address, minPrice, maxPrice);
     }
-    
-//    public List<Car> getAllCars() {
-//        return carDao.findAllWithImages();
-//    }
-    
-    
+  
 }
 
 

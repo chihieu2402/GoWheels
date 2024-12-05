@@ -66,8 +66,13 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
 
+
+        // Add the booking object to the redirect attributes
+     
+
         model.addAttribute("mes", "Data saved temporarily!");
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
+
     }
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -97,8 +102,20 @@ public class BookingController {
 
         return "redirect:/admin/BookingCar";
     }
-    @RequestMapping("/booking/confirm")
-    public String showConfirmBooking( Model model) {
+
+
+    
+    
+    @GetMapping("/confim")
+    private String pulblic() {
+		return "views/ConfimBooking";
+
+	}
+
+
+    @GetMapping("/booking/confirm")
+    public String showConfirmBooking(Model model) {
+
 //    	String path = app.getRealPath("/images/");
 //        Booking booking = new Booking();
 //        Car car = carRepository.findById(carID).orElse(null);
@@ -109,6 +126,7 @@ public class BookingController {
 //        }
 //        booking.setCarID(carID);
 //        model.addAttribute("booking", booking);
+
         model.addAttribute("Tbooking", Tbooking); // Add Tbooking to model
         return "views/ConfirmBooking"; // Ensure this matches the name of your Thymeleaf template
     }
@@ -150,4 +168,6 @@ public class BookingController {
             return "redirect:/booking/form"; // Redirect to form if car not found
         }
 
+
 }}
+
