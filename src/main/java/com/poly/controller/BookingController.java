@@ -103,6 +103,7 @@ public class BookingController {
         return "redirect:/admin/BookingCar";
     }
 
+
     
     
     @GetMapping("/confim")
@@ -114,14 +115,34 @@ public class BookingController {
 
     @GetMapping("/booking/confirm")
     public String showConfirmBooking(Model model) {
+
+//    	String path = app.getRealPath("/images/");
+//        Booking booking = new Booking();
+//        Car car = carRepository.findById(carID).orElse(null);
+//        if (car != null) {
+//            model.addAttribute("car", car);
+//        } else {
+//            model.addAttribute("error", "Car not found");
+//        }
+//        booking.setCarID(carID);
+//        model.addAttribute("booking", booking);
+
         model.addAttribute("Tbooking", Tbooking); // Add Tbooking to model
         return "views/ConfirmBooking"; // Ensure this matches the name of your Thymeleaf template
+    }
+    @RequestMapping("/booking/success")
+    public String showsuccess( Model model) {
+        return "views/success"; // Ensure this matches the name of your Thymeleaf template
+    }
+    @RequestMapping("/booking/error")
+    public String showerror( Model model) {
+        return "views/error"; // Ensure this matches the name of your Thymeleaf template
     }
     @PostMapping("/booking/submit2")
     public String submitFinalBooking(RedirectAttributes redirectAttributes, Model model) {
         if (Tbooking == null) {
             model.addAttribute("error", "No booking data available!");
-            return "redirect:/booking/form"; // Redirect to form if no data available
+            return "redirect:/booking/error"; // Redirect to form if no data available
         }
 
         // Save the temporary Tbooking data into the database
@@ -141,7 +162,7 @@ public class BookingController {
             model.addAttribute("mes", "Booking successfully submitted!");
 
             // Redirect to the booking post page after submission
-            return "redirect:/booking/confirm";
+            return "redirect:/booking/success";
         } else {
             model.addAttribute("error", "Car not found!");
             return "redirect:/booking/form"; // Redirect to form if car not found
