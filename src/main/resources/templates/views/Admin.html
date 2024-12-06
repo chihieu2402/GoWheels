@@ -11,6 +11,80 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.0/exceljs.min.js"></script>
     
+      <!-- Chatbox CSS -->
+    <style>
+        /* Chatbox */
+        .chatbox {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            max-width: 300px;
+            width: 100%;
+            display: none; /* Initially hidden */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1050;
+        }
+
+        /* Header of chatbox */
+        .chatbox-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Body of chatbox */
+        .chatbox-body {
+            background-color: #f8f9fa;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer of chatbox */
+        .chatbox-footer {
+            padding: 10px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbox-footer input {
+            width: 80%;
+            padding: 5px;
+        }
+
+        .chatbox-footer button {
+            width: 18%;
+            padding: 6px 10px;
+        }
+
+        /* Chat button to show/hide the chatbox */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1060;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,6 +101,57 @@
             </div>
         </div>
     </div>
+        <!-- Chatbox -->
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header">
+            Chat Room
+            <button class="btn-close text-white" onclick="toggleChatbox()"></button>
+        </div>
+        <div class="chatbox-body" id="chatBody">
+            <!-- Chat messages will be added dynamically here -->
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="messageInput" placeholder="Enter your message" class="form-control d-inline-block">
+            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <div class="chat-button" onclick="toggleChatbox()">
+        <i class="fas fa-comments"></i>
+    </div>
+    <script>
+        // Toggle the visibility of the chatbox
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+                chatbox.style.display = 'block';
+            } else {
+                chatbox.style.display = 'none';
+            }
+        }
+
+        // Handle sending messages
+        function sendMessage() {
+            const chatBody = document.getElementById('chatBody');
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+
+            if (message.trim() !== '') {
+                // Append the message to the chat body
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.className = 'alert alert-primary my-1 p-2';
+                chatBody.appendChild(messageElement);
+
+                // Clear the input field
+                messageInput.value = '';
+
+                // Scroll to the bottom of the chat body
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+    </script>
     
     <!-- Include footer -->
     <div th:replace="views/admin/footer :: footer"></div>
