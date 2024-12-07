@@ -14,6 +14,8 @@ public interface AccountDao extends JpaRepository<Account, Integer> {
 	 Account findByAccountID(int accountID);
 	 
 	 Optional<Account> findByUserName(String username);
+	 
+
 	
 	 
 }

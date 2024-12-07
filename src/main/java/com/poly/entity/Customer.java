@@ -28,7 +28,7 @@ public class Customer {
     private int customerID;
     
     @Column(name = "Email", columnDefinition = "VARCHAR(255)", nullable = true)
-    private String Email;
+    private String email;
 
     @Column(name="CustomerName", columnDefinition = "NVARCHAR(255)")
     private String customerName;
