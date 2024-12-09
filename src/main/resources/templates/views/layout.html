@@ -44,6 +44,27 @@
 	<!-- Footer -->
 	<footer th:insert="~{/views/layout/footer.html::footer}"></footer>
 
+<<<<<<< HEAD
+        <!-- Chatbox -->
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header">
+            Chat Room
+            <button class="btn-close text-white" onclick="toggleChatbox()"></button>
+        </div>
+        <div class="chatbox-body" id="chatBody">
+            <!-- Chat messages will be added dynamically here -->
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="messageInput" placeholder="Enter your message" class="form-control d-inline-block">
+            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <div class="chat-button" onclick="toggleChatbox()">
+        <i class="fas fa-comments"></i>
+    </div>
+=======
 	<!-- Chatbox -->
 	<div class="chatbox" id="chatbox">
 		<div class="chatbox-header">
@@ -64,6 +85,7 @@
 	<div class="chat-button" onclick="toggleChatbox()">
 		<i class="fas fa-comments"></i>
 	</div>
+>>>>>>> b9ea49894e45a9816ce3b9a90c6517d4ce7f52d4
 
 	<!-- JS Files -->
 	<script src="/views/js/excel-ctrl.js"></script>
@@ -97,6 +119,40 @@
 		crossorigin="anonymous"></script>
 
 	<!-- Chatbox JS -->
+<<<<<<< HEAD
+	    <script>
+        // Toggle the visibility of the chatbox
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+                chatbox.style.display = 'block';
+            } else {
+                chatbox.style.display = 'none';
+            }
+        }
+
+        // Handle sending messages
+        function sendMessage() {
+            const chatBody = document.getElementById('chatBody');
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+
+            if (message.trim() !== '') {
+                // Append the message to the chat body
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.className = 'alert alert-primary my-1 p-2';
+                chatBody.appendChild(messageElement);
+
+                // Clear the input field
+                messageInput.value = '';
+
+                // Scroll to the bottom of the chat body
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+    </script>
+=======
 	<script>
 		// Toggle the visibility of the chatbox
 		function toggleChatbox() {
@@ -150,6 +206,7 @@
 		// Kết nối khi tải trang
 		document.addEventListener('DOMContentLoaded', connect);
 	</script>
+>>>>>>> b9ea49894e45a9816ce3b9a90c6517d4ce7f52d4
 
 	<!-- Chatbox CSS -->
 	<style>
