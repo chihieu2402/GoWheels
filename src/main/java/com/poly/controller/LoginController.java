@@ -41,7 +41,7 @@ public class LoginController {
 	@RequestMapping(value = "/index/login")
 	public String login(@ModelAttribute Account user, Model model) {
 
-		List<Account> accs = accDao.findAll();
+//		List<Account> accs = accDao.findAll();
 //		for (Account acc : accs) {
 //			// Mã hóa mật khẩu hiện tại và lưu lại
 //			String encodedPassword = passwordEncoderLogin().encode(acc.getPassWord());
