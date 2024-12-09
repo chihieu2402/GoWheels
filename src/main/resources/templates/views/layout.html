@@ -119,7 +119,6 @@
 		crossorigin="anonymous"></script>
 
 	<!-- Chatbox JS -->
-<<<<<<< HEAD
 	    <script>
         // Toggle the visibility of the chatbox
         function toggleChatbox() {
@@ -152,61 +151,6 @@
             }
         }
     </script>
-=======
-	<script>
-		// Toggle the visibility of the chatbox
-		function toggleChatbox() {
-			const chatbox = document.getElementById('chatbox');
-			if (chatbox.style.display === 'none'
-					|| chatbox.style.display === '') {
-				chatbox.style.display = 'block';
-			} else {
-				chatbox.style.display = 'none';
-			}
-		}
-
-		// Handle sending messages
-		// WebSocket và STOMP client
-		let stompClient = null;
-
-		function connect() {
-			const socket = new SockJS('/chat-websocket'); // Endpoint đã định nghĩa
-			stompClient = Stomp.over(socket);
-			stompClient.connect({}, function() {
-				console.log('Connected to WebSocket');
-				stompClient.subscribe('/topic/public', function(message) {
-					showMessage(JSON.parse(message.body).content);
-				});
-			});
-		}
-
-		// Gửi tin nhắn
-		function sendMessage() {
-			const messageInput = document.getElementById('messageInput');
-			const message = messageInput.value;
-
-			if (message.trim() !== '' && stompClient) {
-				stompClient.send('/app/chat.sendMessage', {}, JSON.stringify({
-					content : message
-				}));
-				messageInput.value = '';
-			}
-		}
-
-		// Hiển thị tin nhắn trên giao diện
-		function showMessage(message) {
-			const chatBody = document.getElementById('chatBody');
-			const messageElement = document.createElement('div');
-			messageElement.textContent = message;
-			messageElement.className = 'alert alert-primary my-1 p-2';
-			chatBody.appendChild(messageElement);
-			chatBody.scrollTop = chatBody.scrollHeight;
-		}
-
-		// Kết nối khi tải trang
-		document.addEventListener('DOMContentLoaded', connect);
-	</script>
->>>>>>> b9ea49894e45a9816ce3b9a90c6517d4ce7f52d4
 
 	<!-- Chatbox CSS -->
 	<style>
