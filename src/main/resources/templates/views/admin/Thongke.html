@@ -10,46 +10,72 @@
 </head>
 
 <body>
+  <div class="container-fluid">
+    <div class="row">
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
 
-    <!-- Menu Toggle Button -->
-    <button id="menu-toggle" class="btn btn-primary" hidden></button>
-
-    <!-- Wrapper for Toggle Content -->
-    <div id="wrapper" class="toggled">
-        <div class="container-fluid mt-4">
-<div class="custom-heading mb-4"> 
-    <h1 class="mb-1">Statistical</h1>
-</div>	
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+    
+  </div>
+  <div class="offcanvas-body">
+    <p>Try scrolling the rest of the page to see this option in action.</p>
+  </div>
+</div>
+          
+      <div class="col-10">
+        <div>  
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item dropdown">
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <i class="fas fa-user-circle fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+        <div>
+             <div class="container-fluid mt-4">
+            <h1 class="mt-12">Thống kê</h1>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-primary">
                         <div class="card-body">
                             <h5 class="card-title">Tổng số User</h5>
-                            <p class="card-text" th:text="${totalUsers}">26K</p>
+                            <p class="card-text">26K</p>
                         </div>
-                    </div>
+                    </div>  
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-success">
                         <div class="card-body">
-                            <h5 class="card-title">Tổng số Xe</h5>
-                            <p class="card-text" th:text="${totalCars}">6200</p>
+                            <h5 class="card-title">Tổng số Sản phẩm</h5>
+                            <p class="card-text">$6,200</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-warning">
                         <div class="card-body">
-                            <h5 class="card-title">Tổng số Đánh giá</h5>
-                            <p class="card-text" th:text="${totalReviews}">2.49%</p>
+                            <h5 class="card-title">Tỷ lệ Chuyển đổi</h5>
+                            <p class="card-text">2.49%</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-danger">
                         <div class="card-body">
-                            <h5 class="card-title">Thu nhập theo tháng</h5>
-                            <p class="card-text" th:text="${monthlyRentalIncome}">44K</p>
+                            <h5 class="card-title">Số phiên</h5>
+                            <p class="card-text">44K</p>
                         </div>
                     </div>
                 </div>
@@ -64,47 +90,17 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+ 
+    </div>
+ 
+   
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var menuToggle = document.getElementById('menu-toggle');
-            var wrapper = document.getElementById('wrapper');
-            menuToggle.addEventListener('click', function() {
-                wrapper.classList.toggle('toggled');
-            });
-
-            // Chart.js setup
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                    datasets: [{
-                        label: 'Visits',
-                        data: [29370, 24400, 22810, 19700, 23270, 22090],
-                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                        borderColor: 'rgba(0, 123, 255, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: 'Income',
-                        data: [1200, 2300, 1800, 1700, 2500, 2700],
-                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                        borderColor: 'rgba(40, 167, 69, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+      <script src="https://kit.fontawesome.com/03099bb746.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/admin.js"></script>
 </body>
 </html>
+
