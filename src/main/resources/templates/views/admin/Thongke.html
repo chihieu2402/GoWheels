@@ -12,24 +12,16 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+     
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-    
-  </div>
-  <div class="offcanvas-body">
-    <p>Try scrolling the rest of the page to see this option in action.</p>
-  </div>
-</div>
+
           
-      <div class="col-10">
+      <div class="col">
         <div>  
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <ul class="navbar-nav ms-auto mt-0 mt-lg-0">
                     <li class="nav-item dropdown">
                       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             <i class="fas fa-user-circle fa-fw"></i>
@@ -47,34 +39,42 @@
              <div class="container-fluid mt-4">
             <h1 class="mt-12">Thống kê</h1>
             <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="card text-white bg-primary">
-                        <div class="card-body">
-                            <h5 class="card-title">Tổng số User</h5>
-                            <p class="card-text">26K</p>
-                        </div>
-                    </div>  
-                </div>
+               <div class="col-md-3 mb-3">
+    <div class="card text-white bg-info">
+        <div class="card-body">
+            <h5 class="card-title">khách hàng</h5>
+            <p class="card-text">
+                <span th:text="${customerCount}"></span> <i class="fa-solid fa-circle-user"></i>
+            </p>
+        </div>
+    </div>
+</div>
+
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-success">
                         <div class="card-body">
-                            <h5 class="card-title">Tổng số Sản phẩm</h5>
-                            <p class="card-text">$6,200</p>
+                            <h5 class="card-title">Tổng số xe</h5>
+                            <p class="card-text">
+                            <span th:text="${carCount}"></span> <i class="fa-solid fa-car"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card text-white bg-warning">
-                        <div class="card-body">
-                            <h5 class="card-title">Tỷ lệ Chuyển đổi</h5>
-                            <p class="card-text">2.49%</p>
-                        </div>
-                    </div>
-                </div>
+               <div class="col-md-3 mb-3">
+    <div class="card text-white bg-warning">
+        <div class="card-body">
+            <h5 class="card-title">Tổng doanh thu</h5>
+            <p class="card-text">
+                <span th:text="${#numbers.formatDecimal(totalRevenue, 2, 2)}"></span> VNĐ
+            </p>
+        </div>
+    </div>
+</div>
+
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-danger">
                         <div class="card-body">
-                            <h5 class="card-title">Số phiên</h5>
+                            <h5 class="card-title">Tổng chủ xe</h5>
                             <p class="card-text">44K</p>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                     <i class="fas fa-chart-line"></i> Traffic
                 </div>
                 <div class="card-body">
-                    <canvas id="myChart" width="100%" height="30"></canvas>
+                    <canvas id="myChart" width="100%" height="50"></canvas>
                 </div>
             </div>
         </div>
