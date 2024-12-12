@@ -1,10 +1,8 @@
 package com.poly.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,7 @@ import com.poly.entity.Bill;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class BillConttroller {
+public class BillController {
     @Autowired
     private BillDao billDao; // Assuming you have a DAO for Bill
 
@@ -72,18 +70,12 @@ public class BillConttroller {
         return "views/admin/Bill"; // Return the correct view for bill management
     }
 
-    private double calculateRentalHours(String rentalDay, String returnDay) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date rentalDate = sdf.parse(rentalDay);
-            Date returnDate = sdf.parse(returnDay);
-            
-            long durationInMillis = returnDate.getTime() - rentalDate.getTime();
-            return TimeUnit.MILLISECONDS.toHours(durationInMillis); // Convert to hours
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 0; // Return 0 if there's an error in parsing
+    private double calculateRentalHours(LocalDate rentalDay, LocalDate returnDay) {
+        if (rentalDay != null && returnDay != null) {
+            long durationInDays = ChronoUnit.DAYS.between(rentalDay, returnDay);
+            return durationInDays * 24.0; // Convert days to hours (if you want hours)
         }
+        return 0; // Return 0 if either date is null
     }
 
     private double getPricePerHour() {
