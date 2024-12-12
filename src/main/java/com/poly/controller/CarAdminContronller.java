@@ -86,66 +86,65 @@ public class CarAdminContronller {
 	}
 
 	@PostMapping("/car/update")
-	public String updateCar(@ModelAttribute Car car, @RequestParam("carBrandID") int carBrandID,
-			@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2,
-			@RequestParam("ownershipDocument1") MultipartFile ownershipDocument1,
-			@RequestParam("ownershipDocument2") MultipartFile ownershipDocument2) {
+	public String updateCar(
+	        @ModelAttribute Car car, 
+	        @RequestParam("carBrandID") int carBrandID, 
+	        @RequestParam("imageFile") MultipartFile imageFile, 
+	        Model model) {
 
-		CarBrand carBrand = carBrandSerivce.findById(carBrandID).orElse(null);
-		car.setCarBrand(carBrand);
+	    try {
+	        // Lấy thông tin xe hiện tại từ cơ sở dữ liệu
+	        Car existingCar = carDao.findById(car.getCarID()).orElse(null);
+	        if (existingCar == null) {
+	            model.addAttribute("message", "Car not found!");
+	            return "redirect:/admin/car";
+	        }
 
-		handleImageUpload(car, image1, image2, ownershipDocument1, ownershipDocument2);
+	        // Gán thông tin carBrand vào đối tượng car
+	        CarBrand carBrand = carBrandSerivce.findById(carBrandID).orElse(null);
+	        car.setCarBrand(carBrand);
+	        if (!imageFile.isEmpty()) {
+	            // Xóa ảnh cũ nếu có
+	            String oldImage = existingCar.getImageCar() != null ? existingCar.getImageCar().getImage1() : null;
+	            if (oldImage != null) {
+	                Path oldImagePath = Paths.get(UPLOAD_DIR + oldImage);
+	                Files.deleteIfExists(oldImagePath);
+	            }
 
-		// Save the updated car information
-		carDao.save(car);
+	            // Lưu ảnh mới
+	            String newImageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+	            Path newImagePath = Paths.get(UPLOAD_DIR + newImageName);
+	            Files.copy(imageFile.getInputStream(), newImagePath, StandardCopyOption.REPLACE_EXISTING);
 
-		return "redirect:/admin/car";
+	            // Cập nhật thông tin ảnh
+	            ImageCar imageCar = existingCar.getImageCar() != null ? existingCar.getImageCar() : new ImageCar();
+	            imageCar.setImage1(newImageName);
+	            existingCar.setImageCar(imageCar);
+	        }
+
+	        // Cập nhật thông tin xe
+	        existingCar.setCarName(car.getCarName());
+	        existingCar.setColor(car.getColor());
+	        existingCar.setPriceHoursCar(car.getPriceHoursCar());
+	        existingCar.setAddress(car.getAddress());
+	        existingCar.setStatus(car.isStatus());
+	        existingCar.setCarBrand(car.getCarBrand());
+
+	        // Lưu thông tin cập nhật
+	        carDao.save(existingCar);
+	        model.addAttribute("message", "Car updated successfully!");
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        model.addAttribute("message", "Error updating car!");
+	    }
+
+	    return "redirect:/admin/car";
 	}
 
-	private void handleImageUpload(Car car, MultipartFile image1, MultipartFile image2,
-			MultipartFile ownershipDocument1, MultipartFile ownershipDocument2) {
-		try {
-// Save the uploaded images
-			if (!image1.isEmpty()) {
-				String imageName1 = saveFile(image1);
-				if (car.getImageCar() == null) {
-					car.setImageCar(new ImageCar()); // Ensure the imageCar object exists
-				}
-				car.getImageCar().setImage1(imageName1); // Set image1 for ImageCar
-			}
-			if (!image2.isEmpty()) {
-				String imageName2 = saveFile(image2);
-				if (car.getImageCar() == null) {
-					car.setImageCar(new ImageCar());
-				}
-				car.getImageCar().setImage2(imageName2); // Set image2 for ImageCar
-			}
-			if (!ownershipDocument1.isEmpty()) {
-				String docName1 = saveFile(ownershipDocument1);
-				if (car.getImageCar() == null) {
-					car.setImageCar(new ImageCar());
-				}
-				car.getImageCar().setImgOwnershipCertificate1(docName1); // Set ownershipCertificate1
-			}
-			if (!ownershipDocument2.isEmpty()) {
-				String docName2 = saveFile(ownershipDocument2);
-				if (car.getImageCar() == null) {
-					car.setImageCar(new ImageCar());
-				}
-				car.getImageCar().setImgOwnershipCertificate2(docName2); // Set ownershipCertificate2
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
-	// Save file to the server and return the file name
-	private String saveFile(MultipartFile file) throws IOException {
-		String fileName = file.getOriginalFilename();
-		Path filePath = Paths.get(UPLOAD_DIR, fileName);
-		Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-		return fileName;
-	}
+
+
 
 	// hàm xóa
 	@PostMapping("/car/delete")
@@ -153,5 +152,10 @@ public class CarAdminContronller {
 		carDao.deleteById(carID);
 		return "redirect:/admin/car";
 	}
+	  @PostMapping("/car/reset")
+	    public String reset(Model model) {
+	      
+	        return "redirect:/admin/car";
+	    }
 
 }

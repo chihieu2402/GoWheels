@@ -533,9 +533,11 @@ VALUES
            (150.75, 3, '2024-11-19')
            
 GO
-
 select * from car
+
 select * from pending_car_post
 select * from image_pending
 select * from image_car
 select * from review
+select * from customer
+select * from account

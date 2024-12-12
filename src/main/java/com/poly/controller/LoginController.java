@@ -41,7 +41,7 @@ public class LoginController {
 	@RequestMapping(value = "/index/login")
 	public String login(@ModelAttribute Account user, Model model) {
 
-		List<Account> accs = accDao.findAll();
+//		List<Account> accs = accDao.findAll();
 //		for (Account acc : accs) {
 //			// Mã hóa mật khẩu hiện tại và lưu lại
 //			String encodedPassword = passwordEncoderLogin().encode(acc.getPassWord());
@@ -147,4 +147,12 @@ public class LoginController {
 	    public String quenMatKhau() {
 	        return "views/quenMatKhau";
 	    }
+	  @RequestMapping(value="/customer/update", method=RequestMethod.GET)
+	  public String updateCus(@ModelAttribute Account user,Authentication auth, Model model) {
+		 UserRoot userRoot = (UserRoot) auth.getPrincipal();
+		 Customer customer = userRoot.getUser().getCustomer();
+		 model.addAttribute("customer",customer);
+	  	return "/views/updateCustomer";
+	  }
+	  
 }

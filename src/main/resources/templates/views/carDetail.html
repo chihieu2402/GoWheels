@@ -11,20 +11,38 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../../../webapp/views/css/DinhDangSao.css">
+
 </head>
 <body>
-
+	<section class="hero-wrap hero-wrap-2 js-fullheight"
+		style="background-image: url('/images/bg_3.jpg');"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+				<div class="col-md-9 ftco-animate pb-5">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">Home <i
+								class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i
+							class="ion-ios-arrow-forward"></i></span>
+					</p>
+					<h1 class="mb-3 bread">Car Detail</h1>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- phần carDetail -->
-	<section class="py-5 bg-light" th:object="${carDetail}">
-		<div class="container px-4 px-lg-5 my-5">
+	<section class="py-5 " th:object="${carDetail}">
+		<div class="container px-4 px-lg-5 my-5 bg-image">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-6">
-					<div class="col-md-6">
-						<img class="card-img-top mb-5 mb-md-0"
+					
+						<img class="card-img-top mb-5 mb-md-0 "
 							th:if="${carDetail.imageCar != null}"
 							th:src="@{/images/{carDetail.imageCar.image1}(carDetail.imageCar.image1=${carDetail.imageCar.image1})}"
 							alt="Car Image 1">
-					</div>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="small mb-1">
@@ -42,14 +60,50 @@
 
 
 					</div>
-					<h1 class="display-5 fw-bolder">[[*{carName}]]</h1>
-					<div class="fs-5 ">
-						<span class="text-decoration-line-through">[[*{priceHoursCar}]]</span>
-						<span>[[*{priceHoursCar}]]</span>
+					<h1 class="display-5 fw-bolder font-tx">[[*{carName}]]</h1>
+					<h3 class="fs-1">Brand: [[${carDetail.carBrand.brandName}]]</h3>
+					<div class="fs-2">
+						<span class="font-weight text-decoration-line-through">[[*{priceHoursCar}]]</span>
+						<span class="font-weight fw-bolder">[[*{priceHoursCar}]]</span>
 					</div>
-					<div class="lead">[[*{status}?'Free':'Busy']]</div>
-					<div class="lead">[[*{address}]]</div>
-					<div class="lead">Color: [[*{color}]]</div>
+					<div class="lead fs-2">Status: [[*{status}?'Free':'Busy']]</div>
+					<div class="lead fs-2">Address: [[*{address}]]</div>
+					<div class="lead fs-2">Color: [[*{color}]]</div>
+
+					<table class="table-striped fs-4">
+						<tr>
+							<td>Car number:</td>
+							<td>[[*{car_number}]]</td>
+						</tr>
+						<tr>
+							<td>Type gear:</td>
+							<td>[[*{type_gear}]]</td>
+						</tr>
+						<tr>
+							<td>Type fuel:</td>
+							<td>[[*{type_fuel}]]</td>
+						</tr>
+						<tr>
+							<td>Year of manufacture:</td>
+							<td>[[*{year_of_manufacture}]]</td>
+						</tr>
+						<tr>
+							<td>Fuel consumption:</td>
+							<td>[[*{muctieuthu}]]</td>
+						</tr>
+						<tr>
+							<td>Limit:</td>
+							<td>[[*{limit}]]</td>
+						</tr>
+						<tr>
+							<td>Fee limit:</td>
+							<td>[[*{fee_limit}]]</td>
+						</tr>
+						<tr>
+							<td>Describe:</td>
+							<td>[[*{describe}]]</td>
+						</tr>
+					</table>
 					<div class="d-flex">
 
 						<a th:href="@{/booking/views/Booking(carID=${carDetail.carID})}"

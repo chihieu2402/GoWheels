@@ -1,10 +1,7 @@
 package com.poly.controller;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +40,9 @@ public class BillConttroller {
         return "redirect:/admin/Bill"; // Redirect back to the bill management page
     }
 
-    @PostMapping("/bill/update")
+    
+
+	@PostMapping("/bill/update")
     public String updateBill(@ModelAttribute("bill") Bill bill) {
         // Ensure that the bill exists before updating
         if (billDao.existsById(bill.getBillID())) {
@@ -66,24 +65,18 @@ public class BillConttroller {
     @GetMapping("/bill/edit/{id}")
     public String editBill(@PathVariable("id") int id, Model model) {
         Bill bill = billDao.findById(id).orElse(new Bill()); // Fetch the bill by its ID or return a new Bill if not found
-        model.addAttribute("bill", bill); // Add the bill to the model
+model.addAttribute("bill", bill); // Add the bill to the model
         List<Bill> bills = billDao.findAll(); // Fetch all bills
         model.addAttribute("bills", bills); // Add bills to the model
         return "views/admin/Bill"; // Return the correct view for bill management
     }
 
-    private double calculateRentalHours(String rentalDay, String returnDay) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date rentalDate = sdf.parse(rentalDay);
-            Date returnDate = sdf.parse(returnDay);
-            
-            long durationInMillis = returnDate.getTime() - rentalDate.getTime();
-            return TimeUnit.MILLISECONDS.toHours(durationInMillis); // Convert to hours
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 0; // Return 0 if there's an error in parsing
+    private double calculateRentalHours(LocalDate rentalDay, LocalDate returnDay) {
+        if (rentalDay != null && returnDay != null) {
+            long durationInDays = ChronoUnit.DAYS.between(rentalDay, returnDay);
+            return durationInDays * 24.0; // Convert days to hours (if you want hours)
         }
+        return 0; // Return 0 if either date is null
     }
 
     private double getPricePerHour() {
