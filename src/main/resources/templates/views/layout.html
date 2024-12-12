@@ -33,6 +33,7 @@
 <link rel="stylesheet" type="text/css" href="/views/css/flaticon.css">
 <link rel="stylesheet" type="text/css" href="/views/css/icomoon.css">
 <link rel="stylesheet" type="text/css" href="/views/css/style.css">
+<link rel="stylesheet" type="text/css" href="/views/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/views/css/updateCus.css">
 </head>
 <body>
@@ -44,171 +45,160 @@
 
 	<!-- Footer -->
 	<footer th:insert="~{/views/layout/footer.html::footer}"></footer>
-<<<<<<< HEAD
+	<div class="chatbox" id="chatbox">
+		<div class="chatbox-header">
+			Chat Room
+			<button class="btn-close text-white" onclick="toggleChatbox()"></button>
+		</div>
+		<div class="chatbox-body" id="chatBody">
+			<!-- Chat messages will be added dynamically here -->
+		</div>
+		<div class="chatbox-footer">
+			<input type="text" id="messageInput" placeholder="Enter your message"
+				class="form-control d-inline-block">
+			<button class="btn btn-primary" onclick="sendMessage()">Send</button>
+		</div>
+
+	</div>
+	<div class="notifications" id="notifications">
+		<div class="notifications-header">
+			<h5>Notifications</h5>
+			<button class="btn-close" onclick="toggleNotifications()"></button>
+		</div>
+		<div class="notifications-body" id="notificationBody"></div>
+	</div>
 
 
-=======
-	
->>>>>>> aeba06785d6faf27376dc28378ec462267105252
-        <!-- Chatbox -->
-    <div class="chatbox" id="chatbox">
-        <div class="chatbox-header">
-            Chat Room
-            <button class="btn-close text-white" onclick="toggleChatbox()"></button>
-        </div>
-        <div class="chatbox-body" id="chatBody">
-            <!-- Chat messages will be added dynamically here -->
-        </div>
-        <div class="chatbox-footer">
-            <input type="text" id="messageInput" placeholder="Enter your message" class="form-control d-inline-block">
-            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
 
-    <!-- Chat Button -->
-    <div class="chat-button" onclick="toggleChatbox()">
-        <i class="fas fa-comments"></i>
-    </div>
+	<!-- Chat Button -->
+	<div class="chat-button" onclick="toggleChatbox()">
+		<i class="fas fa-comments"></i> <span id="messageCount"
+			class="badge bg-info">0</span>
+		<!-- Message count badge -->
+	</div>
 
+
+	<!-- Notification Button -->
+	<div class="notification-button" onclick="toggleNotifications()">
+		<i class="fas fa-bell"></i><span id="notificationCount"
+			class="badge bg-primary">0</span>
+	</div>
 
 	<!-- JS Files -->
 	<script src="/views/js/excel-ctrl.js"></script>
-	<script src="/views/js/jquery.min.js"></script>
-	<script src="/views/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/views/js/popper.min.js"></script>
-	<script src="/views/js/bootstrap.min.js"></script>
-	<script src="/views/js/jquery.easing.1.3.js"></script>
-	<script src="/views/js/jquery.waypoints.min.js"></script>
-	<script src="/views/js/jquery.stellar.min.js"></script>
-	<script src="/views/js/owl.carousel.min.js"></script>
-	<script src="/views/js/jquery.magnific-popup.min.js"></script>
-	<script src="/views/js/aos.js"></script>
-	<script src="/views/js/jquery.animateNumber.min.js"></script>
-	<script src="/views/js/bootstrap-datepicker.js"></script>
-	<script src="/views/js/jquery.timepicker.min.js"></script>
-	<script src="/views/js/scrollax.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/sockjs/1.5.0/sockjs.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+	<script src="/views/js/jquery.min.js">
+		</script>
+		<script src="/views/js/jquery-migrate-3.0.1.min.js"></script>
+		<script src="/views/js/popper.min.js"></script>
+		<script src="/views/js/bootstrap.min.js"></script>
+		<script src="/views/js/jquery.easing.1.3.js"></script>
+		<script src="/views/js/jquery.waypoints.min.js"></script>
+		<script src="/views/js/jquery.stellar.min.js"></script>
+		<script src="/views/js/owl.carousel.min.js"></script>
+		<script src="/views/js/jquery.magnific-popup.min.js"></script>
+		<script src="/views/js/aos.js"></script>
+		<script src="/views/js/jquery.animateNumber.min.js"></script>
+		<script src="/views/js/bootstrap-datepicker.js"></script>
+		<script src="/views/js/jquery.timepicker.min.js"></script>
+		<script src="/views/js/scrollax.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/sockjs/1.5.0/sockjs.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="/views/js/google-map.js"></script>
-	<script src="/views/js/main.js"></script>
-	<script src="https://kit.fontawesome.com/03099bb746.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+		<script src="/views/js/google-map.js"></script>
+		<script src="/views/js/main.js"></script>
+		<script src="https://kit.fontawesome.com/03099bb746.js"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
 
-	<!-- Chatbox JS -->
-	    <script>
-        // Toggle the visibility of the chatbox
-        function toggleChatbox() {
-            const chatbox = document.getElementById('chatbox');
-            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
-                chatbox.style.display = 'block';
-            } else {
-                chatbox.style.display = 'none';
-            }
-        }
+		<!-- Chatbox JS -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/stompjs@2.3.4/lib/stomp.min.js"></script>
+		<script>
+		let stompClient = null;
+		let notificationCount = 0;
+		let messageCount = 0;
+		userNameInput ="Anonymous";// Initialize notification count
 
-        // Handle sending messages
-        function sendMessage() {
-            const chatBody = document.getElementById('chatBody');
-            const messageInput = document.getElementById('messageInput');
-            const message = messageInput.value;
+		function connectWebSocket() {
+		    const socket = new SockJS('/ws');
+		    stompClient = Stomp.over(socket);
 
-            if (message.trim() !== '') {
-                // Append the message to the chat body
-                const messageElement = document.createElement('div');
-                messageElement.textContent = message;
-                messageElement.className = 'alert alert-primary my-1 p-2';
-                chatBody.appendChild(messageElement);
+		    stompClient.connect({}, () => {
+		        console.log('Connected to WebSocket');
 
-                // Clear the input field
-                messageInput.value = '';
+		        // Đăng ký kênh thông báo
+		        stompClient.subscribe('/topic/notifications', (message) => {
+		            const { message: msg } = JSON.parse(message.body);
+		            displayNotification(msg);
+		        });
 
-                // Scroll to the bottom of the chat body
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-        }
-    </script>
+		        // Đăng ký kênh chat
+		        stompClient.subscribe('/topic/public', (message) => {
+		            displayChatMessage(JSON.parse(message.body));
+		        });
+		    });
+		}
 
-	<!-- Chatbox CSS -->
-	<style>
-/* Chatbox */
-.chatbox {
-	position: fixed;
-	bottom: 80px;
-	right: 20px;
-	max-width: 300px;
-	width: 100%;
-	display: none; /* Initially hidden */
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-	z-index: 1050;
-}
+		function displayNotification(message) {
+		    const notificationBody = document.getElementById('notificationBody');
+		    const notificationElement = document.createElement('div');
+		    notificationElement.className = 'alert alert-info my-2 p-2';
+		    notificationElement.textContent = "GoWheels: " + message; // Display only the message content
+		    notificationBody.appendChild(notificationElement);
+		    
+		    // Update notification count
+		    notificationCount++;
+		    document.getElementById('notificationCount').textContent = notificationCount; // Update badge text
+		    
+		    notificationBody.scrollTop = notificationBody.scrollHeight; // Scroll to bottom
+		}
 
-/* Header of chatbox */
-.chatbox-header {
-	background-color: #007bff;
-	color: white;
-	padding: 10px;
-	border-radius: 5px 5px 0 0;
-	cursor: pointer;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+		
 
-/* Body of chatbox */
-.chatbox-body {
-	background-color: #f8f9fa;
-	padding: 10px;
-	max-height: 300px;
-	overflow-y: auto;
-	border: 1px solid #ddd;
-	border-radius: 0 0 5px 5px;
-	margin-bottom: 10px;
-}
+		function toggleChatbox() {
+		    const chatbox = document.getElementById('chatbox');
+		    chatbox.style.display = (chatbox.style.display === 'none' || chatbox.style.display === '') ? 'block' : 'none';
+		}
 
-/* Footer of chatbox */
-.chatbox-footer {
-	padding: 10px;
-	background-color: #f1f1f1;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
+		function toggleNotifications() {
+		    const notifications = document.getElementById('notifications');
+		    notifications.style.display = (notifications.style.display === 'none' || notifications.style.display === '') ? 'block' : 'none';
+		}
+		function sendMessage() {
+		    const userName = userNameInput;
+		    const messageContent = document.getElementById('messageInput').value;
 
-.chatbox-footer input {
-	width: 80%;
-	padding: 5px;
-}
+		    if (userName && messageContent) {
+		        const message = {
+		            userName: userName,
+		            content: messageContent
+		        };
+		        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
+		        document.getElementById('messageInput').value = ''; // Clear message input
+		    } else {
+		        alert("Please enter both your name and a message.");
+		    }
+		}
+		function displayChatMessage({ userName, content }) {
+		    const chatBody = document.getElementById('chatBody');
+		    const div = document.createElement('div');
+		    div.className = 'alert alert-secondary my-2';
+		    div.textContent = `${userName}: ${content}`;
+		    chatBody.appendChild(div);
+		    chatBody.scrollTop = chatBody.scrollHeight;
+		    messageCount++;
+		    document.getElementById('messageCount').textContent = messageCount;
+		}
+		window.onload = connectWebSocket;
 
-.chatbox-footer button {
-	width: 18%;
-	padding: 6px 10px;
-}
-
-/* Chat button to show/hide the chatbox */
-.chat-button {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	border-radius: 50%;
-	width: 60px;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	z-index: 1060;
-}
-</style>
+	</script>
 </body>
 </html>
