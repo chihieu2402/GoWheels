@@ -8,7 +8,7 @@
     <title>Profile</title>
     <html xmlns:th="http://www.thymeleaf.org">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <style>
+   <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -64,7 +64,8 @@
         }
 
         .main-content {
-            width: 75%;
+        	display: relative;
+            width: 100%;
             padding: 20px;
             box-sizing: border-box;
             background-color: #f0f7fa;
@@ -146,22 +147,22 @@
 
 <body>
     <div class="container">
-        <div class="sidebar">
+       <!--   <div class="sidebar">
             <img alt="User profile picture" height="100"
                 src="https://storage.googleapis.com/a1aa/image/Ito5hXX4V3qqHdvregWicFk1nezuIZjc0IWhhjxTEDa50t2TA.jpg"
                 width="100" />
-            <h2 th:text="${customer.customerName}"></h2> <!-- Hiển thị tên khách hàng -->
+            <h2 th:text="${customer.customerName}"></h2> <!-- Hiển thị tên khách hàng 
             <ul>
-                <li>Personal</li>
+                <li></li>
                 <li>Change Password</li>
             </ul>
             <div class="logout">LOG OUT</div>
-        </div>
+        </div> -->
         <div class="main-content">
             <h1>PROFILE</h1>
             <div class="form-container">
                 <form th:action="@{/customer/update}" th:object="${customer}" method="post">
-                    <h2>Personal</h2>
+                    <h2>[[${customer.customerName}]]</h2>
                     <input id="customerID" th:field="*{customerID}" type="hidden">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
