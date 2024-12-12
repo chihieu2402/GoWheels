@@ -1,8 +1,7 @@
 package com.poly.controller;
-
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import com.poly.entity.Bill;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class BillController {
+public class BillConttroller {
     @Autowired
     private BillDao billDao; // Assuming you have a DAO for Bill
 
@@ -41,7 +40,9 @@ public class BillController {
         return "redirect:/admin/Bill"; // Redirect back to the bill management page
     }
 
-    @PostMapping("/bill/update")
+    
+
+	@PostMapping("/bill/update")
     public String updateBill(@ModelAttribute("bill") Bill bill) {
         // Ensure that the bill exists before updating
         if (billDao.existsById(bill.getBillID())) {
@@ -64,7 +65,7 @@ public class BillController {
     @GetMapping("/bill/edit/{id}")
     public String editBill(@PathVariable("id") int id, Model model) {
         Bill bill = billDao.findById(id).orElse(new Bill()); // Fetch the bill by its ID or return a new Bill if not found
-        model.addAttribute("bill", bill); // Add the bill to the model
+model.addAttribute("bill", bill); // Add the bill to the model
         List<Bill> bills = billDao.findAll(); // Fetch all bills
         model.addAttribute("bills", bills); // Add bills to the model
         return "views/admin/Bill"; // Return the correct view for bill management
