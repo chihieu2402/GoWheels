@@ -11,8 +11,8 @@
 <body>
 	<div class="container mt-5">
 		<h1>Manage Bookings</h1>
-		<table class="table table-striped">
-			<thead>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
 				<tr>
 					<th>ID</th>
 					<th>Car ID</th>
@@ -23,6 +23,9 @@
 					<th>Address</th>
 					<th>TotalPrice</th>
 					<th>Status</th>
+					<th>CCCD 1</th>
+					<th>CCCD 2</th>
+					<th>GPLX</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -32,11 +35,17 @@
 					<td th:text="${booking.carID}"></td>
 					<td th:text="${booking.customerName}"></td>
 					<td th:text="${booking.rentalDay}"></td>
-					<td th:text="${booking.returnDay}"></td>	
+					<td th:text="${booking.returnDay}"></td>
 					<td th:text="${booking.phoneNumber}"></td>
 					<td th:text="${booking.address}"></td>
 					<td th:text="${booking.totalPrice}"></td>
 					<td th:text="${booking.status ? 'Approved' : 'Pending'}"></td>
+					<td><img th:src="${booking.image1}" alt="Image 1"
+						style="width: 100px; height: auto;" /></td>
+					<td><img th:src="${booking.image2}" alt="Image 2"
+						style="width: 100px; height: auto;" /></td>
+					<td><img th:src="${booking.image3}" alt="Image 3"
+						style="width: 100px; height: auto;" /></td>
 					<td>
 						<form th:action="@{/admin/approveBooking}" method="post"
 							style="display: inline;">

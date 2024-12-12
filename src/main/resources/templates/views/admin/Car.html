@@ -8,7 +8,24 @@
 </head>
 <body>
     <div class="container mt-4">
-
+     <div>  
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto mt-0 mt-lg-0">
+                    <li class="nav-item dropdown">
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <i class="fas fa-user-circle fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
         <div class="custom-heading mb-4">
             <h1 class="mb-1">Car Management</h1>
         </div>
@@ -40,8 +57,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="priceHoursCar">Price/Hour:</label>
-                        <input th:value="${car.priceHoursCar}" name="priceHoursCar" type="number" step="0.01" class="form-control" id="priceHoursCar" placeholder="Enter price per hour" required>
+                        <label for="typeGear">Type of Gear:</label>
+                        <input th:value="${car.type_gear}" name="type_gear" type="text" class="form-control" id="typeGear" placeholder="Enter type of gear" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carNumber">Car Number:</label>
+                        <input th:value="${car.car_number}" name="car_number" type="text" class="form-control" id="carNumber" placeholder="Enter car number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="typeFuel">Type of Fuel:</label>
+                        <input th:value="${car.type_fuel}" name="type_fuel" type="text" class="form-control" id="typeFuel" placeholder="Enter type of fuel" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearOfManufacture">Year of Manufacture:</label>
+                        <input th:value="${car.year_of_manufacture}" name="year_of_manufacture" type="number" class="form-control" id="yearOfManufacture" placeholder="Enter year of manufacture" required>
                     </div>
                 </div>
 
@@ -49,6 +81,11 @@
                     <div class="form-group">
                         <label for="address">Address:</label>
                         <input th:value="${car.address}" name="address" type="text" class="form-control" id="address" placeholder="Enter address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priceHoursCar">Price/Hour:</label>
+                        <input th:value="${car.priceHoursCar}" name="priceHoursCar" type="number" step="0.01" class="form-control" id="priceHoursCar" placeholder="Enter price per hour" required>
                     </div>
 
                     <div class="form-group">
@@ -60,8 +97,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="ownerID">Owner ID:</label>
-                        <input th:value="${car.carOwner != null ? car.carOwner.ownerID : ''}" name="ownerID" type="text" class="form-control" id="ownerID" placeholder="Enter owner ID">
+                        <label for="muctieuthu">Fuel Consumption:</label>
+                        <input th:value="${car.muctieuthu}" name="muctieuthu" type="text" class="form-control" id="muctieuthu" placeholder="Enter fuel consumption">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="limit">Limit:</label>
+                        <input th:value="${car.limit}" name="limit" type="text" class="form-control" id="limit" placeholder="Enter limit">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feeLimit">Fee Limit:</label>
+                        <input th:value="${car.fee_limit}" name="fee_limit" type="text" class="form-control" id="feeLimit" placeholder="Enter fee limit">
                     </div>
 
                     <div class="form-group">
@@ -75,7 +122,7 @@
                 <button type="submit" class="btn btn-info">Add</button>
                 <button type="submit" th:formaction="@{/admin/car/update}" class="btn btn-warning">Update</button>
                 <button type="submit" th:formaction="@{/admin/car/delete}" class="btn btn-danger">Delete</button>
-                <button type="reset" class="btn btn-success">Reset</button>
+                <button type="submit" th:formaction="@{/admin/car/reset}" class="btn btn-success">Reset</button>
             </div>
         </form>
 
@@ -87,10 +134,16 @@
                     <th>Car Name</th>
                     <th>Car Brand</th>
                     <th>Color</th>
+                    <th>Type of Gear</th>
+                    <th>Car Number</th>
+                    <th>Type of Fuel</th>
+                    <th>Year of Manufacture</th>
+                    <th>Fuel Consumption</th>
+                    <th>Limit</th>
+                    <th>Fee Limit</th>
                     <th>Address</th>
                     <th>Price/Hour</th>
                     <th>Status</th>
-                    <th>Owner</th>
                     <th>Images</th>
                     <th>Edit</th>
                 </tr>
@@ -101,19 +154,22 @@
                     <td th:text="${car.carName}"></td>
                     <td th:text="${car.carBrand != null ? car.carBrand.brandName : 'N/A'}"></td>
                     <td th:text="${car.color}"></td>
+                    <td th:text="${car.type_gear}"></td>
+                    <td th:text="${car.car_number}"></td>
+                    <td th:text="${car.type_fuel}"></td>
+                    <td th:text="${car.year_of_manufacture}"></td>
+                    <td th:text="${car.muctieuthu}"></td>
+                    <td th:text="${car.limit}"></td>
+                    <td th:text="${car.fee_limit}"></td>
                     <td th:text="${car.address}"></td>
                     <td th:text="${car.priceHoursCar}"></td>
                     <td th:text="${car.status ? 'Active' : 'Inactive'}"></td>
-                    <td th:text="${car.carOwner != null ? car.carOwner.customerName : 'N/A'}"></td>
-
-                    <!-- Display images -->
                     <td>
                         <span th:if="${car.imageCar != null and car.imageCar.image1 != null}">
-                            <img th:src="@{/images/{image}(image=${car.imageCar.image1})}" alt="Car Image 1" style="width: 100px; height: auto;">
+                            <img th:src="@{/images/{image}(image=${car.imageCar.image1})}" alt="Car Image" style="width: 100px; height: auto;">
                         </span>
                         <span th:if="${car.imageCar == null or car.imageCar.image1 == null}">No Image</span>
                     </td>
-
                     <td>
                         <a th:href="@{/admin/car/edit/{id}(id=${car.carID})}" class="btn btn-primary">Edit</a>
                     </td>

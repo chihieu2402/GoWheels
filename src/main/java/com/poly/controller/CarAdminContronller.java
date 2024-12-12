@@ -152,5 +152,10 @@ public class CarAdminContronller {
 		carDao.deleteById(carID);
 		return "redirect:/admin/car";
 	}
+	  @PostMapping("/car/reset")
+	    public String reset(Model model) {
+	      
+	        return "redirect:/admin/car";
+	    }
 
 }
