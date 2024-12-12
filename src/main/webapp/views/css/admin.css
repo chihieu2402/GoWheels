@@ -1,261 +1,355 @@
 #accordian {
-    padding: 0;
-    background-color: transparent;
+	padding: 0;
+	background-color: transparent;
 }
 
 /* List item styles */
 #accordian .list-group-item {
-    padding: 10px;
-    background-color: transparent; /* Remove background color */
-    margin-bottom: 30px; /* Spacing between items */
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Light white border */
-    border-radius: 5px; /* Rounded corners */
-    transition: transform 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s; /* Smooth transitions */
-    z-index: 1;
-    position: relative;
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2); /* Box shadow on the right side */
+	padding: 10px;
+	background-color: transparent; /* Remove background color */
+	margin-bottom: 30px; /* Spacing between items */
+	border: 2px solid rgba(255, 255, 255, 0.3); /* Light white border */
+	border-radius: 5px; /* Rounded corners */
+	transition: transform 0.2s, background-color 0.2s, border-color 0.2s,
+		box-shadow 0.2s; /* Smooth transitions */
+	z-index: 1;
+	position: relative;
+	box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+	/* Box shadow on the right side */
 }
 
 /* Text and link styles */
 #accordian .list-group-item a {
-    color: white;
-    text-decoration: none;
-    display: block; /* Make the entire item clickable */
-    font-weight: bold; /* Make the text bold */
+	color: white;
+	text-decoration: none;
+	display: block; /* Make the entire item clickable */
+	font-weight: bold; /* Make the text bold */
 }
 
 /* Hover effect */
 #accordian .list-group-item:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    background-color: rgba(30, 30, 30, 0.1); /* Very light background on hover */
-    border-color: white; /* White border on hover */
-    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.3); /* Enhanced box shadow on hover */
+	transform: translateY(-5px); /* Slight lift on hover */
+	background-color: rgba(30, 30, 30, 0.1);
+	/* Very light background on hover */
+	border-color: white; /* White border on hover */
+	box-shadow: 6px 0 12px rgba(0, 0, 0, 0.3);
+	/* Enhanced box shadow on hover */
 }
 
 /* Active state (if you have an active class) */
 #accordian .list-group-item.active {
-    background-color: rgba(0, 0, 255, 0.5); /* Light blue background for active item */
-    border-color: rgba(0, 0, 255, 0.5); /* Light blue border for active item */
-    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.3); /* Enhanced box shadow for active item */
+	background-color: rgba(0, 0, 255, 0.5);
+	/* Light blue background for active item */
+	border-color: rgba(0, 0, 255, 0.5);
+	/* Light blue border for active item */
+	box-shadow: 6px 0 12px rgba(0, 0, 0, 0.3);
+	/* Enhanced box shadow for active item */
 }
 
 #accordian .list-group-item.active a {
-    color: white; /* White text color for active item */
-}
-.left_content {
-    background-image: url('/images/car-4.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    padding: 20px;
+	color: white; /* White text color for active item */
 }
 
 .left_content {
-    background-image: url('/images/car-4.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    padding: 20px;
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.5); /* Box shadow on the right side */
+	background-image: url('/images/car-4.jpg');
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	padding: 20px;
+}
+
+.left_content {
+	background-image: url('/images/car-4.jpg');
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	padding: 20px;
+	box-shadow: 4px 0 8px rgba(0, 0, 0, 0.5);
+	/* Box shadow on the right side */
 }
 
 .left_content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Darker black overlay with 80% opacity */
-    z-index: 1;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	/* Darker black overlay with 80% opacity */
+	z-index: 1;
 }
 
-.left_content > * {
-    position: relative;
-    z-index: 2;
+.left_content>* {
+	position: relative;
+	z-index: 2;
 }
-     .navbar-brand {
-        font-size: 24px; /* Adjust the font size */
-        font-weight: bold; /* Make the text bold */
-        text-decoration: none; /* Remove underline */
-    }
 
-    .navbar-brand span {
-        color:black; /* Color for "Book" */
-    }
-
-    .navbar-brand {
-        color: white; /* Color for "Car" */
-    }
-    .navbar-brand {
-    font-size: 36px; /* Increase font size */
-    font-weight: bold; /* Make the text bold */
-    color: white; /* Color for "Car" */
-    text-decoration: none; /* Remove underline */
-    text-align: center; /* Center align the text */
-    display: block; /* Make the link a block element to center it */
-    margin: 0 auto; /* Center align the block element */
-    width: fit-content; /* Adjust width to fit content */
+.navbar-brand {
+	font-size: 24px; /* Adjust the font size */
+	font-weight: bold; /* Make the text bold */
+	text-decoration: none; /* Remove underline */
 }
 
 .navbar-brand span {
-    color:#8aab6f; /* Color for "Book" */
+	color: black; /* Color for "Book" */
 }
-   .footer {
-        background-color: black; /* Dark background color */
-        color: white; /* White text color */
-        padding: 20px; /* Padding around the footer content */
-        text-align: center; /* Center-align the text */
-        position: relative; /* Position relative for any additional styling */
-        bottom: 0; /* Align to the bottom of the page */
-        width: 100%; /* Full width */
-        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on top */
-    }
 
-    .text_footer {
-        font-size: 14px; /* Adjust font size as needed */
-        margin-bottom: 10px; /* Space between copyright and designer */
-    }
+.navbar-brand {
+	color: white; /* Color for "Car" */
+}
 
-    .designed {
-        font-size: 14px; /* Adjust font size as needed */
-    }
+.navbar-brand {
+	font-size: 36px; /* Increase font size */
+	font-weight: bold; /* Make the text bold */
+	color: white; /* Color for "Car" */
+	text-decoration: none; /* Remove underline */
+	text-align: center; /* Center align the text */
+	display: block; /* Make the link a block element to center it */
+	margin: 0 auto; /* Center align the block element */
+	width: fit-content; /* Adjust width to fit content */
+}
 
-    .designed a {
-        color: #ffffff; /* White color for the link */
-        text-decoration: none; /* Remove underline from the link */
-        font-weight: bold; /* Make the link text bold */
-    }
+.navbar-brand span {
+	color: #8aab6f; /* Color for "Book" */
+}
 
-    .designed a:hover {
-        text-decoration: underline; /* Underline the link on hover */
-    }
+.footer {
+	background-color: black; /* Dark background color */
+	color: white; /* White text color */
+	padding: 20px; /* Padding around the footer content */
+	text-align: center; /* Center-align the text */
+	position: relative; /* Position relative for any additional styling */
+	bottom: 0; /* Align to the bottom of the page */
+	width: 100%; /* Full width */
+	box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on top */
+}
 
-    
+.text_footer {
+	font-size: 14px; /* Adjust font size as needed */
+	margin-bottom: 10px; /* Space between copyright and designer */
+}
+
+.designed {
+	font-size: 14px; /* Adjust font size as needed */
+}
+
+.designed a {
+	color: #ffffff; /* White color for the link */
+	text-decoration: none; /* Remove underline from the link */
+	font-weight: bold; /* Make the link text bold */
+}
+
+.designed a:hover {
+	text-decoration: underline; /* Underline the link on hover */
+}
+
 .custom-heading {
-    background-color: #8aab6f; /* Green background */
-    color: white; /* Black text */
-    height: 80px; /* Set the height */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center text vertically */
-    justify-content: flex-start; /* Align text to the left */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
-    padding: 0 20px; /* Optional: Add padding if needed */
+	background-color: #8aab6f; /* Green background */
+	color: white; /* Black text */
+	height: 80px; /* Set the height */
+	display: flex; /* Use flexbox for alignment */
+	align-items: center; /* Center text vertically */
+	justify-content: flex-start; /* Align text to the left */
+	border-radius: 5px; /* Rounded corners */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
+	padding: 0 20px; /* Optional: Add padding if needed */
 }
 
 .custom-heading h1 {
-    margin: 0; /* Remove default margin */
-    font-size: 1.5rem; /* Adjust font size for smaller text */
-    font-weight: 300; /* Light font weight */
-    font-family: 'Roboto', sans-serif; /* Use the slim, light font */
-    text-align: left; /* Align text to the left */
+	margin: 0; /* Remove default margin */
+	font-size: 1.5rem; /* Adjust font size for smaller text */
+	font-weight: 300; /* Light font weight */
+	font-family: 'Roboto', sans-serif; /* Use the slim, light font */
+	text-align: left; /* Align text to the left */
 }
+
 .table-container {
-    margin-top: 30px; /* Space above the table */
-    padding: 20px; /* Padding around the table */
-    background-color: #f8f9fa; /* Light gray background for the container */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+	margin-top: 30px; /* Space above the table */
+	padding: 20px; /* Padding around the table */
+	background-color: #f8f9fa;
+	/* Light gray background for the container */
+	border-radius: 8px; /* Rounded corners */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Table styles */
 .table {
-    width: 100%; /* Full width */
-    border-collapse: collapse; /* Collapse borders */
+	width: 100%; /* Full width */
+	border-collapse: collapse; /* Collapse borders */
 }
 
 .table th, .table td {
-    padding: 12px; /* Padding inside cells */
-    text-align: left; /* Left align text */
-    border-bottom: 1px solid #dee2e6; /* Border between rows */
+	padding: 12px; /* Padding inside cells */
+	text-align: left; /* Left align text */
+	border-bottom: 1px solid #dee2e6; /* Border between rows */
 }
 
 .table thead {
-    background-color: #343a40; /* Dark background for the header */
-    color: #ffffff; /* White text color */
+	background-color: #343a40; /* Dark background for the header */
+	color: #ffffff; /* White text color */
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Alternating row colors */
+	background-color: #f2f2f2; /* Alternating row colors */
 }
 
 .table tbody tr:hover {
-    background-color: #e9ecef; /* Hover color for rows */
+	background-color: #e9ecef; /* Hover color for rows */
 }
 
 .table .btn {
-    padding: 5px 10px; /* Padding for buttons */
-    font-size: 0.875rem; /* Smaller button text */
+	padding: 5px 10px; /* Padding for buttons */
+	font-size: 0.875rem; /* Smaller button text */
 }
 
 .table .btn-info {
-    background-color: #17a2b8; /* Info button background color */
-    border: none; /* Remove button border */
+	background-color: #17a2b8; /* Info button background color */
+	border: none; /* Remove button border */
 }
+
 .btn-group {
-    display: flex; /* Use flexbox for horizontal alignment */
-    gap: 10px; /* Space between buttons */
-    margin-top: 20px; /* Space above the button group */
+	display: flex; /* Use flexbox for horizontal alignment */
+	gap: 10px; /* Space between buttons */
+	margin-top: 20px; /* Space above the button group */
 }
 
 /* General button styles */
 .btn {
-    background-color: #007bff; /* Default background color */
-    color: white; /* Text color */
-    border: 1px solid #007bff; /* Border color matching the background */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px; /* Padding inside buttons */
-    font-size: 14px; /* Font size */
-    font-weight: bold; /* Bold text */
-    transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
-    cursor: pointer; /* Pointer cursor on hover */
+	background-color: #007bff; /* Default background color */
+	color: white; /* Text color */
+	border: 1px solid #007bff; /* Border color matching the background */
+	border-radius: 5px; /* Rounded corners */
+	padding: 10px 20px; /* Padding inside buttons */
+	font-size: 14px; /* Font size */
+	font-weight: bold; /* Bold text */
+	transition: background-color 0.3s, border-color 0.3s;
+	/* Smooth transitions */
+	cursor: pointer; /* Pointer cursor on hover */
 }
 
 /* Button hover and focus states */
 .btn:hover, .btn:focus {
-    background-color: #0056b3; /* Darker shade on hover */
-    border-color: #0056b3; /* Border color change on hover */
+	background-color: #0056b3; /* Darker shade on hover */
+	border-color: #0056b3; /* Border color change on hover */
 }
 
 /* Specific button colors */
 .btn-info {
-    background-color: #17a2b8; /* Info button color */
-    border-color: #17a2b8; /* Info button border color */
+	background-color: #17a2b8; /* Info button color */
+	border-color: #17a2b8; /* Info button border color */
 }
 
 .btn-info:hover, .btn-info:focus {
-    background-color: #138496; /* Darker shade for info button */
-    border-color: #138496; /* Darker border color for info button */
+	background-color: #138496; /* Darker shade for info button */
+	border-color: #138496; /* Darker border color for info button */
 }
 
 .btn-warning {
-    background-color: #ffc107; /* Warning button color */
-    border-color: #ffc107; /* Warning button border color */
-    color: black; /* Text color for warning button */
+	background-color: #ffc107; /* Warning button color */
+	border-color: #ffc107; /* Warning button border color */
+	color: black; /* Text color for warning button */
 }
 
 .btn-warning:hover, .btn-warning:focus {
-    background-color: #e0a800; /* Darker shade for warning button */
-    border-color: #e0a800; /* Darker border color for warning button */
+	background-color: #e0a800; /* Darker shade for warning button */
+	border-color: #e0a800; /* Darker border color for warning button */
 }
 
 .btn-danger {
-    background-color: #dc3545; /* Danger button color */
-    border-color: #dc3545; /* Danger button border color */
+	background-color: #dc3545; /* Danger button color */
+	border-color: #dc3545; /* Danger button border color */
 }
 
 .btn-danger:hover, .btn-danger:focus {
-    background-color: #c82333; /* Darker shade for danger button */
-    border-color: #c82333; /* Darker border color for danger button */
+	background-color: #c82333; /* Darker shade for danger button */
+	border-color: #c82333; /* Darker border color for danger button */
 }
 
 .btn-success {
-    background-color: #28a745; /* Success button color */
-    border-color: #28a745; /* Success button border color */
+	background-color: #28a745; /* Success button color */
+	border-color: #28a745; /* Success button border color */
 }
 
 .btn-success:hover, .btn-success:focus {
-    background-color: #218838; /* Darker shade for success button */
-    border-color: #1e7e34; /* Darker border color for success button */
+	background-color: #218838; /* Darker shade for success button */
+	border-color: #1e7e34; /* Darker border color for success button */
+}
+
+/* Chatbox */
+.chatbox {
+	position: fixed;
+	bottom: 80px;
+	right: 20px;
+	max-width: 300px;
+	width: 100%;
+	display: none; /* Initially hidden */
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+	z-index: 1050;
+}
+
+/* Header of chatbox */
+.chatbox-header {
+	background-color: #007bff;
+	color: white;
+	padding: 10px;
+	border-radius: 5px 5px 0 0;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* Body of chatbox */
+.chatbox-body {
+	background-color: #f8f9fa;
+	padding: 10px;
+	max-height: 300px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 0 0 5px 5px;
+	margin-bottom: 10px;
+}
+
+/* Footer of chatbox */
+.chatbox-footer {
+	padding: 10px;
+	background-color: #f1f1f1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.chatbox-footer input {
+	width: 80%;
+	padding: 5px;
+}
+
+.chatbox-footer button {
+	width: 18%;
+	padding: 6px 10px;
+}
+
+/* Chat button to show/hide the chatbox */
+.chat-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 1060;
+}
+
+.chat-button .badge {
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }

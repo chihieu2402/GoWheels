@@ -26,7 +26,6 @@
 					<li class="nav-item"><a href="/index/cars" class="nav-link">Cars</a></li>
 					<li class="nav-item"><a href="/index/blog" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="/index/contact" class="nav-link">Contact</a></li>
-					<li class="nav-item"><a href="/index/chat" class="nav-link">Chat</a></li>
 					<li class="nav-item" th:if=${session.userSes==null}><a
 						href="/index/login" class="nav-link">Login</a></li>
 
@@ -40,14 +39,16 @@
 								<!-- Hiển thị số lượng thông báo mới -->
 							</button>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/index/changePass">Change
-										Password</a></li>
-								<li><a class="dropdown-item" href="/index/postcar">Post
-										Rentals</a></li>
-								<li><a class="dropdown-item" href="#">MailBox <span><i
-											class="fa-regular fa-envelope"></i></span></a></li>
-								<li><a class="dropdown-item" href="/admin/thongke">Manage</a></li>
-								<li><a class="dropdown-item" href="/logout">Logout</a></li>
+								<li><a class="dropdown-item" href="/index/changePass"><i
+										class="fa-solid fa-key"></i> Change Pass</a></li>
+								<li><a class="dropdown-item" href="/index/postcar"><i
+										class="fa-solid fa-clipboard"></i> Post Rentals</a></li>
+								<li><a class="dropdown-item" href="#"><i
+										class="fa-solid fa-envelope"></i> MailBox</a></li>
+								<li><a class="dropdown-item" href="/admin/thongke"><i
+										class="fa-solid fa-bars-progress"></i> Manage</a></li>
+								<li><a class="dropdown-item" href="/logout"><i
+										class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
 							</ul>
 
 						</div>
