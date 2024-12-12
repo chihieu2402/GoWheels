@@ -52,7 +52,7 @@ public class SecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             req -> req
-                .requestMatchers("/admin/*","/booking/views/*").authenticated()
+                .requestMatchers("/admin/*","/booking/views/*","/customer/update").authenticated()
                 .requestMatchers("/account/change-password").permitAll()
                 .anyRequest().permitAll())
         .formLogin(form -> form
