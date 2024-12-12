@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -31,10 +32,10 @@ public class Bill {
     private String customerName;
 
     @Column(name="RentalDay")
-    private String rentalDay;
+    private LocalDate rentalDay;
 
     @Column(name="ReturnDay")
-    private String returnDay;
+    private LocalDate returnDay;
     
     @Column(name="TotalPrice")
     private double totalPrice;
