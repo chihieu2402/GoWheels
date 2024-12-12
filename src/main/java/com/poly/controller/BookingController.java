@@ -82,26 +82,7 @@ public class BookingController {
         return "views/BookingPost"; // Ensure this path matches your HTML file location
     }
 
-    @PostMapping("/admin/approveBooking")
-    public String approveBooking(@RequestParam("bookingID") int bookingID, RedirectAttributes redirectAttributes) {
-        Booking booking = bookingRepository.findById(bookingID).orElseThrow(() -> new IllegalArgumentException("Invalid booking ID:" + bookingID));
-        booking.setStatus(true); // Approve booking
-        bookingRepository.save(booking);
-
-        redirectAttributes.addFlashAttribute("message", "Booking approved successfully!");
-
-        return "redirect:/admin/BookingCar";
-    }
-
-    @PostMapping("/admin/rejectBooking")
-    public String rejectBooking(@RequestParam("bookingID") int bookingID, RedirectAttributes redirectAttributes) {
-        Booking booking = bookingRepository.findById(bookingID).orElseThrow(() -> new IllegalArgumentException("Invalid booking ID:" + bookingID));
-        bookingRepository.delete(booking);
-
-        redirectAttributes.addFlashAttribute("message", "Booking rejected successfully!");
-
-        return "redirect:/admin/BookingCar";
-    }
+   
 
 
     
