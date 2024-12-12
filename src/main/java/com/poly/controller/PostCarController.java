@@ -55,8 +55,6 @@ public class PostCarController {
             model.addAttribute("customerID", customer.getCustomerID());
         }
 		
-		
-
         model.addAttribute("pendingCarPost", new PendingCarPost());
         model.addAttribute("carBrands", brandService.findAll());
 

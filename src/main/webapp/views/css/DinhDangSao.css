@@ -39,4 +39,12 @@ position: relative;
 }
 
 
+.responsive-img {
+    width: 500px; /* Kích thước chiều rộng cố định ban đầu */
+    height: 300px; /* Kích thước chiều cao cố định ban đầu */
+    max-width: 100%; /* Hỗ trợ responsive khi vượt container */
+    height: auto; /* Tự động điều chỉnh chiều cao khi thu nhỏ */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo khi responsive */
+}
+
 
