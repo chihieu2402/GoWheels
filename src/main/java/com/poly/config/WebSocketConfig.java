@@ -12,12 +12,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic"); // Broker cho các topic
-        config.setApplicationDestinationPrefixes("/app"); // Tiền tố cho các API WebSocket
+        config.enableSimpleBroker("/topic");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat-websocket").withSockJS(); // Điểm kết nối WebSocket
+        registry.addEndpoint("/ws").withSockJS();
     }
 }
+
