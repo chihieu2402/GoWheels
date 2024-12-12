@@ -149,7 +149,7 @@ public class LoginController {
 	    }
 	  @RequestMapping(value="/customer/update", method=RequestMethod.GET)
 	  public String updateCus(@ModelAttribute Account user,Authentication auth, Model model) {
-		  UserRoot userRoot = (UserRoot) auth.getPrincipal();
+		 UserRoot userRoot = (UserRoot) auth.getPrincipal();
 		 Customer customer = userRoot.getUser().getCustomer();
 		 model.addAttribute("customer",customer);
 	  	return "/views/updateCustomer";
