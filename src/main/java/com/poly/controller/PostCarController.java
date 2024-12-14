@@ -44,11 +44,12 @@ public class PostCarController {
 	@GetMapping("/index/postcar")
     @PreAuthorize("hasAuthority('OWNER')")
     public String showPostCarForm(Model model ) {
-
+		
+		
 		// Lấy thông tin người dùng hiện tại từ Spring Security
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); // Hoặc bạn có thể sử dụng các thông tin khác của người dùng
-
+        	
         // Lấy CustomerID của người dùng từ cơ sở dữ liệu hoặc service
         Customer customer = customerService.findByUsername(username);
         if (customer != null) {
@@ -57,7 +58,7 @@ public class PostCarController {
 		
         model.addAttribute("pendingCarPost", new PendingCarPost());
         model.addAttribute("carBrands", brandService.findAll());
-
+        
         return "views/postcar";  // Trả về view postcar
     }
 
