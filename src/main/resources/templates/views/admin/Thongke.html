@@ -37,12 +37,12 @@
     </div>
         <div>
              <div class="container-fluid mt-4">
-            <h1 class="mt-12">Thống kê</h1>
+            <h1 class="mt-12">Statistical</h1>
             <div class="row">
                <div class="col-md-3 mb-3">
     <div class="card text-white bg-info">
         <div class="card-body">
-            <h5 class="card-title">khách hàng</h5>
+            <h5 class="card-title">Customer</h5>
             <p class="card-text">
                 <span th:text="${customerCount}"></span> <i class="fa-solid fa-circle-user"></i>
             </p>
@@ -53,7 +53,7 @@
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-success">
                         <div class="card-body">
-                            <h5 class="card-title">Tổng số xe</h5>
+                            <h5 class="card-title">Total Car</h5>
                             <p class="card-text">
                             <span th:text="${carCount}"></span> <i class="fa-solid fa-car"></i>
                             </p>
@@ -63,7 +63,7 @@
                <div class="col-md-3 mb-3">
     <div class="card text-white bg-warning">
         <div class="card-body">
-            <h5 class="card-title">Tổng doanh thu</h5>
+            <h5 class="card-title">Total revenue</h5>
             <p class="card-text">
                 <span th:text="${#numbers.formatDecimal(totalRevenue, 2, 2)}"></span> VNĐ
             </p>
@@ -74,7 +74,7 @@
                 <div class="col-md-3 mb-3">
                     <div class="card text-white bg-danger">
                         <div class="card-body">
-                            <h5 class="card-title">Tổng chủ xe</h5>
+                            <h5 class="card-title">Total Car Owner</h5>
                             <p class="card-text">44K</p>
                         </div>
                     </div>
