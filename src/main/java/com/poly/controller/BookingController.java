@@ -76,28 +76,7 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
         
-        if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("errorMessage", "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
-			return "views/postcar";
-		}
-
-		try {
-			
-			booking.setImage1(saveFile(image1));
-			booking.setImage2(saveFile(image2));
-			booking.setImage3(saveFile(image3));
-			bookingRepository.save(booking);
-
-		
-			redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được thêm thành công!");
-		} catch (IOException e) {
-			redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi thêm bài đăng.");
-		}
-
-        // Add the booking object to the redirect attributes
-     
-
-        model.addAttribute("mes", "Data saved temporarily!");
+//       
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
