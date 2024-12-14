@@ -41,100 +41,99 @@
 				<form action="/index/addPost" method="POST"
 					enctype="multipart/form-data" th:object="${pendingCarPost}">
 					<div class="form-group">
-						<label for="carName">Tên Xe</label> <input type="text"
+						<label for="carName">Name Car</label> <input type="text"
 							class="form-control" id="carName" name="carName" required>
 					</div>
 					<div class="form-group">
-						<label for="carType">Loại Xe</label> <input type="text"
+						<label for="carType"> Car Type</label> <input type="text"
 							class="form-control" id="carType" name="carType" required>
 					</div>
 					<div class="form-group">
-						<label for="color">Màu Sắc</label> <input type="text"
+						<label for="color">Color</label> <input type="text"
 							class="form-control" id="color" name="color" required>
 					</div>
 					<div class="form-group">
-						<label for="typeGear">Loại Hộp Số</label> <input type="text"
+						<label for="typeGear">Gear Type</label> <input type="text"
 							class="form-control" id="typeGear" name="type_gear" required>
 					</div>
 					<div class="form-group">
-						<label for="carNumber">Biển Số Xe</label> <input type="text"
+						<label for="carNumber">Car number</label> <input type="text"
 							class="form-control" id="carNumber" name="car_number" required>
 					</div>
 					<div class="form-group">
-						<label for="typeFuel">Loại Nhiên Liệu</label> <input type="text"
+						<label for="typeFuel">Fuel Type</label> <input type="text"
 							class="form-control" id="typeFuel" name="type_fuel" required>
 					</div>
 					<div class="form-group">
-						<label for="yearOfManufacture">Năm Sản Xuất</label> <input
+						<label for="yearOfManufacture">Year of manufacture</label> <input
 							type="number" class="form-control" id="yearOfManufacture"
 							name="year_of_manufacture" required>
 					</div>
 					<div class="form-group">
-						<label for="muctieuthu">Mức Tiêu Thụ</label> <input type="text"
+						<label for="muctieuthu">Consumption Level</label> <input type="text"
 							class="form-control" id="muctieuthu" name="muctieuthu" required>
 					</div>
 					<div class="form-group">
-						<label for="limit">Giới Hạn</label> <input type="text"
+						<label for="limit">Limit</label> <input type="text"
 							class="form-control" id="limit" name="limit" required>
 					</div>
 					<div class="form-group">
-						<label for="feeLimit">Phí Giới Hạn</label> <input type="text"
+						<label for="feeLimit">Limit fee</label> <input type="text"
 							class="form-control" id="feeLimit" name="fee_limit" required>
 					</div>
 					<div class="form-group">
-						<label for="address">Địa Chỉ</label> <input type="text"
+						<label for="address">Adress</label> <input type="text"
 							class="form-control" id="address" name="address" required>
 					</div>
 					<div class="form-group">
-						<label for="describe">Mô Tả</label> <input type="text"
+						<label for="describe">Describe</label> <input type="text"
 							class="form-control" id="describe" name="describe" required>
 					</div>
 					<div class="form-group">
-						<label for="priceHoursCar">Giá Thuê Theo Giờ</label> <input
+						<label for="priceHoursCar">Hourly rental price</label> <input
 							type="number" step="0.01" class="form-control" id="priceHoursCar"
 							name="priceHoursCar" required>
 					</div>
 					<div class="form-group">
-						<label for="images">Hình Ảnh Xe (6 Ảnh)</label>
+						<label for="images">Car image (6 Ảnh)</label>
 						<div class="row">
 							<div class="col-md-4">
-								<label for="image1">Ảnh 1</label> <input type="file"
+								<label for="image1">Image 1</label> <input type="file"
 									class="form-control-file" id="image1" name="image1" required>
 							</div>
 							<div class="col-md-4">
-								<label for="image2">Ảnh 2</label> <input type="file"
+								<label for="image2">Image 2</label> <input type="file"
 									class="form-control-file" id="image2" name="image2" required>
 							</div>
 							<div class="col-md-4">
-								<label for="image3">Ảnh 3</label> <input type="file"
+								<label for="image3">Image 3</label> <input type="file"
 									class="form-control-file" id="image3" name="image3" required>
 							</div>
 						</div>
 						<div class="row mt-3">
 							<div class="col-md-4">
-								<label for="image4">Ảnh 4</label> <input type="file"
+								<label for="image4">Image 4</label> <input type="file"
 									class="form-control-file" id="image4" name="image4" required>
 							</div>
 							<div class="col-md-4">
-								<label for="image5">Giấy Tờ Sở Hữu 1</label> <input type="file"
+								<label for="image5">Vehicle registration </label> <input type="file"
 									class="form-control-file" id="image5" name="ownershipDocument1"
 									required>
 							</div>
 							<div class="col-md-4">
-								<label for="image6">Giấy Tờ Sở Hữu 2</label> <input type="file"
+								<label for="image6">Car insurance</label> <input type="file"
 									class="form-control-file" id="image6" name="ownershipDocument2"
 									required>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="customerID">Mã Khách Hàng</label> <input type="text"
-							class="form-control" id="customerID" name="customerID"
-							th:value="${customerID}" readonly>
-					</div>
+				<div class="form-group" style="display: none;">
+    <label for="customerID">Mã Khách Hàng</label>
+    <input type="text" class="form-control" id="customerID" name="customerID" th:value="${customerID}" readonly>
+</div>
 
 					<div class="form-group">
-						<label for="carBrandID">Thương Hiệu Xe</label><select
+						<label for="carBrandID">Car Brand</label><select
 							class="form-control" id="carBrand" name="carBrand.carBrandID"
 							required>
 							<option value="">Select Car Brand</option>
@@ -145,7 +144,7 @@
 							</th:block>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-primary">Đăng Bài</button>
+					<button type="submit" class="btn btn-primary">Post</button>
 				</form>
 
 			</div>
