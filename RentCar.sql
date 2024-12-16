@@ -378,7 +378,7 @@ INSERT INTO [dbo].[account]
            ,[password]
            ,[user_name])
      VALUES
-           (0, 0, '123', 'chihieu2402'),
+           (0, 0, '123', 'rentaladmin'),
            (0, 1, '123', 'ben123'),
            (0, 2, '123', 'teo123');
 GO
@@ -416,7 +416,8 @@ INSERT INTO [dbo].[car_brand]
            ('Mercedes-Benz'),
            ('Audi'),
            ('Chevrolet'),
-           ('Ford');
+           ('Ford'),
+		   ('Hyundai');
 GO
 -- insert customer
 INSERT INTO [dbo].[customer]
@@ -441,33 +442,48 @@ VALUES
             [price_hours_car], [status], [type_fuel], [type_gear], 
             [year_of_manufacture], [car_brandid], [ownerid], [reviewid])
 VALUES
-           ('Hanoi', 'Ferrari F8', 'Sports', '30A-12345', 'Red', 'Luxury sports car', 
+           ('To Ky Street, District 12, HCMC', 'Ferrari F8', 'Sports', '30A-12345', 'Red', 'Luxury sports car', 
             '500km', NULL, '500km', '10L/100km', NULL, 5000.0, 1, 'Petrol', 'Automatic', 
             2020, 1, 1, NULL),
-           ('Hanoi', 'Lamborghini Huracan', 'Sports', '30A-12346', 'Yellow', 'High-end sports car', 
+           ('Bui Vien Street, District 1, HCMC', 'Lamborghini Huracan', 'Sports', '30A-12346', 'Yellow', 'High-end sports car', 
             '400km', NULL, '400km', '12L/100km', NULL, 5500.0, 1, 'Petrol', 'Automatic', 
             2021, 2, 1, NULL),
-           ('Hanoi', 'Porsche 911', 'Sports', '30A-12347', 'Blue', 'Top-class sports car', 
+           ('Tran Nao Street, District 2, HCMC', 'Porsche 911', 'Sports', '30A-12347', 'Blue', 'Top-class sports car', 
             '300km', NULL, '300km', '11L/100km', NULL, 6000.0, 1, 'Petrol', 'Automatic', 
             2022, 3, 1, NULL),
-           ('Hanoi', 'Honda Civic', 'Sedan', '30A-22345', 'Black', 'Reliable sedan', 
+           ('3/2 Street,District 10, HCMC', 'Honda Civic', 'Sedan', '30A-22345', 'Black', 'Reliable sedan', 
             '500km', NULL, '500km', '7L/100km', NULL, 1500.0, 1, 'Petrol', 'Manual', 
-            2020, 4, 2, NULL),
-           ('Hanoi', 'Toyota Camry', 'Sedan', '30A-22346', 'White', 'Comfortable sedan', 
+            2020, 5, 2, NULL),
+           ('Su Van Hanh Street, District 10, HCMC', 'Toyota Camry', 'Sedan', '30A-22346', 'White', 'Comfortable sedan', 
             '600km', NULL, '600km', '8L/100km', NULL, 2000.0, 1, 'Petrol', 'Automatic', 
-            2019, 5, 2, NULL),
-           ('Hanoi', 'Hyundai Tucson', 'SUV', '30A-22347', 'Gray', 'Versatile SUV', 
+            2019, 4, 2, NULL),
+           ('Song Hanh QL22 Street, District 12, HCMC', 'Hyundai Tucson', 'SUV', '30A-22347', 'Gray', 'Versatile SUV', 
             '500km', NULL, '500km', '9L/100km', NULL, 1800.0, 1, 'Diesel', 'Automatic', 
-            2021, 6, 2, NULL),
-           ('Hanoi', 'Ford Ranger', 'Truck', '30A-32345', 'Red', 'Tough truck', 
+            2021, 11, 2, NULL),
+           ('To Ngoc Van Street, District 12, HCMC', 'Ford Ranger', 'Truck', '30A-32345', 'Red', 'Tough truck', 
             '700km', NULL, '700km', '10L/100km', NULL, 2500.0, 1, 'Diesel', 'Manual', 
-            2020, 7, 3, NULL),
-           ('Hanoi', 'Mazda CX-5', 'SUV', '30A-32346', 'Blue', 'Stylish SUV', 
+            2020, 10, 3, NULL),
+           ('Duong Thi Muoi Street, District 12, HCMC', 'Mazda CX-5', 'SUV', '30A-32346', 'Blue', 'Stylish SUV', 
             '600km', NULL, '600km', '8L/100km', NULL, 2300.0, 1, 'Petrol', 'Automatic', 
             2021, 8, 3, NULL),
-           ('Hanoi', 'Chevrolet Colorado', 'Truck', '30A-32347', 'Black', 'Durable truck', 
+           ('Truong Chinh Street, District 2, HCMC', 'Chevrolet Colorado', 'Truck', '30A-32347', 'Black', 'Durable truck', 
             '800km', NULL, '800km', '12L/100km', NULL, 2800.0, 1, 'Diesel', 'Automatic', 
-            2022, 9, 3, NULL);
+            2022, 9, 3, NULL),
+			('Pham Van Chi Street, District 6, HCMC', 'Ferrari 488 GTB', 'Sport', '71A-32547', 'Black', 'Luxury', 
+            '800km', NULL, '500km', '11L/100km', NULL, 2900.0, 1, 'Diesel', 'Automatic', 
+            2022, 1, 3, NULL),
+			('Lac Long Quan Street, District 11, HCMC', 'Porsche 918 Spyder', 'Sport', '71A-80212', 'Gray', 'Luxury car, sports', 
+            '600km', NULL, '600km', '10L/100km', NULL, 3600.0, 1, 'Diesel', 'Automatic', 
+            2022, 3, 3, NULL),
+			('Le Van Viet Street, District 9, HCMC', 'Lamborghini Sian', 'Sport', '71A-42807', 'Yellow', 'Luxury car for people', 
+            '600km', NULL, '600km', '10L/100km', NULL, 3800.0, 1, 'Diesel', 'Automatic', 
+            2022, 2, 3, NULL),
+			('Nguyen Xien Street, District 9, HCMC', 'Audi Q8', 'Sport', '59B-24024', 'Blue', 'Sport car', 
+            '500km', NULL, '600km', '9L/100km', NULL, 2900.0, 1, 'Diesel', 'Automatic', 
+            2020, 8, 3, NULL),
+			('Nguyen Xien Street, District 9, HCMC', 'Ford Everest', 'SUV', '59B-24024', 'White', 'Good car for travel and camping with family or friends', 
+            '800km', NULL, '600km', '8L/100km', NULL, 2500.0, 1, 'Diesel', 'Automatic', 
+            2020, 10, 3, NULL);
 go
 -- insert bill
 INSERT INTO [dbo].[bill]
@@ -496,16 +512,21 @@ VALUES
 INSERT INTO [dbo].[image_car]
            ([image1], [image2], [image3], [image4], [img_ownership_certificate1], [img_ownership_certificate2], [car_id])
 VALUES
-            ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 1),
-           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 4),
-           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 7),
-		     ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 2),
-           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 3),
-           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 5),
-		     ('Ferrari LaFerrari.jpg', 'Ferrari F8 Tributo.jpg', 'Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'doc1.jpg', 'doc2.jpg', 6),
-           ('Bugatti Veyron.jpg', 'Bugatti Divo.jpg', 'Bugatti Chiron.jpg', 'Bugatti Divo.jpg', 'doc3.jpg', 'doc4.jpg', 8),
-           ('Ferrari 488 GTB.jpg', 'Ferrari F8 Tributo.jpg', 'Aston Martin DB11.jpg', 'Aston Martin DB11.jpg', 'doc5.jpg', 'doc6.jpg', 9);
+           ('FerrariF8Tributo.jpg', 'FerrariF8Tributo2.jpg', 'FerrariF8Tributo3.jpg', 'FerrariF8Tributo4.jpg', NULL,NULL, 1),
+		   ('LamborghiniHuracan.jpg', 'LamborghiniHuracan2.jpg', 'LamborghiniHuracan3.jpg', 'LamborghiniHuracan4.jpg', NULL, NULL, 2),
+		   ('Porsche911.jpg', 'Porsche911_2.jpg', 'Porsche911_3.jpg', 'Porsche911_4.jpg', NULL, NULL, 3),
+           ('HondaCivic.jpg', 'HondaCivic2.jpg', 'HondaCivic3.jpg', 'HondaCivic4.jpg', NULL, NULL, 4),
+		   ('ToyotaCamry.jpg', 'ToyotaCamry2.jpg', 'ToyotaCamry3.jpg', 'ToyotaCamry4.jpg', NULL, NULL, 5),
+		   ('HyundaiTucson.jpg', 'HyundaiTucson2.jpg', 'HyundaiTucson3.jpg', 'HyundaiTucson4.jpg', NULL,NULL, 6),
+           ('FordRanger.jpg', 'FordRanger2.jpg', 'FordRanger3.jpg', 'FordRanger4.jpg',NULL, NULL, 7),
+           ('MazdaCX-5.jpg', 'MazdaCX-52.jpg', 'MazdaCX-53.jpg', 'MazdaCX-54.jpg', NULL, NULL, 8),
+           ('ChevroletColorado.jpg', 'ChevroletColorado2.jpg', 'ChevroletColorado3.jpg', 'ChevroletColorado4.jpg', NULL, NULL, 9),
+		   ('Ferrari488GTB.jpg', 'Ferrari488GTB2.jpg', 'Ferrari488GTB3.jpg', 'Ferrari488GTB4.jpg', NULL,NULL, 10),
 
+		   ('Porsche918.jpg', 'Porsche918_2.jpg', 'Porsche918_3.jpg', 'Porsche918_4.jpg', NULL,NULL, 11),
+		   ('LamborghiniSian.jpg', 'LamborghiniSian2.jpg', 'LamborghiniSian3.jpg', 'LamborghiniSian4.jpg', NULL,NULL, 12),
+		   ('AudiQ8.jpg', 'AudiQ82.jpg', 'AudiQ83.jpg', 'AudiQ84.jpg', NULL,NULL, 13),
+		   ('FordEverest.jpg', 'FordEverest2.jpg', 'FordEverest3.jpg', 'FordEverest4.jpg', NULL,NULL, 14);
 
 go
 
