@@ -117,7 +117,7 @@ public class PostCarController {
 	public String approvePost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
 		carPostService.approvePost(postID);
 		redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được duyệt thành công!");
-		return "redirect:/index/managePosts";
+		return "redirect:/admin/PendingCar";
 	}
 
 	@PostMapping("/index/rejectPost")
@@ -125,7 +125,7 @@ public class PostCarController {
 	public String rejectPost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
 		carPostService.rejectPost(postID);
 		redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã bị từ chối.");
-		return "redirect:/index/managePosts";
+		return "redirect:/admin/PendingCar";
 	}
 
 }
