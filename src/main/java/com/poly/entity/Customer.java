@@ -50,6 +50,7 @@ public class Customer {
     @Column(name="AccountID")
     private int accountID;
     
+
     @Column(name="license")
     private String license;
     
@@ -67,6 +68,7 @@ public class Customer {
 //    private MultipartFile image2;
 //    @Column(name="gplx")
 //    private MultipartFile image3;
+
 
     @OneToMany(mappedBy = "customer")
     private List<Review> review;
