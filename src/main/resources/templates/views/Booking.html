@@ -63,61 +63,132 @@
         <form th:action="@{/booking/submit}" method="post" th:object="${booking}" enctype="multipart/form-data">
             <input type="hidden" th:field="*{carID}" readonly />
 
-            <!-- Customer Name -->
-            <div class="mb-3">
-                <label for="customerName" class="form-label">Customer Name</label>
-                <input type="text" class="form-control" id="customerName" th:field="*{customerName}" required>
-            </div>
-
-            <!-- Rental Dates -->
-            <div class="mb-3">
-                <label for="rentalStart" class="form-label">Rental Start Date</label>
-                <input type="date" class="form-control" id="rentalStart" th:field="*{rentalDay}" required>
-            </div>
-            <div class="mb-3">
-                <label for="rentalEnd" class="form-label">Rental End Date</label>
-                <input type="date" class="form-control" id="rentalEnd" th:field="*{returnDay}" required>
-            </div>
-
-            <!-- Phone Number -->
-            <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
-            </div>
-
-            <!-- Address -->
-            <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" th:field="*{address}" required>
-            </div>
-
-            <!-- Ownership Documents -->
-            <div class="mb-3">
-                <label>Ownership Documents (3 Images)</label>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="image1" class="form-label">Document 1 (CCCD1)</label>
-                        <input type="file" class="form-control" id="image1" name="" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="image2" class="form-label">Document 2 (CCCD2)</label>
-                        <input type="file" class="form-control" id="image2" name="" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="image3" class="form-label">Document 3 (GPLX)</label>
-                        <input type="file" class="form-control" id="image3" name="" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Confirm Booking</button>
-        </form>
-    </div>
+				<div class="mb-3">
+					<label for="customerName" class="form-label">Customer Name</label>
+					<input type="text" class="form-control" id="customerName"
+						th:field="*{customerName}" required>
+				</div>
+				<div class="mb-3">
+					<label for="rentalStart" class="form-label">Rental Start
+						Date</label> <input type="date" class="form-control" id="rentalStart"
+						th:field="*{rentalDay}" required th:min="${minRentalDay}">
+				</div>
+				<div class="mb-3">
+					<label for="rentalEnd" class="form-label">Rental End Date</label> <input
+						type="date" class="form-control" id="rentalEnd"
+						th:field="*{returnDay}" required min="*{rentalDay}">
+				</div>
+				<div class="mb-3">
+					<label for="phoneNumber" class="form-label">Phone Number</label> <input
+						type="tel" class="form-control" id="phoneNumber"
+						th:field="*{phoneNumber}" required>
+				</div>
+				<div class="mb-3">
+					<label for="address" class="form-label">Address</label> <input
+						type="text" class="form-control" id="address"
+						th:field="*{address}" required>
+				</div>
+				
+				
+				<div class="h3" th:text="${mes}"></div>
+				<br>
+				<div class="d-flex">
+				<button type="submit" class="btn btn-primary">Confirm
+					Booking
+				</button>
+				
+				</div>	
+						
+			</form>
+		</div>
+		<footer class="ftco-footer ftco-bg-dark ftco-section mt-3"
+			th:fragment="footer" style="background-color: black; color: white;">
+			<div class="container">
+				<div class="row mb-5">
+					<div class="col-md">
+						<div class="ftco-footer-widget mb-4">
+							<h2 class="ftco-heading-2">
+								<a href="#" class="logo">Car<span>book</span></a>
+							</h2>
+							<p>Far far away, behind the word mountains, far from the
+								countries Vokalia and Consonantia, there live the blind texts.</p>
+							<ul
+								class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+								<li class="ftco-animate"><a href="#"><span
+										class="icon-twitter"></span></a></li>
+								<li class="ftco-animate"><a href="#"><span
+										class="icon-facebook"></span></a></li>
+								<li class="ftco-animate"><a href="#"><span
+										class="icon-instagram"></span></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md">
+						<div class="ftco-footer-widget mb-4 ml-md-5">
+							<h2 class="ftco-heading-2">Information</h2>
+							<ul class="list-unstyled">
+								<li><a href="#" class="py-2 d-block">About</a></li>
+								<li><a href="#" class="py-2 d-block">Services</a></li>
+								<li><a href="#" class="py-2 d-block">Term and
+										Conditions</a></li>
+								<li><a href="#" class="py-2 d-block">Best Price
+										Guarantee</a></li>
+								<li><a href="#" class="py-2 d-block">Privacy &amp;
+										Cookies Policy</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md">
+						<div class="ftco-footer-widget mb-4">
+							<h2 class="ftco-heading-2">Customer Support</h2>
+							<ul class="list-unstyled">
+								<li><a href="#" class="py-2 d-block">FAQ</a></li>
+								<li><a href="#" class="py-2 d-block">Payment Option</a></li>
+								<li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+								<li><a href="#" class="py-2 d-block">How it works</a></li>
+								<li><a href="#" class="py-2 d-block">Contact Us</a></li>
 
     <!-- Footer -->
-    <footer class="mt-5 bg-dark text-white text-center py-4">
-        <p>&copy; 2024 CarBook. All rights reserved.</p>
-    </footer>
+  
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							All rights reserved | This template is made with <i
+								class="icon-heart color-danger" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script>
+    // Hàm cộng thêm 1 ngày vào một giá trị ngày
+    function addOneDay(dateString) {
+        const date = new Date(dateString); // Chuyển chuỗi thành đối tượng Date
+        date.setDate(date.getDate() + 1); // Cộng thêm 1 ngày
+        return date.toISOString().split('T')[0]; // Định dạng lại thành chuỗi yyyy-MM-dd
+    }
+
+    // Lắng nghe sự kiện thay đổi giá trị ngày bắt đầu
+    document.getElementById("rentalStart").addEventListener("change", function () {
+        // Lấy giá trị ngày bắt đầu và cộng thêm 1 ngày
+        const startDate = this.value;
+        const minEndDate = addOneDay(startDate); // Cộng thêm 1 ngày
+
+        // Đặt giá trị min cho trường ngày kết thúc
+        const rentalEnd = document.getElementById("rentalEnd");
+        rentalEnd.min = minEndDate;
+
+        // Nếu ngày kết thúc hiện tại nhỏ hơn ngày min, reset giá trị ngày kết thúc
+        if (rentalEnd.value && rentalEnd.value < minEndDate) {
+            rentalEnd.value = "";
+        }
+    });
+</script>
+
 </body>
 </html>

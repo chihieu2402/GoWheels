@@ -1,5 +1,6 @@
 package com.poly.controller;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class BookingController {
         Booking booking = new Booking();
         Car car = carRepository.findById(carID).orElse(null);
         if (car != null) {
+        	model.addAttribute("minRentalDay", LocalDate.now());
             model.addAttribute("car", car);
         } else {
             model.addAttribute("error", "Car not found");
@@ -67,14 +69,17 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
 
+
         
         // Add the booking object to the redirect attributes
      
 
         model.addAttribute("mes", "Data saved temporarily!");
+
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
+
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showBookingPost(Model model) {
@@ -82,6 +87,11 @@ public class BookingController {
         model.addAttribute("bookings", bookings);
         return "views/BookingPost"; // Ensure this path matches your HTML file location
     }
+
+
+ 
+
+
 
 
 @GetMapping("/booking/confirm")
@@ -141,4 +151,14 @@ public class BookingController {
         }
 
 
-}}
+
+}
+    @GetMapping("/booking/submit3")
+    public String submit3FinalBooking(RedirectAttributes redirectAttributes, Model model) {
+       
+            return "redirect:/booking/error"; // Redirect to form if car not found
+        }    
+}
+
+
+

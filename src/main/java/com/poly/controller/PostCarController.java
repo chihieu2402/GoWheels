@@ -72,7 +72,7 @@ public class PostCarController {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errorMessage", "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
-			return "views/postcar";
+			return "views/thatbai";
 		}
 
 		try {
@@ -92,7 +92,7 @@ public class PostCarController {
 			redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi thêm bài đăng.");
 		}
 
-		return "views/postcar";
+		return "views/thanhcong";
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {
@@ -117,7 +117,7 @@ public class PostCarController {
 	public String approvePost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
 		carPostService.approvePost(postID);
 		redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã được duyệt thành công!");
-		return "redirect:/index/managePosts";
+		return "redirect:/admin/PendingCar";
 	}
 
 	@PostMapping("/index/rejectPost")
@@ -125,7 +125,7 @@ public class PostCarController {
 	public String rejectPost(@RequestParam("postID") int postID, RedirectAttributes redirectAttributes) {
 		carPostService.rejectPost(postID);
 		redirectAttributes.addFlashAttribute("successMessage", "Bài đăng đã bị từ chối.");
-		return "redirect:/index/managePosts";
+		return "redirect:/admin/PendingCar";
 	}
 
 }

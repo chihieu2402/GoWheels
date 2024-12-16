@@ -70,6 +70,7 @@
         <img th:src="@{/images/{filename}(filename=${post.imagePending.image4})}" alt="Car Image 4"
             style="width: 100px; height: auto;"
             th:if="${post.imagePending != null and post.imagePending.image4 != null}">
+            
     </div>
 </td>
 
@@ -95,12 +96,12 @@
                         <div class="btn-group">
                             <form action="/index/approvePost" method="post" style="display: inline;">
                                 <input type="hidden" name="postID" th:value="${post.postID}">
-                                <button type="submit" class="btn btn-success">Duyệt</button>
+                                <button type="submit" class="btn btn-success">Approve</button>
                             </form>
 
                             <form action="/index/rejectPost" method="post" style="display: inline;">
                                 <input type="hidden" name="postID" th:value="${post.postID}">
-                                <button type="submit" class="btn btn-danger">Từ Chối</button>
+                                <button type="submit" class="btn btn-danger">Reject</button>
                             </form>
                         </div>
                     </td>
