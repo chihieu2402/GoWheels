@@ -378,9 +378,19 @@ INSERT INTO [dbo].[account]
            ,[password]
            ,[user_name])
      VALUES
-           (0, 0, '123', 'rentaladmin'),
+           (0, 0, '123', 'admin'),
            (0, 1, '123', 'ben123'),
-           (0, 2, '123', 'teo123');
+           (0, 2, '123', 'teo123'),
+		   (0, 3, '123', 'vu123'),
+           (0, 3, '123', 'than123'),
+           (0, 3, '123', 'hieu123'),
+           (0, 3, '123', 'ben123'),
+           (0, 3, '123', 'tai123'),
+           (0, 3, '123', 'hoang123'),
+           (0, 3, '123', 'quan123'),
+           (0, 3, '123', 'hung123'),
+           (0, 3, '123', 'linh123'),
+           (0, 3, '123', 'hung123');
 GO
 
 -- Inserting into role table
@@ -425,7 +435,17 @@ INSERT INTO [dbo].[customer]
 VALUES
            (1, '123 Main St', 'Chi Hieu', 'Male', '123456789', '0909123456'),
            (2, '456 Main St', 'Ben', 'Male', '987654321', '0909765432'),
-           (3, '789 Main St', 'Teo', 'Male', '192837465', '0909345678');
+           (3, '789 Main St', 'Teo', 'Male', '192837465', '0909345678'),
+		   (4, '123 Nguyen Trai, Ho Chi Minh', 'Vu', 'Male', '123456781', '0909000001'),
+           (5, '456 Le Loi, Ho Chi Minh', 'Than', 'Male', '123456782', '0909000002'),
+           (6, '789 Tran Hung Dao, Ho Chi Minh', 'Hieu', 'Male', '123456783', '0909000003'),
+           (7, '123 Ly Thuong Kiet, Ho Chi Minh', 'Ben', 'Male', '123456784', '0909000004'),
+           (8, '456 Cach Mang Thang 8, Ho Chi Minh', 'Tai', 'Male', '123456785', '0909000005'),
+           (9, '789 Pham Van Dong, Ho Chi Minh', 'Hoang', 'Male', '123456786', '0909000006'),
+           (10, '123 Vo Van Tan, Ho Chi Minh', 'Quan', 'Male', '123456787', '0909000007'),
+           (11, '456 Pham Ngu Lao, Ho Chi Minh', 'Hung', 'Male', '123456788', '0909000008'),
+           (12, '789 Dinh Tien Hoang, Ho Chi Minh', 'Linh', 'Female', '123456789', '0909000009'),
+           (13, '123 Hai Ba Trung, Ho Chi Minh', 'Hung', 'Male', '123456790', '0909000010');
 go
  --inser car_owner
 INSERT INTO [dbo].[car_owner]
@@ -443,55 +463,65 @@ VALUES
             [year_of_manufacture], [car_brandid], [ownerid], [reviewid])
 VALUES
            ('To Ky Street, District 12, HCMC', 'Ferrari F8', 'Sports', '30A-12345', 'Red', 'Luxury sports car', 
-            '500km', NULL, '500km', '10L/100km', NULL, 5000.0, 1, 'Petrol', 'Automatic', 
+            '500km', NULL, '500km', '10L/100km', NULL, 500000.0, 1, 'Petrol', 'Automatic', 
             2020, 1, 1, NULL),
            ('Bui Vien Street, District 1, HCMC', 'Lamborghini Huracan', 'Sports', '30A-12346', 'Yellow', 'High-end sports car', 
-            '400km', NULL, '400km', '12L/100km', NULL, 5500.0, 1, 'Petrol', 'Automatic', 
+            '400km', NULL, '400km', '12L/100km', NULL, 5500000.0, 1, 'Petrol', 'Automatic', 
             2021, 2, 1, NULL),
            ('Tran Nao Street, District 2, HCMC', 'Porsche 911', 'Sports', '30A-12347', 'Blue', 'Top-class sports car', 
-            '300km', NULL, '300km', '11L/100km', NULL, 6000.0, 1, 'Petrol', 'Automatic', 
+            '300km', NULL, '300km', '11L/100km', NULL, 6000000.0, 1, 'Petrol', 'Automatic', 
             2022, 3, 1, NULL),
            ('3/2 Street,District 10, HCMC', 'Honda Civic', 'Sedan', '30A-22345', 'Black', 'Reliable sedan', 
-            '500km', NULL, '500km', '7L/100km', NULL, 1500.0, 1, 'Petrol', 'Manual', 
+            '500km', NULL, '500km', '7L/100km', NULL, 15000000.0, 1, 'Petrol', 'Manual', 
             2020, 5, 2, NULL),
            ('Su Van Hanh Street, District 10, HCMC', 'Toyota Camry', 'Sedan', '30A-22346', 'White', 'Comfortable sedan', 
-            '600km', NULL, '600km', '8L/100km', NULL, 2000.0, 1, 'Petrol', 'Automatic', 
+            '600km', NULL, '600km', '8L/100km', NULL, 2000000.0, 1, 'Petrol', 'Automatic', 
             2019, 4, 2, NULL),
            ('Song Hanh QL22 Street, District 12, HCMC', 'Hyundai Tucson', 'SUV', '30A-22347', 'Gray', 'Versatile SUV', 
-            '500km', NULL, '500km', '9L/100km', NULL, 1800.0, 1, 'Diesel', 'Automatic', 
+            '500km', NULL, '500km', '9L/100km', NULL, 1800000.0, 1, 'Diesel', 'Automatic', 
             2021, 11, 2, NULL),
            ('To Ngoc Van Street, District 12, HCMC', 'Ford Ranger', 'Truck', '30A-32345', 'Red', 'Tough truck', 
-            '700km', NULL, '700km', '10L/100km', NULL, 2500.0, 1, 'Diesel', 'Manual', 
+            '700km', NULL, '700km', '10L/100km', NULL, 2500000.0, 1, 'Diesel', 'Manual', 
             2020, 10, 3, NULL),
            ('Duong Thi Muoi Street, District 12, HCMC', 'Mazda CX-5', 'SUV', '30A-32346', 'Blue', 'Stylish SUV', 
-            '600km', NULL, '600km', '8L/100km', NULL, 2300.0, 1, 'Petrol', 'Automatic', 
+            '600km', NULL, '600km', '8L/100km', NULL, 2300000.0, 1, 'Petrol', 'Automatic', 
             2021, 8, 3, NULL),
            ('Truong Chinh Street, District 2, HCMC', 'Chevrolet Colorado', 'Truck', '30A-32347', 'Black', 'Durable truck', 
-            '800km', NULL, '800km', '12L/100km', NULL, 2800.0, 1, 'Diesel', 'Automatic', 
+            '800km', NULL, '800km', '12L/100km', NULL, 2800000.0, 1, 'Diesel', 'Automatic', 
             2022, 9, 3, NULL),
 			('Pham Van Chi Street, District 6, HCMC', 'Ferrari 488 GTB', 'Sport', '71A-32547', 'Black', 'Luxury', 
-            '800km', NULL, '500km', '11L/100km', NULL, 2900.0, 1, 'Diesel', 'Automatic', 
+            '800km', NULL, '500km', '11L/100km', NULL, 2900000.0, 1, 'Diesel', 'Automatic', 
             2022, 1, 3, NULL),
 			('Lac Long Quan Street, District 11, HCMC', 'Porsche 918 Spyder', 'Sport', '71A-80212', 'Gray', 'Luxury car, sports', 
-            '600km', NULL, '600km', '10L/100km', NULL, 3600.0, 1, 'Diesel', 'Automatic', 
+            '600km', NULL, '600km', '10L/100km', NULL, 3600000.0, 1, 'Diesel', 'Automatic', 
             2022, 3, 3, NULL),
 			('Le Van Viet Street, District 9, HCMC', 'Lamborghini Sian', 'Sport', '71A-42807', 'Yellow', 'Luxury car for people', 
-            '600km', NULL, '600km', '10L/100km', NULL, 3800.0, 1, 'Diesel', 'Automatic', 
+            '600km', NULL, '600km', '10L/100km', NULL, 3800000.0, 1, 'Diesel', 'Automatic', 
             2022, 2, 3, NULL),
 			('Nguyen Xien Street, District 9, HCMC', 'Audi Q8', 'Sport', '59B-24024', 'Blue', 'Sport car', 
-            '500km', NULL, '600km', '9L/100km', NULL, 2900.0, 1, 'Diesel', 'Automatic', 
+            '500km', NULL, '600km', '9L/100km', NULL, 2900000.0, 1, 'Diesel', 'Automatic', 
             2020, 8, 3, NULL),
 			('Nguyen Xien Street, District 9, HCMC', 'Ford Everest', 'SUV', '59B-24024', 'White', 'Good car for travel and camping with family or friends', 
-            '800km', NULL, '600km', '8L/100km', NULL, 2500.0, 1, 'Diesel', 'Automatic', 
+            '800km', NULL, '600km', '8L/100km', NULL, 2500000.0, 1, 'Diesel', 'Automatic', 
             2020, 10, 3, NULL);
 go
 -- insert bill
 INSERT INTO [dbo].[bill]
            ([customer_name], [rental_day], [return_day], [status], [total_price], [customerid])
 VALUES
-           ('Chi Hieu', '2024-01-01', '2024-01-10', 1, 15000.0, 1),
-           ('Ben', '2024-02-01', '2024-02-05', 1, 8000.0, 2),
-           ('Teo', '2024-03-01', '2024-03-07', 1, 12000.0, 3);
+           ('Chi Hieu', '2024-01-01', '2024-01-10', 1, 1500000.0, 1),
+           ('Ben', '2024-02-01', '2024-02-05', 1, 800000.0, 2),
+           ('Teo', '2024-03-01', '2024-03-07', 1, 1200000.0, 3),
+		    ('Vu', '2024-01-11', '2024-01-15', 1, 5000000.0, 4),
+           ('Than', '2024-01-16', '2024-01-20', 1, 4000000.0, 5),
+           ('Hieu', '2024-02-01', '2024-02-10', 1, 9000000.0, 6),
+           ('Ben', '2024-02-11', '2024-02-15', 1, 3500000.0, 7),
+           ('Tai', '2024-03-01', '2024-03-10', 1, 10000000.0, 8),
+           ('Hoang', '2024-03-11', '2024-03-20', 1, 7500000.0, 9),
+           ('Quan', '2024-04-01', '2024-04-05', 1, 3000000.0, 10),
+           ('Hung', '2024-04-06', '2024-04-15', 1, 6000000.0, 11),
+           ('Linh', '2024-05-01', '2024-05-10', 1, 8500000.0, 12),
+           ('Hung', '2024-05-11', '2024-05-20', 1, 7000000.0, 13);
 go
 -- insert bill_detail
 INSERT INTO [dbo].[bill_detail]
@@ -540,18 +570,24 @@ INSERT INTO [dbo].[booking]
            ,[status]
            ,[total_price])
      VALUES
-           ('123 Main Street', 1, 'John Doe', '1234567890', '2024-11-21', '2024-11-25', 1, 200.50),
-           ('456 Elm Street', 2, 'Jane Smith', '0987654321', '2024-11-22', '2024-11-26', 1, 300.75),
-           ('789 Oak Avenue', 3, 'Michael Brown', '1112223334', '2024-11-23', '2024-11-27', 0, 150.25),
-           ('321 Pine Lane', 4, 'Emily Davis', '2223334445', '2024-11-24', '2024-11-28', 1, 400.00),
-           ('654 Maple Blvd', 5, 'Chris Wilson', '3334445556', '2024-11-25', '2024-11-29', 0, 250.50);
+            ('123 Main St', 1, 'Chi Hieu', '0909123456', '2024-12-01', '2024-12-05', 1, 3500000.00),
+           ('456 Main St', 2, 'Ben', '0909765432', '2024-12-02', '2024-12-06', 1, 4200000.00),
+           ('789 Main St', 3, 'Teo', '0909345678', '2024-12-03', '2024-12-07', 0, 2800000.00),
+           ('123 Ho Chi Minh', 4, 'Vu', '0911002233', '2024-12-04', '2024-12-08', 1, 5000000.00),
+           ('456 Ho Chi Minh', 5, 'Than', '0911223344', '2024-12-05', '2024-12-09', 0, 3100000.00),
+           ('789 Ho Chi Minh', 6, 'Hieu', '0911334455', '2024-12-06', '2024-12-10', 1, 4500000.00),
+           ('123 District 1', 7, 'Tai', '0911445566', '2024-12-07', '2024-12-11', 1, 3200000.00),
+           ('456 District 2', 8, 'Hoang', '0911556677', '2024-12-08', '2024-12-12', 0, 4000000.00),
+           ('789 District 3', 9, 'Quan', '0911667788', '2024-12-09', '2024-12-13', 1, 5100000.00),
+           ('123 Binh Thanh', 10, 'Hung', '0911778899', '2024-12-10', '2024-12-14', 1, 6000000.00);
 GO
 INSERT INTO [dbo].[payment] 
            ([amount], [billid], [payment_date])
 VALUES
            (250.00, 1, '2024-11-20'),
            (300.50, 2, '2024-11-21'),
-           (150.75, 3, '2024-11-19')
+           (150.75, 3, '2024-11-19');
+
            
 GO
 select * from car
@@ -562,3 +598,4 @@ select * from image_car
 select * from review
 select * from customer
 select * from account
+select * from document

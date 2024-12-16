@@ -1,12 +1,12 @@
 package com.poly.controller;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -31,6 +31,7 @@ import jakarta.servlet.ServletContext;
 
 @Controller
 public class BookingController {
+    private final String UPLOAD_DIR = "src/main/resources/static/images/";
 
     @Autowired
     private BookingDao bookingRepository;
@@ -75,10 +76,16 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
 
+
+        
+        // Add the booking object to the redirect attributes
+     
+
+        model.addAttribute("mes", "Data saved temporarily!");
+
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
-
 
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -88,11 +95,6 @@ public class BookingController {
         return "views/BookingPost"; // Ensure this path matches your HTML file location
     }
 
-   
-
-
-    
-    
 
  
 
@@ -156,7 +158,9 @@ public class BookingController {
         }
 
 
-    }
+
+}
+
     @GetMapping("/booking/submit3")
     public String submit3FinalBooking(RedirectAttributes redirectAttributes, Model model) {
        

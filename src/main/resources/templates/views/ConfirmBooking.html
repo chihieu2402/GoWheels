@@ -8,14 +8,16 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/views/css/style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<div class="container"></div>
 	<section class="ftco-section ftco-no-pt bg-dark"></section>
 
 	<div th:replace="~{views/layout/navbar :: nav}"></div>
+
 		
 					
 					<div class="container p-5 " style="color:black;">
@@ -37,15 +39,6 @@
                         </div>
                         <div class="row mb-3">
 
-                            <div class="col-4 fw-bold">Rental Day:</div>
-                            <div class="col-8 text-end"><span th:text="${Tbooking.rentalDay}"></span></div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4 fw-bold">Return Day:</div>
-                            <div class="col-8 text-end"><span th:text="${Tbooking.returnDay}"></span></div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4 fw-bold">Total Price:</div>
 
                             <div class="col-4 fw-bold">Rental start day:</div>
                             <div class="col-8 text-end"><span th:text="${Tbooking.rentalDay}"></span></div>
@@ -67,9 +60,6 @@
                        <button type="submit" class="btn btn-primary">Confirm</button>
                             <a href="/booking/submit3" class="btn btn-danger">Exit</a>
                        </div>
-                            
-
-                            <button type="submit" class="btn btn-primary">Confirm</button>
 
                              <a th:href="@{/payment(carID=${Tbooking.carID}, totalPrice=${Tbooking.totalPrice})}" class="btn btn-primary">
     						<i class="bi-cart-fill me-1"></i> Payment
@@ -87,13 +77,13 @@
 
 
 
-					<div class="container mt-4 mb-3"></div>
-				</div>
-			</div>
-		</div>
-		<!-- menu rent  -->
-		
+
 	
+	</div>
+	
+	<!-- menu rent  -->
+
+
 </body>
 <script src="/views/js/jquery.min.js"></script>
 <script src="/views/js/jquery-migrate-3.0.1.min.js"></script>

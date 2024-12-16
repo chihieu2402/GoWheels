@@ -30,6 +30,7 @@
 				<!-- Include header with navigation menu -->
 				<div th:replace="views/admin/header :: header"></div>
 			</div>
+			
 			<div class="col-md-9 right_content">
 				<!-- Admin content here -->
 				<div th:replace="${view}"></div>
@@ -117,7 +118,7 @@
 	</script>
 
 	<!-- Include footer -->
-	<div th:replace="views/admin/footer :: footer"></div>
+	<!-- <div th:replace="views/admin/footer :: footer"></div> -->
 	<script th:src="@{/js/admin.js}"></script>
 
 	<scrip src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
