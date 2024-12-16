@@ -65,4 +65,5 @@ public class Account {
     public String getRoleString() {
       return this.roles.stream().map(r -> r.getName()).collect(Collectors.joining(", "));
     }
+    
 }

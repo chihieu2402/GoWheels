@@ -67,7 +67,7 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
 
-
+        
         // Add the booking object to the redirect attributes
      
 
@@ -83,10 +83,9 @@ public class BookingController {
         return "views/BookingPost"; // Ensure this path matches your HTML file location
     }
 
- 
 
+@GetMapping("/booking/confirm")
 
-    @GetMapping("/booking/confirm")
     public String showConfirmBooking(Model model) {
 
 //    	String path = app.getRealPath("/images/");
@@ -143,4 +142,3 @@ public class BookingController {
 
 
 }}
-
