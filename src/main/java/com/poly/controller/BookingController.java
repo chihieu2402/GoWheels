@@ -66,11 +66,6 @@ public class BookingController {
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
 
-
-        // Add the booking object to the redirect attributes
-     
-
-        model.addAttribute("mes", "Data saved temporarily!");
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
