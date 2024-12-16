@@ -49,7 +49,7 @@
 
 			<div class="form-container">
 				<form th:action="@{/customer/update}" th:object="${customer}"
-					method="post">
+					method="post"enctype="multipart/form-data">	
 					<h2>Welcome: [[${customer.customerName}]]</h2>
 					<input id="customerID" th:field="*{customerID}" type="hidden">
 					<div class="form-group">
@@ -80,7 +80,25 @@
 						<label for="idCard">IDCard</label> <input id="idCard"
 							th:field="*{idCard}" type="text" />
 					</div>
-					<div class="form-actions">
+					<div class="form-group">
+		        <label for="image1">Font of CCCD</label>
+		        <img th:src="@{/images/{filename}(filename=${customer.image1})}" alt="Image 1"
+						style="width: 100px; height: auto;"  />
+		        <input   type="file"  name="image11"  required/>
+		   		 </div>
+		   			 <div class="form-group">
+		        <label for="image2">Back of CCCD</label>
+		        <img th:src="@{/images/{filename}(filename=${customer.image2})}" alt="Image 1"
+						style="width: 100px; height: auto;"  />
+		        <input   type="file"  name="image22" required />
+		    </div>
+		    <div class="form-group">
+		        <label for="image3">GPLX</label>
+		        <img th:src="@{/images/{filename}(filename=${customer.image3})}" alt="Image 1"
+						style="width: 100px; height: auto;"  />
+		        <input   type="file"  name="image33" required />
+		    </div>
+							<div class="form-actions">
 						<button class="save" type="submit">Save</button>
 					</div>
 				</form>

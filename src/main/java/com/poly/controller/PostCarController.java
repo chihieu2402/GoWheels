@@ -72,7 +72,7 @@ public class PostCarController {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errorMessage", "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
-			return "views/postcar";
+			return "views/thatbai";
 		}
 
 		try {
@@ -92,7 +92,7 @@ public class PostCarController {
 			redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi thêm bài đăng.");
 		}
 
-		return "views/postcar";
+		return "views/thanhcong";
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {

@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Entity
 @Table(name="Customer")
@@ -48,6 +50,26 @@ public class Customer {
     @Column(name="AccountID")
     private int accountID;
     
+
+    @Column(name="license")
+    private String license;
+    
+    @Column(name="cccd1")
+    private String image1;
+    @Column(name="cccd2")
+    private String image2;
+    @Column(name="gplx")
+    private String image3;
+    
+    // đổi thành dạng khác thử
+//    @Column(name="cccd1")
+//    private MultipartFile image1;
+//    @Column(name="cccd2")
+//    private MultipartFile image2;
+//    @Column(name="gplx")
+//    private MultipartFile image3;
+
+
     @OneToMany(mappedBy = "customer")
     private List<Review> review;
     

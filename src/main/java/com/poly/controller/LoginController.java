@@ -1,6 +1,12 @@
 package com.poly.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.auth.UserRoot;
 import com.poly.dao.AccountDao;
@@ -28,6 +35,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
+	
+	private final String UPLOAD_DIR = "src/main/resources/static/images/";
 	@Autowired
 	AccountDao accDao;
 	@Autowired
@@ -119,7 +128,11 @@ public class LoginController {
 	
 	// user tự update khi mới vào
 	@PostMapping("/customer/update")
-	public String updateCustomer(@ModelAttribute("customer") Customer customer, Authentication auth) {
+	public String updateCustomer(@ModelAttribute("customer") Customer customer,
+			@RequestParam("image11") MultipartFile image1, 
+            @RequestParam("image22") MultipartFile image2,
+            @RequestParam("image33") MultipartFile image3,
+			Authentication auth) {
 	    try {
 	        Customer existingCustomer = customerDao.findByCustomerID(customer.getCustomerID());
 	        if (existingCustomer != null) {
@@ -129,6 +142,29 @@ public class LoginController {
 	            existingCustomer.setAddress(customer.getAddress());
 	            existingCustomer.setGender(customer.getGender());
 	            existingCustomer.setIdCard(customer.getIdCard());
+	            
+	            String imageName1 = image1.getOriginalFilename();
+	            String imageName2 = image2.getOriginalFilename();
+	            String imageName3 = image3.getOriginalFilename();
+	            saveFile(image1);
+	            saveFile(image2);
+	            saveFile(image3);
+	            // Lưu các hình ảnh và lấy đường dẫn
+//	            String image1Path = saveImage(image1, uploadDir);
+//	            String image2Path = saveImage(image2, uploadDir);
+//	            String image3Path = saveImage(image3, uploadDir);
+
+	            // Tải lại khách hàng từ cơ sở dữ liệu
+	            
+
+//	            // Cập nhật các đường dẫn hình ảnh vào đối tượng customer
+//	            if (image1Path != null) u.setImage1(image1Path);
+//	            if (image2Path != null) u.setImage2(image2Path);
+//	            if (image3Path != null) u.setImage3(image3Path);
+	            existingCustomer.setImage1(imageName1);
+	            existingCustomer.setImage2(imageName2);
+	            existingCustomer.setImage3(imageName3);
+	            
 	            
 	            customerDao.save(existingCustomer);  // Lưu lại đối tượng đã cập nhật
 	        }
@@ -141,6 +177,15 @@ public class LoginController {
 				+ userRoot.getAuthorities().stream().map(v -> v.getAuthority()).collect(Collectors.joining(", ")));
 		ses.setAttribute("userSes", userRoot);
 	    return "redirect:/index";
+	}
+	private String saveFile(MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			String fileName = file.getOriginalFilename();
+			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
+			Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+			return fileName;
+		}
+		return null;
 	}
 
 	  @GetMapping("/quenMatKhau")
