@@ -27,12 +27,15 @@
                 <label for="passWord">Password:</label>
                 <input th:value="${account.passWord}" name="passWord" type="password" class="form-control" id="passWord" placeholder="Enter password" required>
             </div>
+            
+            <div class="fs-5">[[${mes}]]</div>
             <div class="btn-group mt-3">
                 <button type="submit" th:formaction="@{/admin/account/create}" class="btn btn-info">Add</button>
                 <button type="submit" th:formaction="@{/admin/account/update}" class="btn btn-warning">Update</button>
                 <button type="submit" th:formaction="@{/admin/account/delete/{id}(id=${account.accountID})}" class="btn btn-danger">Delete</button>
                 <button type="submit" th:formaction="@{/admin/account/reset}" class="btn btn-success">Reset</button>
             </div>
+            
         </form>
         <!-- them file excel -->
         <div>
@@ -46,18 +49,18 @@
                 <tr>
                     <th>Account ID</th>
                     <th>User Name</th>
-                    <th>Password</th>
-                    <th>Edit</th>
+                    
+                  
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="account : ${accounts}">
                     <td th:text="${account.accountID}"></td>
                     <td th:text="${account.userName}"></td>
-                    <td th:text="${account.passWord}"></td>
-                    <td>
+                    
+                    <!--  <td>
                         <a th:href="@{/admin/account/edit/{id}(id=${account.accountID})}" class="btn btn-info text-white">Edit</a>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
