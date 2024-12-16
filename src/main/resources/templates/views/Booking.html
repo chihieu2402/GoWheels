@@ -88,12 +88,12 @@
 				<div class="mb-3">
 					<label for="rentalStart" class="form-label">Rental Start
 						Date</label> <input type="date" class="form-control" id="rentalStart"
-						th:field="*{rentalDay}" required>
+						th:field="*{rentalDay}" required th:min="${minRentalDay}">
 				</div>
 				<div class="mb-3">
 					<label for="rentalEnd" class="form-label">Rental End Date</label> <input
 						type="date" class="form-control" id="rentalEnd"
-						th:field="*{returnDay}" required>
+						th:field="*{returnDay}" required min="*{rentalDay}">
 				</div>
 				<div class="mb-3">
 					<label for="phoneNumber" class="form-label">Phone Number</label> <input
@@ -203,6 +203,30 @@
 				</div>
 			</div>
 		</footer>
+		<script>
+    // Hàm cộng thêm 1 ngày vào một giá trị ngày
+    function addOneDay(dateString) {
+        const date = new Date(dateString); // Chuyển chuỗi thành đối tượng Date
+        date.setDate(date.getDate() + 1); // Cộng thêm 1 ngày
+        return date.toISOString().split('T')[0]; // Định dạng lại thành chuỗi yyyy-MM-dd
+    }
+
+    // Lắng nghe sự kiện thay đổi giá trị ngày bắt đầu
+    document.getElementById("rentalStart").addEventListener("change", function () {
+        // Lấy giá trị ngày bắt đầu và cộng thêm 1 ngày
+        const startDate = this.value;
+        const minEndDate = addOneDay(startDate); // Cộng thêm 1 ngày
+
+        // Đặt giá trị min cho trường ngày kết thúc
+        const rentalEnd = document.getElementById("rentalEnd");
+        rentalEnd.min = minEndDate;
+
+        // Nếu ngày kết thúc hiện tại nhỏ hơn ngày min, reset giá trị ngày kết thúc
+        if (rentalEnd.value && rentalEnd.value < minEndDate) {
+            rentalEnd.value = "";
+        }
+    });
+</script>
 </body>
 <script src="/views/js/jquery.min.js"></script>
 <script src="/views/js/jquery-migrate-3.0.1.min.js"></script>

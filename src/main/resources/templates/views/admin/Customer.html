@@ -81,6 +81,9 @@
                     <th>ID Card</th>
                     <th>Gender</th>
                     <th>Account ID</th>
+                    <th>Font of CCCD</th>
+                    <th>Back of CCCD</th>
+                    <th>GPlX</th>
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -93,6 +96,12 @@
                     <td th:text="${customer.idCard}"></td>
                     <td th:text="${customer.gender}"></td>
                     <td th:text="${customer.accountID}"></td>
+                    <td ><img th:src="@{/images/{filename}(filename=${customer.image1})}" alt="Image 1"
+						style="width: 100px; height: auto;" /></td>
+                    <td ><img th:src="@{/images/{filename}(filename=${customer.image2})}" alt="Image 1"
+						style="width: 100px; height: auto;" /></td>
+                    <td ><img th:src="@{/images/{filename}(filename=${customer.image3})}" alt="Image 1"
+						style="width: 100px; height: auto;" /></td>
                     <td>
                         <a th:href="@{/admin/customer/edit/{id}(id=${customer.customerID})}" class="btn btn-info text-white">Edit</a>
                     </td>

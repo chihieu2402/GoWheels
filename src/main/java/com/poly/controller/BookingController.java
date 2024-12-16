@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class BookingController {
         Booking booking = new Booking();
         Car car = carRepository.findById(carID).orElse(null);
         if (car != null) {
+        	model.addAttribute("minRentalDay", LocalDate.now());
             model.addAttribute("car", car);
         } else {
             model.addAttribute("error", "Car not found");
@@ -60,9 +62,7 @@ public class BookingController {
     @PostMapping("/booking/submit")
     public String submitBooking(
             @ModelAttribute Booking booking,
-            @RequestParam int carID,@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2,
-			@RequestParam("image3") MultipartFile image3, BindingResult result,
-			RedirectAttributes redirectAttributes,
+            @RequestParam int carID,
             Model model) {
 
         booking.setStatus(false); // Set initial status
@@ -80,15 +80,7 @@ public class BookingController {
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
-    private String saveFile(MultipartFile file) throws IOException {
-		if (!file.isEmpty()) {
-			String fileName = file.getOriginalFilename();
-			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
-			Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-			return fileName;
-		}
-		return null;
-	}
+   
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showBookingPost(Model model) {
@@ -102,11 +94,7 @@ public class BookingController {
 
     
     
-    @GetMapping("/confim")
-    private String pulblic() {
-		return "views/ConfimBooking";
-
-	}
+ 
 
 
     @GetMapping("/booking/confirm")
@@ -165,5 +153,11 @@ public class BookingController {
         }
 
 
-}}
+}
+    @GetMapping("/booking/submit3")
+    public String submit3FinalBooking(RedirectAttributes redirectAttributes, Model model) {
+       
+            return "redirect:/booking/error"; // Redirect to form if car not found
+        }    
+}
 
