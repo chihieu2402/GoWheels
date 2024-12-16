@@ -1,14 +1,13 @@
 package com.poly.controller;
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-=======
->>>>>>> d99a3d394c488b0ebb0faab4a79f6514219e2089
+
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -79,10 +78,8 @@ public class BookingController {
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
-<<<<<<< HEAD
-   
-=======
->>>>>>> d99a3d394c488b0ebb0faab4a79f6514219e2089
+
+
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showBookingPost(Model model) {
@@ -96,19 +93,14 @@ public class BookingController {
 
     
     
-<<<<<<< HEAD
+
  
 
 
-    @GetMapping("/booking/confirm")
-=======
-    @GetMapping("/confim")
-    private String pulblic() {
-		return "views/ConfimBooking";
 
-	}
+
 @GetMapping("/booking/confirm")
->>>>>>> d99a3d394c488b0ebb0faab4a79f6514219e2089
+
     public String showConfirmBooking(Model model) {
 
 //    	String path = app.getRealPath("/images/");
@@ -164,8 +156,7 @@ public class BookingController {
         }
 
 
-<<<<<<< HEAD
-}
+    }
     @GetMapping("/booking/submit3")
     public String submit3FinalBooking(RedirectAttributes redirectAttributes, Model model) {
        
@@ -173,6 +164,3 @@ public class BookingController {
         }    
 }
 
-=======
-}}
->>>>>>> d99a3d394c488b0ebb0faab4a79f6514219e2089
