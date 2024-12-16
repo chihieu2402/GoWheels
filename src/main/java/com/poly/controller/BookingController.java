@@ -1,10 +1,5 @@
 package com.poly.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -12,26 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.poly.dao.BookingDao;
 import com.poly.dao.CarDao;
 import com.poly.entity.Booking;
 import com.poly.entity.Car;
-import com.poly.entity.ImagePending;
 
 import jakarta.servlet.ServletContext;
 
 @Controller
 public class BookingController {
-	private final String UPLOAD_DIR = "src/main/resources/static/images/";
+
     @Autowired
     private BookingDao bookingRepository;
     
@@ -60,9 +52,7 @@ public class BookingController {
     @PostMapping("/booking/submit")
     public String submitBooking(
             @ModelAttribute Booking booking,
-            @RequestParam int carID,@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2,
-			@RequestParam("image3") MultipartFile image3, BindingResult result,
-			RedirectAttributes redirectAttributes,
+            @RequestParam int carID,
             Model model) {
 
         booking.setStatus(false); // Set initial status
@@ -75,20 +65,10 @@ public class BookingController {
 
         // Save data in the temporary Tbooking variable
         this.Tbooking = booking;
-        
-//       
+
         return "redirect:/booking/confirm"; // Redirect to the confirmation page
 
     }
-    private String saveFile(MultipartFile file) throws IOException {
-		if (!file.isEmpty()) {
-			String fileName = file.getOriginalFilename();
-			Path uploadPath = Paths.get(UPLOAD_DIR + fileName);
-			Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-			return fileName;
-		}
-		return null;
-	}
     @GetMapping("/admin/BookingCar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showBookingPost(Model model) {
@@ -107,9 +87,7 @@ public class BookingController {
 		return "views/ConfimBooking";
 
 	}
-
-
-    @GetMapping("/booking/confirm")
+@GetMapping("/booking/confirm")
     public String showConfirmBooking(Model model) {
 
 //    	String path = app.getRealPath("/images/");
@@ -166,4 +144,3 @@ public class BookingController {
 
 
 }}
-
