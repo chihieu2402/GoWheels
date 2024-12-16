@@ -23,6 +23,7 @@ import jakarta.servlet.ServletContext;
 
 @Controller
 public class BookingController {
+    private final String UPLOAD_DIR = "src/main/resources/static/images/";
 
     @Autowired
     private BookingDao bookingRepository;
@@ -82,16 +83,7 @@ public class BookingController {
         return "views/BookingPost"; // Ensure this path matches your HTML file location
     }
 
-   
-
-
-    
-    
-    @GetMapping("/confim")
-    private String pulblic() {
-		return "views/ConfimBooking";
-
-	}
+ 
 
 
     @GetMapping("/booking/confirm")
